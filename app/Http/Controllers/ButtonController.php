@@ -33,17 +33,12 @@ class ButtonController extends Controller
         return $buttons;
     }
 
-    public function setButtons(){
-        // create an array holding the buttons and their state as booleans?
-        // based on if the following is true or false
-        // buttons will be greyed out until they can be completed (btn disabled/active)
-        // and then green(btn-success) when completed (btn ie.basic when active but not complete)
-        // Brent talking about getting API calls to interact with answering these instead of queries
 
-
-        // 1) messages sent - total count
-        // not sure if this is DB stored and if not the reminder counts for each button may be enough
-
+    // buttons will be greyed out until they can be completed (btn disabled/active)
+    // and then green(btn-success) when completed (btn ie.basic when active but not complete)
+    // these functions query DB for current state of action for buttons' associated form
+    // all set functions for buttons follow:
+    public function setValidationButton(){
 
         // 2) data validation sent/completed
         // if data validation has not been sent (0 correspondence) "send validation" with btn
@@ -52,80 +47,107 @@ class ButtonController extends Controller
 
         // if validation complete button btn-success and "validation complete" with check mark
 
+    }
+
+    public function setTypeButton(){
         // 3a)student type
         // NEW REQUEST from PK
         // Student type - flag if changes so it can be acknowledged
         // Considering pulling this info and setting in column here:
 
+    }
 
+    public function setEnrolmentButton(){
         // 3b) Enrolment sent/complete
         // If deposit paid then button = btn active
 
-            // if no correspondence "send enrolment'
+        // if no correspondence "send enrolment'
 
-            // if correspondence greater than 0 but enrolment not complete, "resend enrolment"
+        // if correspondence greater than 0 but enrolment not complete, "resend enrolment"
 
-            // if complete button = btn-success "enrolment complete" with check mark
+        // if complete button = btn-success "enrolment complete" with check mark
 
         // else button disabled
 
+    }
 
+
+    public function setPaidButton(){
         // 3c) deposit paid - check mark or ex only dealt with in view currently
 
+    }
 
+
+
+    public function setADButton(){
         // 4) AD account created
         // If enrolment complete then button = btn active
 
-            // If AD account exists "account has been created" btn-success
+        // If AD account exists "account has been created" btn-success
 
-            // else "create AD account"
+        // else "create AD account"
 
         // else button disabled
 
+    }
+
+    public function setConsentButton(){
         // 5) informed consent has been sent/signed
         // If AD account complete button active
 
-            // If no correspondence, "send informed consent form"
+        // If no correspondence, "send informed consent form"
 
-            // if correspondence greater than 0 "resend consent form"
+        // if correspondence greater than 0 "resend consent form"
 
-            // if complete btn-success "Informed consent signed" with check mark
+        // if complete btn-success "Informed consent signed" with check mark
 
         // else button disabled
 
+    }
+
+    public function setCourseButton(){
         // 6) course selection sent/complete
         // If AD account complete button active
 
-            // If no correspondence, "send course selection"
+        // If no correspondence, "send course selection"
 
-            // If correspondence greater than 0 "resend course selection"
+        // If correspondence greater than 0 "resend course selection"
 
-            // if complete btn-success "course selection complete" with check mark
+        // if complete btn-success "course selection complete" with check mark
 
         // else button disabled
 
+    }
+
+    public function setHealthButton(){
         // 7) Blue health form sent/complete
         // If AD account complete button active
 
-            // If no correspondence, "send health form"
+        // If no correspondence, "send health form"
 
-            // if correspondence greater than 0 "resend health form"
+        // if correspondence greater than 0 "resend health form"
 
-            // if complete btn-success "blue health form complete" with check mark
+        // if complete btn-success "blue health form complete" with check mark
 
         // else button disabled
 
+    }
+
+    public function setOrientationButton(){
         // 8) Orientation email sent
         // If ???? complete button active
 
-            // If no correspondence, "send orientation email"
+        // If no correspondence, "send orientation email"
 
-            // if correspondence greater than 0 "Orientation email sent" btn-success-
-            // need drop down to resend
+        // if correspondence greater than 0 "Orientation email sent" btn-success-
+        // need drop down to resend
 
         // else button disabled
 
 
+    }
+
+    public function setPrefectButton(){
         // 9) Head Prefect email sent
         // If ???? complete button active
 
@@ -137,6 +159,69 @@ class ButtonController extends Controller
         // else button disabled
 
 
+    }
+
+    //following 'click' button functions deal with the action if a button is clicked
+    //button state will disable a click if it should not be clicked
+    public function sendValidation(){
+
+    }
+
+    public function resendValidation(){
+
+    }
+
+    public function changeStudentType(){
+
+    }
+
+    public function sendEnrolment(){
+
+    }
+
+    public function resendEnrolment(){
+
+    }
+
+    public function ADCreation(){
+
+    }
+
+    public function sendInformedConsent(){
+
+    }
+
+    public function resendIC(){
+
+    }
+
+    public function sendCourseSelection(){
+
+    }
+
+    public function resendCS(){
+
+    }
+
+    public function sendHealth(){
+        //API call will know/deal with send or resend once Mike completes dev of this feature
+
+    }
+
+    public function sendOrientation(){
+
+    }
+
+    public function resendOrientation(){
+
+    }
+
+    public function sendPrefect(){
+
+    }
+
+    public function resendPrefect(){
+        
     }
 
     public function increaseMessageCount($bid, $uid){
@@ -160,6 +245,7 @@ class ButtonController extends Controller
 //        $button->update();
     }
 
+    // following function for returning a button name based on id passed
     public function getName($id) {
         $button = Button::find($id);
         $name = $button->button_name;
