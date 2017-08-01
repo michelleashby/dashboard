@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Email;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,10 @@ class PagesController extends Controller
             $button = new Button();
             $buttons = $button->all();
 
-            return view('admin')->with('buttons', $buttons);
+            $email = new Email();
+            $emails = $email->all();
+
+            return view('admin')->with('buttons', $buttons)->with('emails', $emails);
         } else {
             return view('welcome');
         }
