@@ -221,7 +221,7 @@ class ButtonController extends Controller
     }
 
     public function resendPrefect(){
-        
+
     }
 
     public function increaseMessageCount($bid, $uid){
