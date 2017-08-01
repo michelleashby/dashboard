@@ -42,7 +42,7 @@
 
 
             {{--edit button to be at bottom of table to change the questionnaire_id for future years--}}
-            <button type="button" class="btn btn-info enabled" onclick="location.href='{{ url('createEmailForm') }}'" style="white-space: normal">CREATE EMAIL</button>
+            <button type="button" class="btn btn-info enabled" onclick="location.href='/createEmailForm'" style="white-space: normal">CREATE EMAIL</button>
 
         </div>
 
