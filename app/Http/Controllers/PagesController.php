@@ -82,4 +82,8 @@ class PagesController extends Controller
 
         return view('editButtonForm')->with('button', $button);
     }
+
+    public function displayCreateEmail(){
+        return view('createEmailForm');
+    }
 }
