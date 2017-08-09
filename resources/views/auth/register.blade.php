@@ -68,6 +68,7 @@
                             {{--</div>--}}
                         {{--</div>--}}
                     {{--</form>--}}
+                    
                     <h1>Please contact administration if you require access - no registrations being accepted at this time</h1>
                 </div>
             </div>
