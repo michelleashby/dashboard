@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('content')
     <h1>You are adding a new correspondence/email</h1>
@@ -18,7 +18,7 @@
 
 
         <h3>Email Content:</h3>
-        <textarea name="name" form="editButton" rows="10" cols="70">Type your email here...</textarea>
+        <textarea name="body" form="editButton" rows="10" cols="70">Type your email here...</textarea>
 
     </form>
 
