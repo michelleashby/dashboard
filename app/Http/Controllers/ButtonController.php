@@ -38,14 +38,25 @@ class ButtonController extends Controller
     // and then green(btn-success) when completed (btn ie.basic when active but not complete)
     // these functions query DB for current state of action for buttons' associated form
     // all set functions for buttons follow:
-    public function setValidationButton(){
+    public function setValidationButton($student){
 
-        // 2) data validation sent/completed
-        // if data validation has not been sent (0 correspondence) "send validation" with btn
+        $valButton = new Button();
 
-        // if correspondence is greater than 0 but validation not complete, "resend validation" with btn
+        if($student->custom_field_1 = "Yes") {
 
-        // if validation complete button btn-success and "validation complete" with check mark
+        $valButton->class="btn btn-success disabled";
+        $valButton->words="Validation Complete  <span class=\"glyphicon glyphicon-ok\"></span>";
+
+            return $valButton;
+            }
+            else {
+//                                --ADD if (student is added to 1106 questionairre) RESEND--}
+
+                $valButton->class = "btn btn-info";
+                $valButton->words = "Send Data Validation";
+
+                return $valButton;
+            }
 
     }
 
@@ -57,24 +68,39 @@ class ButtonController extends Controller
 
     }
 
-    public function setEnrolmentButton(){
-        // 3b) Enrolment sent/complete
-        // If deposit paid then button = btn active
+    public function setEnrolmentButton($student){
 
-        // if no correspondence "send enrolment'
+        $enrolButton = new Button();
 
-        // if correspondence greater than 0 but enrolment not complete, "resend enrolment"
+        if($student->custom_field_2 == null){
+            $enrolButton->class="btn btn-info enabled";
+            $enrolButton->words="send enrolment reminder";
 
-        // if complete button = btn-success "enrolment complete" with check mark
+            return $enrolButton;
+        } else {
+            $enrolButton->class="btn btn-success disabled";
+            $enrolButton->words=$student->custom_field_2;
 
-        // else button disabled
+            return $enrolButton;
+        }
 
     }
 
+    public function setPaidButton($student){
 
-    public function setPaidButton(){
-        // 3c) deposit paid - check mark or ex only dealt with in view currently
+        $depButton = new Button();
 
+        if($student->custom_field_9 = "Yes"){
+            $depButton->class="btn btn-success disabled";
+            $depButton->words="<span class=\"glyphicon glyphicon-ok\"></span>";
+
+            return $depButton;
+        } else {
+            $depButton->class="btn";
+            $depButton->words="<span class=\"glyphicon glyphicon-remove\"></span>";
+
+            return $depButton;
+        }
     }
 
 
@@ -253,12 +279,14 @@ class ButtonController extends Controller
         return $name;
     }
 
-    public function apiCall(){
+    public function apiCall($uid, $qid){
+        $uid = $user_id;
+        $qid = $questionnaire_id;
+
         try {
-            $client = new $client->request('GET', 'http://website.com/API/whateverURL', [
-                'query' => ['user_id' => 'PASSED FROM UI','questionnaire_id' => 'ALSO PASSED'],
-                'auth' => ['Name', 'PSWD'], //if needed
-                'debug' => true //if needed
+            $client = new $client->request('POST', 'https://brentwoodevents.msm.io/custom/brentwood/data/api.php', [
+                'query' => ['action'=> 'AddQuestionnaireRecipient','user_id' => $user_id,'questionnaire_id' => $questionnaire_id],
+                'apikey' => [81633913542557427]
             ]);
 
             //echo $apiRequest->getStatusCode());

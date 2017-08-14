@@ -46,4 +46,8 @@ class Button extends Model
         //built in historical information
     }
 
+    public function status(){
+        return $this->hasOne('App\status', 'status_id');
+    }
+
 }
