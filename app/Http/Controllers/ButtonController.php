@@ -105,15 +105,28 @@ class ButtonController extends Controller
 
 
 
-    public function setADButton(){
-        // 4) AD account created
-        // If enrolment complete then button = btn active
+    public function setADButton($student){
 
-        // If AD account exists "account has been created" btn-success
+        $adButton = new Button();
 
-        // else "create AD account"
+        if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null){
+            if($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca"){
+                $adButton->class="btn btn-success disabled";
+                $adButton->words="AD Account Exists <span class=\"glyphicon glyphicon-ok\"></span>";
 
-        // else button disabled
+                return $adButton;
+            } else {
+                $adButton->class="btn bnt-info enabled";
+                $adButton->words="Create AD Account";
+
+                return $adButton;
+            }
+        } else {
+            $adButton->class="btn disabled";
+            $adButton->words="AD Account";
+
+            return $adButton;
+        }
 
     }
 
@@ -145,19 +158,43 @@ class ButtonController extends Controller
 
     }
 
-    public function setHealthButton(){
-        // 7) Blue health form sent/complete
-        // If AD account complete button active
+    public function setHealthButton($student){
+        // uses Bluehealth API
+        $student->email = $email;
+        $questionnaire_id = 3;
+        $bhButton= new Button();
 
-        // If no correspondence, "send health form"
+        try {
+            $client = new $client->request('POST', 'https://go.bluehealth.ca/api.questionnaires/status', [
+                'query' => ['action'=> 'AddQuestionnaireRecipient','patient_email' => $email,'questionnaire_id' => $questionnaire_id],
+                'api_key' => ['cJaXrT2Ik8iG7Hps6IrGMXKILGgnzNPD']
+            ]);
 
-        // if correspondence greater than 0 "resend health form"
+            //echo $apiRequest->getStatusCode());
+            //echo $apiRequest->getHeader('content-type));
 
-        // if complete btn-success "blue health form complete" with check mark
+            $content = json_decode($apiRequest->getBody()->getContents());
+        } catch (RequestException $re) {
+            //for handling exception
+        }
 
-        // else button disabled
+        if(true){
+            //apiRequest->"complete"=true
+                $bhButton->class="btn btn-success disabled";
+                $bhButton->words="Health form complete <span class=\"glyphicon glyphicon-ok\"></span>";
+
+                return $bhButton;
+            } else {
+                $bhButton->class="btn bnt-info enabled";
+                $bhButton->words="Not Complete: send email";
+
+                return $bhButton;
+            }
+
 
     }
+
+
 
     public function setOrientationButton(){
         // 8) Orientation email sent
@@ -231,6 +268,7 @@ class ButtonController extends Controller
 
     public function sendHealth(){
         //API call will know/deal with send or resend once Mike completes dev of this feature
+
 
     }
 
