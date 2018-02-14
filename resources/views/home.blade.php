@@ -90,7 +90,7 @@
                     @if($student->insurance_no != null)
                         {{--this logic does not check AD - need to figure out how to do this--}}
                         <button type="button" class="btn btn-success disabled" style="white-space: normal">Health Form Complete
-                            <span class="glyphicon glyphicon-ok"></span>
+                            p<span class="glyphicon glyphicon-ok"></span>
                         </button>
                     @elseif($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)
                         {{--add a check that messages >= 0--}}

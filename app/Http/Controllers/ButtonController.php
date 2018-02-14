@@ -160,7 +160,7 @@ class ButtonController extends Controller
 
     public function setHealthButton($student){
         // uses Bluehealth API
-        $student->email = $email;
+        $email = $student->email;
         $questionnaire_id = 3;
         $bhButton= new Button();
 
