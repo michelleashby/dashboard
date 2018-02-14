@@ -1,0 +1,683 @@
+Index: resources/views/welcome.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/welcome.blade.php	(revision )
++++ resources/views/welcome.blade.php	(revision )
+@@ -5,7 +5,7 @@
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+-        <title>Brentwood Laravel Dashboard</title>
++        <title>Laravel</title>
+ 
+         <!-- Fonts -->
+         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@@ -77,17 +77,17 @@
+                 </div>
+             @endif
+ 
+-	    <div class="links">
+-	    </div>
+-
+             <div class="content">
+                 <div class="title m-b-md">
+-                    Brentwood Laravel Dashboard
++                    Laravel
+                 </div>
+ 
+                 <div class="links">
+-                    <a href="https://laracasts.com">Laracasts</a></br></br>
+-		    <a href="https://brentwood.bc.ca">This Website is Under Construction</a>
++                    <a href="https://laravel.com/docs">Documentation</a>
++                    <a href="https://laracasts.com">Laracasts</a>
++                    <a href="https://laravel-news.com">News</a>
++                    <a href="https://forge.laravel.com">Forge</a>
++                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                 </div>
+             </div>
+         </div>
+Index: resources/views/createEmailForm.blade.php
+===================================================================
+--- resources/views/createEmailForm.blade.php	(revision )
++++ resources/views/createEmailForm.blade.php	(revision )
+@@ -1,25 +0,0 @@
+-@extends('layouts.app')
+-
+-@section('content')
+-    <h1>You are adding a new correspondence/email</h1>
+-    <h4>Once created you will be able to associate this with a specific button</h4>
+-    {{--this form is used to create an email which is then associated to a button--}}
+-
+-    <form method="POST" action="/createEmail" id ="createEmail">
+-        {{--following needed for authentication--}}
+-        <input type="hidden" name="token" value="{{ csrf_token() }}">
+-
+-        <h3>Email Name: </h3>
+-        <textarea name="name" form="editButton" rows="1" cols="40">Create a name for the email</textarea><br>
+-
+-        <h3>Email type:</h3>
+-        <input type="radio" form="editButton" name="email" value="notify" checked>Initial Email<br>
+-        <input type="radio" form="editButton" name="email" value="reminder">Reminder Email<br>
+-
+-
+-        <h3>Email Content:</h3>
+-        <textarea name="name" form="editButton" rows="10" cols="70">Type your email here...</textarea>
+-
+-    </form>
+-
+-@endsection
+\ No newline at end of file
+Index: resources/views/home.blade.php
+===================================================================
+--- resources/views/home.blade.php	(revision )
++++ resources/views/home.blade.php	(revision )
+@@ -1,130 +0,0 @@
+-@extends('layouts.app')
+-
+-@section('content')
+-<div class="container center-block" style="width: 85%">
+-    <h1 class="display-3">{{count($students)}} students being admitted to Brentwood</h1>
+-
+-    <table class="table">
+-        <thead>
+-        <tr>
+-            <th>Student Name & ID</th>
+-            <th>Data Validation</th>
+-            <th>Student Type</th>
+-            <th>Enrolment</th>
+-            <th>Deposit Paid</th>
+-            <th>Create AD Account & Email</th>
+-            <th>Informed Consent</th>
+-            <th>Course Selection</th>
+-            <th>Health</th>
+-            <th>Orientation</th>
+-            <th>Email from Head Prefect</th>
+-    </tr>
+-        </thead>
+-        <tbody>
+-        {{--{{dd($students)}}--}}
+-        @foreach($students as $student)
+-            <tr>
+-
+-                <td>{{$student->name}} {{$student->surname}}  {{$student->user_id}}</td>
+-
+-                {{--not using the messages ATM that's why it's commented out--}}
+-                {{--Will have button foreach loop here once logic ready for it--}}
+-                {{--also needing to move all logic to controller to just call a function--}}
+-
+-                <td>
+-                    @if($student->custom_field_1 = "Yes")
+-                        <button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete
+-                            <span class="glyphicon glyphicon-ok"></span>
+-                        </button> </td>
+-                    @else
+-                        {{--ADD @if(student is added to 1106 questionairre) RESEND--}}
+-                    <button type="button" class="btn btn-info" style="white-space: normal">Send Data Validation</button> </td>
+-                    @endif
+-
+-                {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
+-                <td>{{$student->custom_field_8}}</td>
+-
+-                <td>
+-                    {{--Need enrolment to check if any emails sent as well as if it's still null--}}
+-                    @if($student->custom_field_2 == null)
+-                        <button type="button" class="btn btn-info enabled" style="white-space: normal">send enrolment reminder</button> </td>
+-                    @else
+-                    <button type="button" class="btn btn-success disabled" style="white-space: normal">{{$student->custom_field_2}}
+-                        <span class="glyphicon glyphicon-ok"></span>
+-                    </button> </td>
+-                    @endif
+-
+-                <td>
+-                    @if($student->custom_field_9 = "Yes")
+-                        <button type="button" class="btn btn-success disabled" aria-label="done">
+-                        <span class="glyphicon glyphicon-ok "></span>
+-                    @else
+-                                <button type="button" class="btn" aria-label="done">
+-                        <span class="glyphicon glyphicon-remove"></span>
+-                    @endif
+-                    </button>
+-                </td>
+-
+-                <td>
+-                    @if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)
+-
+-                        @if($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca")
+-                            {{--this logic does not check AD - need to figure out how to do this--}}
+-                            <button type="button" class="btn btn-success disabled" style="white-space: normal">AD Account Exists
+-                                <span class="glyphicon glyphicon-ok"></span>
+-                            </button>
+-                        @else
+-                            <button type="button" class="btn bnt-info enabled" style="white-space: normal">Create AD Account</button>
+-                        @endif
+-                    @else
+-                        <button type="button" class="btn disabled" style="white-space: normal">AD Account</button>
+-                    @endif
+-                </td>
+-
+-                <td><button type="button" class="btn disabled" style="white-space: normal">Informed Consent</button> </td>
+-
+-                <td><button type="button" class="btn disabled" style="white-space: normal">Send Course Selection</button> </td>
+-
+-                <td>
+-                    {{--below is NOT correct check need to know what would work--}}
+-                    @if($student->insurance_no != null)
+-                        {{--this logic does not check AD - need to figure out how to do this--}}
+-                        <button type="button" class="btn btn-success disabled" style="white-space: normal">Health Form Complete
+-                            <span class="glyphicon glyphicon-ok"></span>
+-                        </button>
+-                    @elseif($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)
+-                        {{--add a check that messages >= 0--}}
+-                        {{--@if($button->messages = 0)--}}
+-                            <button type="button" class="btn btn-info enabled" style="white-space: normal">Send Health Form</button>
+-                            {{--@else--}}
+-                            {{--<button type="button" class="btn btn-info enabled" style="white-space: normal">Send Health Form Reminder</button>--}}
+-                    {{--@endif--}}
+-                    @else
+-                        <button type="button" class="btn disabled" style="white-space: normal">Send Health Form</button>
+-
+-                    @endif
+-                </td>
+-
+-                <td>
+-                    {{--need to figure out the column in DB to check for this data still (if complete)--}}
+-                    @if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)
+-                        <button type="button" class="btn btn-info enabled" style="white-space: normal">Send Orientation Email</button> </td>
+-                    @else
+-                        <button type="button" class="btn disabled" style="white-space: normal">Resend Orientation Email</button> </td>
+-                    @endif
+-
+-                <td>
+-                    {{--need to figure out the column in DB to check for this data still (if complete)--}}
+-                    @if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)
+-                        <button type="button" class="btn b btn-info enabled" style="white-space: normal">Send Head Prefect Email</button> </td>
+-                    @else
+-                        <button type="button" class="btn disabled" style="white-space: normal">Resend Head Prefect Email</button> </td>
+-                    @endif
+-
+-
+-            </tr>
+-        @endforeach
+-        </tbody>
+-    </table>
+-</div>
+-@endsection
+Index: resources/views/layouts/app.blade.php
+===================================================================
+--- resources/views/layouts/app.blade.php	(revision )
++++ resources/views/layouts/app.blade.php	(revision )
+@@ -1,90 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="{{ config('app.locale') }}">
+-<head>
+-    <meta charset="utf-8">
+-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+-    <meta name="viewport" content="width=device-width, initial-scale=1">
+-
+-    <!-- CSRF Token -->
+-    <meta name="csrf-token" content="{{ csrf_token() }}">
+-
+-    <title>Brentwood Laravel Dashboard</title>
+-
+-    <!-- Styles -->
+-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+-
+-</head>
+-<body>
+-    <div id="app">
+-        <nav class="navbar navbar-default navbar-static-top">
+-            <div class="container">
+-                <div class="navbar-header">
+-                    <!-- Collapsed Hamburger -->
+-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+-                        <span class="sr-only">Toggle Navigation</span>
+-                        <span class="icon-bar"></span>
+-                        <span class="icon-bar"></span>
+-                        <span class="icon-bar"></span>
+-                    </button>
+-
+-                    <!-- Branding Image -->
+-                    <a class="navbar-brand" href="{{ url('/') }}">
+-                        Brentwood Laravel Dashboard
+-                    </a>
+-                </div>
+-
+-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+-                    <!-- Left Side Of Navbar -->
+-                    <ul class="nav navbar-nav">
+-                    </ul>
+-
+-                    <!-- Right Side Of Navbar -->
+-                    <ul class="nav navbar-nav navbar-right">
+-                        <!-- Authentication Links -->
+-                        @if (Auth::guest())
+-                            <li><a href="{{ route('login') }}">Login</a></li>
+-                            <li><a href="{{ route('register') }}">Register</a></li>
+-                        @else
+-                            <li class="dropdown">
+-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+-                                    You are logged in as {{ Auth::user()->name }} <span class="caret"></span>
+-                                </a>
+-
+-                                <ul class="dropdown-menu" role="menu">
+-                                    <li>
+-                                        <a href="/admin"}}>Manage</a>
+-                                    </li>
+-                                    <li>
+-                                        <a href="UNKNOWN">Re-Sync DB</a>
+-                                    </li>
+-                                    <li>
+-                                        <a href="{{ route('logout') }}"
+-                                           onclick="event.preventDefault();
+-                                                     document.getElementById('logout-form').submit();">
+-                                            Logout
+-                                        </a>
+-
+-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+-                                            {{ csrf_field() }}
+-                                        </form>
+-                                    </li>
+-                                </ul>
+-                            </li>
+-                        @endif
+-                    </ul>
+-                </div>
+-            </div>
+-        </nav>
+-
+-        <div class="container center-block" style="width: 85%">
+-
+-        @yield('content')
+-
+-        </div>
+-    </div>
+-
+-    <!-- Scripts -->
+-    <script src="{{ asset('js/app.js') }}"></script>
+-</body>
+-</html>
+Index: resources/views/editButtonForm.blade.php
+===================================================================
+--- resources/views/editButtonForm.blade.php	(revision )
++++ resources/views/editButtonForm.blade.php	(revision )
+@@ -1,33 +0,0 @@
+-@extends('layouts.app')
+-
+-@section('content')
+-    <div class="container center-block" style="width: 85%">
+-
+-    <h1>You are editing the button: {{$button->button_name}}</h1>
+-    {{--this form is used to edit which email is associated to which emails so that it can be updated annually--}}
+-
+-    <form method="POST" action="/editButton/{{$button->button_id}}" id ="editButton">
+-        {{--following needed for authentication--}}
+-        <input type="hidden" name="token" value="{{ csrf_token() }}">
+-
+-        <h3>Button Name: </h3>
+-        <textarea name="name" form="editButton" rows="1" cols="40">{{$button->button_name}}</textarea><br>
+-
+-        <h3>Email sent with button:</h3>
+-        <input type="radio" form="editButton" name="email" value="{{$button->email_id}}" checked>
+-        {{--{{App\Email::find($button->email_id)->email_name}}<br>--}}
+-        The name of some email
+-        {{--@foreach($emails as $email)--}}
+-            {{--<input type="radio" form="editButton" name="email" value="{{$email->email_id}}">{{$email->email_name}}<br>--}}
+-        {{--@endforeach--}}
+-
+-        <h3>Questionnaire associated with button:</h3>
+-        <textarea name="questionnaire_id" form="editButton" rows="1" cols="8">{{$button->questionnaire_id}}</textarea><br>
+-
+-
+-
+-    </form>
+-
+-    </div>
+-
+-@endsection
+\ No newline at end of file
+Index: resources/views/auth/passwords/email.blade.php
+===================================================================
+--- resources/views/auth/passwords/email.blade.php	(revision )
++++ resources/views/auth/passwords/email.blade.php	(revision )
+@@ -1,46 +0,0 @@
+-@extends('layouts.app')
+-
+-@section('content')
+-<div class="container">
+-    <div class="row">
+-        <div class="col-md-8 col-md-offset-2">
+-            <div class="panel panel-default">
+-                <div class="panel-heading">Reset Password</div>
+-                <div class="panel-body">
+-                    @if (session('status'))
+-                        <div class="alert alert-success">
+-                            {{ session('status') }}
+-                        </div>
+-                    @endif
+-
+-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
+-                        {{ csrf_field() }}
+-
+-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+-
+-                                @if ($errors->has('email'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('email') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group">
+-                            <div class="col-md-6 col-md-offset-4">
+-                                <button type="submit" class="btn btn-primary">
+-                                    Send Password Reset Link
+-                                </button>
+-                            </div>
+-                        </div>
+-                    </form>
+-                </div>
+-            </div>
+-        </div>
+-    </div>
+-</div>
+-@endsection
+Index: resources/views/auth/passwords/reset.blade.php
+===================================================================
+--- resources/views/auth/passwords/reset.blade.php	(revision )
++++ resources/views/auth/passwords/reset.blade.php	(revision )
+@@ -1,76 +0,0 @@
+-@extends('layouts.app')
+-
+-@section('content')
+-<div class="container">
+-    <div class="row">
+-        <div class="col-md-8 col-md-offset-2">
+-            <div class="panel panel-default">
+-                <div class="panel-heading">Reset Password</div>
+-
+-                <div class="panel-body">
+-                    @if (session('status'))
+-                        <div class="alert alert-success">
+-                            {{ session('status') }}
+-                        </div>
+-                    @endif
+-
+-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
+-                        {{ csrf_field() }}
+-
+-                        <input type="hidden" name="token" value="{{ $token }}">
+-
+-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
+-
+-                                @if ($errors->has('email'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('email') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+-                            <label for="password" class="col-md-4 control-label">Password</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="password" type="password" class="form-control" name="password" required>
+-
+-                                @if ($errors->has('password'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('password') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+-                            <div class="col-md-6">
+-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+-
+-                                @if ($errors->has('password_confirmation'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group">
+-                            <div class="col-md-6 col-md-offset-4">
+-                                <button type="submit" class="btn btn-primary">
+-                                    Reset Password
+-                                </button>
+-                            </div>
+-                        </div>
+-                    </form>
+-                </div>
+-            </div>
+-        </div>
+-    </div>
+-</div>
+-@endsection
+Index: resources/views/auth/login.blade.php
+===================================================================
+--- resources/views/auth/login.blade.php	(revision )
++++ resources/views/auth/login.blade.php	(revision )
+@@ -1,68 +0,0 @@
+-@extends('layouts.app')
+-
+-@section('content')
+-<div class="container">
+-    <div class="row">
+-        <div class="col-md-8 col-md-offset-2">
+-            <div class="panel panel-default">
+-                <div class="panel-heading">Login</div>
+-                <div class="panel-body">
+-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
+-                        {{ csrf_field() }}
+-
+-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+-
+-                                @if ($errors->has('email'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('email') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+-                            <label for="password" class="col-md-4 control-label">Password</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="password" type="password" class="form-control" name="password" required>
+-
+-                                @if ($errors->has('password'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('password') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group">
+-                            <div class="col-md-6 col-md-offset-4">
+-                                <div class="checkbox">
+-                                    <label>
+-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+-                                    </label>
+-                                </div>
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group">
+-                            <div class="col-md-8 col-md-offset-4">
+-                                <button type="submit" class="btn btn-primary">
+-                                    Login
+-                                </button>
+-
+-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+-                                    Forgot Your Password?
+-                                </a>
+-                            </div>
+-                        </div>
+-                    </form>
+-                </div>
+-            </div>
+-        </div>
+-    </div>
+-</div>
+-@endsection
+Index: resources/views/auth/register.blade.php
+===================================================================
+--- resources/views/auth/register.blade.php	(revision )
++++ resources/views/auth/register.blade.php	(revision )
+@@ -1,76 +0,0 @@
+-@extends('layouts.app')
+-
+-@section('content')
+-<div class="container">
+-    <div class="row">
+-        <div class="col-md-8 col-md-offset-2">
+-            <div class="panel panel-default">
+-                <div class="panel-heading">Register</div>
+-                <div class="panel-body">
+-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+-                        {{ csrf_field() }}
+-
+-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+-                            <label for="name" class="col-md-4 control-label">Name</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+-
+-                                @if ($errors->has('name'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('name') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+-
+-                                @if ($errors->has('email'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('email') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+-                            <label for="password" class="col-md-4 control-label">Password</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="password" type="password" class="form-control" name="password" required>
+-
+-                                @if ($errors->has('password'))
+-                                    <span class="help-block">
+-                                        <strong>{{ $errors->first('password') }}</strong>
+-                                    </span>
+-                                @endif
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group">
+-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+-
+-                            <div class="col-md-6">
+-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+-                            </div>
+-                        </div>
+-
+-                        <div class="form-group">
+-                            <div class="col-md-6 col-md-offset-4">
+-                                <button type="submit" class="btn btn-primary">
+-                                    Register
+-                                </button>
+-                            </div>
+-                        </div>
+-                    </form>
+-                </div>
+-            </div>
+-        </div>
+-    </div>
+-</div>
+-@endsection
+Index: resources/views/admin.blade.php
+===================================================================
+--- resources/views/admin.blade.php	(revision )
++++ resources/views/admin.blade.php	(revision )
+@@ -1,52 +0,0 @@
+-@extends('layouts.app')
+-
+-@section('content')
+-    <div class="container center-block" style="width: 85%">
+-        <h1>Administration Panel</h1>
+-
+-        <div class="container">
+-            {{--button_email table that associates them - pull the ifo into a table here--}}
+-            <table class="table">
+-                <thead>
+-                <h3>Button Settings</h3>
+-
+-                <tr>
+-                    <th>#</th>
+-                    <th>Name</th>
+-                    <th>Email</th>
+-                    <th>Questionnaire ID</th>
+-                    <th></th>
+-                    </tr>
+-                </thead>
+-                <tbody>
+-                @foreach($buttons as $button)
+-                    <tr>
+-                        <td>{{$button->button_id}}</td>
+-                        <td>{{$button->button_name}}</td>
+-                        {{--<td>@if($button HAS EMAIL DISPLAY THE NAME OF EMAIL else)--}}
+-                        <td>No email associated</td>
+-                        <td>{{$button->questionnaire_id}}</td>
+-                        <td>
+-                            <button type="button" class="btn btn-info enabled" onclick="location.href='/editButton/{{$button->button_id}}'" style="white-space: normal">EDIT</button></td>
+-                       </td>
+-                    </tr>
+-                @endforeach
+-                </tbody>
+-            </table>
+-        </div>
+-
+-        <div class="container">
+-            <h3>Communications/Emails</h3>
+-            {{--Need to figure out how we want to store these, pull them, and edit them--}}
+-            {{--Is there a google drive plug in?--}}
+-            {{--PHPWord could be a solution: https://github.com/PHPOffice/PHPWord --}}
+-
+-
+-            {{--edit button to be at bottom of table to change the questionnaire_id for future years--}}
+-            <button type="button" class="btn btn-info enabled" onclick="location.href='{{ url('createEmail') }}'" style="white-space: normal">CREATE EMAIL</button>
+-
+-        </div>
+-
+-
+-    </div>
+-@endsection
