@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container center-block" style="width: 85%">
-    <h1 class="display-3">{{count($students)}} students being admitted to Brentwood</h1>
+    <h1 class="display-3">{{count($students)}} TEST students being admitted to Brentwood</h1>
 
     <table class="table">
         <thead>
