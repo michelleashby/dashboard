@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Button;
+use App\Status;
 use Illuminate\Http\Request;
 use Symfony\Component\Yaml\Tests\B;
 use GuzzleHttp\Client as GuzzleHttpClient;
@@ -41,6 +42,13 @@ class ButtonController extends Controller
     public function setValidationButton($student){
 
         $valButton = new Button();
+        $id = $student->id;
+        $questionnaire = new Status();
+
+        $questionnaires = $questionnaire->select('questionnaire_submissions.questionnaire_id',
+            'questionnare_submissions.questionnaire_submission_status_id')
+            ->where('questionnaire_submissions.user_id','=',$id)
+            ->get();
 
         if($student->custom_field_1 = "Yes") {
 
@@ -49,8 +57,14 @@ class ButtonController extends Controller
 
             return $valButton;
             }
+            elseif ($questionnaires->questionnaire_id = 152 && $questionnaires->questionnaire_submission_status_id = 1) {
+            // If student is in the validation questionnaire and has not completed
+                $valButton->class = "btn btn-info";
+                $valButton->words = "Resend Data Validation";
+
+                return $valButton;
+            }
             else {
-//                                --ADD if (student is added to 1106 questionairre) RESEND--}
 
                 $valButton->class = "btn btn-info";
                 $valButton->words = "Send Data Validation";

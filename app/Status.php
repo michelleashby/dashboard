@@ -17,12 +17,12 @@ class Status extends Model
     /**
      * @var string
      */
-    protected $table = 'status';
+    protected $table = 'questionnaire_submissions';
 
     /**
      * @var string
      */
-    protected $primaryKey = 'status_id';
+    protected $primaryKey = 'questionnaire_submission_id';
 
     /**
      * Creates a hasMany relationship between student->buttons
