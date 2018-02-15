@@ -47,8 +47,12 @@
                 <td>
                     {{--Need enrolment to check if any emails sent as well as if it's still null--}}
                     @if($student->custom_field_2 == null)
+                        {{--This years' re-enrollment questionnaires are 157-161 - need to grab student type to determine which they get--}}
                         <button type="button" class="btn btn-info enabled" style="white-space: normal">send enrolment reminder</button> </td>
-                    @else
+                    {{--Will also need if thay are new to school -
+                    This years' enrollment questionnaires are not made yet - need to grab student type again to determine which they get--}}
+
+                @else
                     <button type="button" class="btn btn-success disabled" style="white-space: normal">{{$student->custom_field_2}}
                         <span class="glyphicon glyphicon-ok"></span>
                     </button> </td>
