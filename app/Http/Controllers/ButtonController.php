@@ -85,15 +85,29 @@ class ButtonController extends Controller
     public function setEnrolmentButton($student){
 
         $enrolButton = new Button();
+        $id = $student->id;
+        $questionnaire = new Status();
 
-        if($student->custom_field_2 == null){
+        $questionnaires = $questionnaire->select('questionnaire_submissions.questionnaire_id',
+            'questionnare_submissions.questionnaire_submission_status_id')
+            ->where('questionnaire_submissions.user_id','=',$id)
+            ->get();
+
+
+        if($student->custom_field_2 == null){ //if questionnaires has ID of current enrollment and status of 1 invited but not complete
             $enrolButton->class="btn btn-info enabled";
-            $enrolButton->words="send enrolment reminder";
+            $enrolButton->words="Resend enrolment reminder";
 
             return $enrolButton;
-        } else {
+        } elseif ($student->custom_field_2 != null) {
             $enrolButton->class="btn btn-success disabled";
             $enrolButton->words=$student->custom_field_2;
+
+            return $enrolButton;
+        }
+            else {
+            $enrolButton->class="btn btn-info enabled";
+            $enrolButton->words="Send ".$student->custom_field_8." enrolment.";
 
             return $enrolButton;
         }
@@ -332,8 +346,8 @@ class ButtonController extends Controller
     }
 
     public function apiCall($uid, $qid){
-        $uid = $user_id;
-        $qid = $questionnaire_id;
+        $user_id = $uid;
+        $questionnaire_id = $qid;
 
         try {
             $client = new $client->request('POST', 'https://brentwood.msm.io/custom/brentwood/data/api.php', [
