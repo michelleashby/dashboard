@@ -7,7 +7,7 @@
 
     <form method="POST" action="/createEmail" id ="createEmail">
         {{--following needed for authentication--}}
-        <input type="hidden" name="token" value="{{ csrf_token() }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <h3>Email Name: </h3>
         <textarea name="name" form="editButton" rows="1" cols="40">Create a name for the email</textarea><br>
@@ -19,6 +19,8 @@
 
         <h3>Email Content:</h3>
         <textarea name="body" form="editButton" rows="10" cols="70">Type your email here...</textarea>
+
+        <input type="submit">
 
     </form>
 
