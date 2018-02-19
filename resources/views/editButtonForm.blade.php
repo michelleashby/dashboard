@@ -6,7 +6,7 @@
     <h1>You are editing the button: {{$button->button_name}}</h1>
     {{--this form is used to edit which email is associated to which emails so that it can be updated annually--}}
 
-    <form method="POST" action="/saveButton/{{$button->button_id}}" id ="saveButton">
+    <form method="POST" action="/editButton/{{$button->button_id}}" id ="editButton">
         {{--following needed for authentication--}}
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

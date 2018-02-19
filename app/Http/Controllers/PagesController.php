@@ -91,7 +91,7 @@ class PagesController extends Controller
         return view('createEmailForm');
     }
 
-    public function saveButton($id){
+    public function editButton($id){
 
             $buttonName = Input::get('name');
             //$buttonEmail = Input::get('email'); //functionality to be added as we build the email form inand ability to toggle valid emails to be sent with button
