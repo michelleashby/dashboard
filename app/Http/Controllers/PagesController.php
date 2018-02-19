@@ -104,7 +104,7 @@ class PagesController extends Controller
                 //if input fields are not the same as the stored values for button
                 //update them to be the same
                 //will need to incorporate email attached here when developed
-                $button->name = $buttonName;
+                $button->button_name = $buttonName;
                 $button->questionnaire_id = $questionnaireId;
 
                 $button->update();
