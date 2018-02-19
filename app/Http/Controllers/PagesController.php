@@ -114,7 +114,7 @@ class PagesController extends Controller
 
             }
 
-            return redirect()->action('TicketController@displayHome');
+            return redirect()->action('PagesController@displayHome');
         }
 
 }

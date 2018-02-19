@@ -46,7 +46,7 @@ class ButtonController extends Controller
         $questionnaire = new Status();
 
         $questionnaires = $questionnaire->select('questionnaire_submissions.questionnaire_id',
-            'questionnare_submissions.questionnaire_submission_status_id')
+            'questionnaire_submissions.questionnaire_submission_status_id')
             ->where('questionnaire_submissions.user_id','=',$id)
             ->get();
 
@@ -62,14 +62,14 @@ class ButtonController extends Controller
                 $valButton->class = "btn btn-info";
                 $valButton->words = "Resend Data Validation";
 
-                return $valButton;
+                $valButton->save();
             }
             else {
 
                 $valButton->class = "btn btn-info";
                 $valButton->words = "Send Data Validation";
 
-                return $valButton;
+                $valButton->save;
             }
 
     }
