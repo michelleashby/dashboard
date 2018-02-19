@@ -34,8 +34,8 @@ class EmailController extends Controller
 
         // creates new email
         $email = new Email();
-        $email->name = $name;
-        $email->type = $type;
+        $email->email_name = $name;
+        $email->email_type = $type;
         $email->body = $body;
         $email->created_at = Carbon::now();
         $email->save();
