@@ -24,6 +24,9 @@
         <h3>Questionnaire associated with button:</h3>
         <textarea name="questionnaire_id" form="editButton" rows="1" cols="8">{{$button->questionnaire_id}}</textarea><br>
 
+        {!! Form::submit('Submit', ['class' => 'btn btn-info']) !!}
+
+
     </form>
 
     </div>
