@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Email;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
 
 class EmailController extends Controller
@@ -63,7 +64,7 @@ class EmailController extends Controller
             $email->name = $name;
             $email->type = $type;
             $email->body = $body;
-            $email->updated_at = CURDATE();
+            $email->updated_at = Carbon::now();
             $email->update();
 
             return redirect()->action('PagesController@displayAdmin');
