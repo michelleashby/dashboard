@@ -10,15 +10,15 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <h3>Email Name: </h3>
-        <textarea name="name" form="editButton" rows="1" cols="40">Create a name for the email</textarea><br>
+        <textarea name="name" form="createEmail" rows="1" cols="40">Create a name for the email</textarea><br>
 
         <h3>Email type:</h3>
-        <input type="radio" form="editButton" name="email" value="notify" checked>Initial Email<br>
-        <input type="radio" form="editButton" name="email" value="reminder">Reminder Email<br>
+        <input type="radio" form="createEmail" name="email" value="notify" checked>Initial Email<br>
+        <input type="radio" form="createEmail" name="email" value="reminder">Reminder Email<br>
 
 
         <h3>Email Content:</h3>
-        <textarea name="body" form="editButton" rows="10" cols="70">Type your email here...</textarea>
+        <textarea name="body" form="createEmail" rows="10" cols="70">Type your email here...</textarea>
 
         <input type="submit">
 
