@@ -10,6 +10,8 @@ namespace App\Http\Controllers;
 
 
 use App\Email;
+use Illuminate\Support\Facades\Input;
+
 
 class EmailController extends Controller
 {
