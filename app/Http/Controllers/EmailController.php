@@ -37,7 +37,7 @@ class EmailController extends Controller
         $email->name = $name;
         $email->type = $type;
         $email->body = $body;
-        $email->created_at = CURDATE();
+        $email->created_at = Carbon::now();
         $email->save();
 
         return redirect()->action('PagesController@displayAdmin');
