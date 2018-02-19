@@ -90,4 +90,31 @@ class PagesController extends Controller
     public function displayCreateEmail(){
         return view('createEmailForm');
     }
+
+    public function saveButton($id){
+
+            $buttonName = Input::get('name');
+            //$buttonEmail = Input::get('email'); //functionality to be added as we build the email form inand ability to toggle valid emails to be sent with button
+            $questionnaireId = Input::get('questionnaire_id');
+
+            $button = Button::find($id);
+//        Check if name has changed
+            if($button->button_name != $buttonName || $button->questionnaire_id != $questionnaireId) {
+                //if input fields are not the same as the stored values for button
+                //update them to be the same
+                //will need to incorporate email attached here when developed
+                $button->name = $buttonName;
+                $button->questionnaire_id = $questionnaireId;
+
+                $button->update();
+
+            } else {
+//            if nothing changed do nothing
+
+
+            }
+
+            return redirect()->action('TicketController@displayHome');
+        }
+
 }
