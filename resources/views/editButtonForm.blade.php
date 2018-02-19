@@ -8,7 +8,7 @@
 
     <form method="POST" action="/editButton/{{$button->button_id}}" id ="editButton">
         {{--following needed for authentication--}}
-        <input type="hidden" name="token" value="{{ csrf_token() }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <h3>Button Name: </h3>
         <textarea name="name" form="editButton" rows="1" cols="40">{{$button->button_name}}</textarea><br>
@@ -25,7 +25,6 @@
         <textarea name="questionnaire_id" form="editButton" rows="1" cols="8">{{$button->questionnaire_id}}</textarea><br>
 
         <input type="submit">
-
 
     </form>
 
