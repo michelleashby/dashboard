@@ -60,7 +60,16 @@ class EmailController extends Controller
         $active = Input::get('active');
 
         $email = Email::find($id);
-        //check if name has changed
+
+        if($type == null){
+            $type = $email->type;
+        }
+
+        if($active == null){
+            $active = $email->active;
+        }
+
+        //check if data has changed
         if($email->email_name != $name || $email->type != $type || $email->body != $body || $email->active != 1){
             $email->email_name = $name;
             $email->type = $type;
