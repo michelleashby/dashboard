@@ -76,13 +76,15 @@ class ButtonController extends Controller
     // all set functions for buttons follow:
     public function setValidationButton($student){
 
-        $valButton = new Button();
+        $valButton = Button::find(1);
         $id = $student->id;
         $questionnaire = new Status();
+        $questionnaireID = $valButton->questionnaire_id;
 
-        $questionnaires = $questionnaire->select('questionnaire_submissions.questionnaire_id',
+        $questionnaire = $questionnaire->select('questionnaire_submissions.questionnaire_id',
             'questionnaire_submissions.questionnaire_submission_status_id')
             ->where('questionnaire_submissions.user_id','=',$id)
+            ->where('questionnaire_submission.questionnaire_id','=',$questionnaireID)
             ->get();
 
         if($student->custom_field_1 = "Yes") {
@@ -92,7 +94,7 @@ class ButtonController extends Controller
 
             return $valButton;
             }
-            elseif ($questionnaires->questionnaire_id = 152 && $questionnaires->questionnaire_submission_status_id = 1) {
+            elseif ($questionnaire->questionnaire_submission_status_id = 1) {
             // If student is in the validation questionnaire and has not completed
                 $valButton->class = "btn btn-info";
                 $valButton->words = "Resend Data Validation";

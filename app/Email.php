@@ -21,7 +21,7 @@ class Email extends Model
      * Creates a hasOne relationship between student->buttons
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function button(){
-        return $this->hasOne('App\Button', 'button_id');
+    public function step(){
+        return $this->hasMany('App\Step', 'email_id');
     }
 }

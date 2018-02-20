@@ -29,6 +29,6 @@ class Status extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function button(){
-        return $this->hasMany('App\Button', 'button_id');
+        return $this->belongsTo('App\Button', 'button_id');
     }
 }
