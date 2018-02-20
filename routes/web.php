@@ -28,7 +28,7 @@ Route::get('/editStep/{id}', 'PagesController@displayStep');
 
 
 //Form POSTS - go through appropriate controller and redirect back to whatever page BEFORE displaying form
-Route::post('/editStep/{id}', 'ButtonController@editStep');
+Route::post('/editStep/{id}', 'StepController@editStep');
 Route::post('/editEmail/{id}', 'EmailController@saveEmail');
 Route::post('/createEmail', 'EmailController@createEmail');
 
