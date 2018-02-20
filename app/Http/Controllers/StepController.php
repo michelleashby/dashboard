@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Step;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Input;
 
