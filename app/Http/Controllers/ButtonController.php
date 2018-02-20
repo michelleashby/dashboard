@@ -40,7 +40,8 @@ class ButtonController extends Controller
             $button->update();
 
         } else {
-//            if nothing changed do nothing
+//            if nothing changed
+            return "No changes detected for button configuration" . '<br><a class="btn btn-primary btn-lg" href="/admin" role="button">Return to Admin</a>';
 
 
         }
