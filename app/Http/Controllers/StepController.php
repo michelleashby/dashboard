@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Button;
-use App\Status;
-use Illuminate\Http\Request;
-use Symfony\Component\Yaml\Tests\B;
-use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Input;
 
