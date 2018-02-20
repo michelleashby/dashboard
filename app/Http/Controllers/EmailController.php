@@ -19,6 +19,34 @@ class EmailController extends Controller
     // this controller is used for all the email functions
     // email has email_id, email_name, button_id, type, body, active, create_at & updated_at
 
+    public function editEmail($id){
+
+        $emailName = Input::get('name');
+        $emailType = Input::get('type');
+        $emailBody = Input::get('body');
+
+        $email = Email::find($id);
+//        Check if name has changed
+        if($email->email_name != $emailName || $email->tpy != $emailType || $email->body != $emailBody) {
+            //if input fields are not the same as the stored values for button
+            //update them to be the same
+            //will need to incorporate email attached here when developed
+            $email->email_name = $emailName;
+            $email->type = $emailType;
+            $email->body = $emailBody;
+
+            $email->update();
+
+        } else {
+//            if nothing changed do nothing
+
+
+        }
+
+        return redirect()->action('PagesController@displayAdmin');
+    }
+
+
     public function getEmails(){
         //get all emails and return names & id for use in UI
         //currnetly not working
@@ -47,13 +75,7 @@ class EmailController extends Controller
 
         return redirect()->action('PagesController@displayAdmin');
     }
-
-    public function editEmail($id){
-        // needs to be passed id to grab correct email values
-        $email = Email::find($id);
-
-        return view('editEmailForm')->with('email', $email);
-    }
+    
 
     public function saveEmail($id){
         // saves an email after editing
