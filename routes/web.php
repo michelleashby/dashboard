@@ -24,11 +24,11 @@ Route::get('/home', 'PagesController@displayHome');
 Route::get('/admin', 'PagesController@displayAdmin');
 Route::get('/createEmail', 'PagesController@displayCreateEmail');
 Route::get('/editEmail/{id}', 'PagesController@displayEditEmail');
-Route::get('/editButton/{id}', 'PagesController@displayEditButton');
+Route::get('/editStep/{id}', 'StepController@displayStep');
 
 
 //Form POSTS - go through appropriate controller and redirect back to whatever page BEFORE displaying form
-Route::post('/editButton/{id}', 'ButtonController@editButton');
+Route::post('/editStep/{id}', 'ButtonController@editStep');
 Route::post('/editEmail/{id}', 'EmailController@saveEmail');
 Route::post('/createEmail', 'EmailController@createEmail');
 

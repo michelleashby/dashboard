@@ -50,7 +50,7 @@
 
             <table class="table">
                 <thead>
-                <h3>Exsisting Communication Emails</h3>
+                <h3>Existing Communication Emails</h3>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
