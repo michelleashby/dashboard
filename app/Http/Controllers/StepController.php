@@ -36,7 +36,7 @@ class StepController extends Controller
             //will need to incorporate email attached here when developed
             $step->step_name = $stepName;
             $step->questionnaire_id = $questionnaireId;
-            $step->step_email = $stepEmail;
+            $step->email_id = $stepEmail;
 
             $step->update();
 
