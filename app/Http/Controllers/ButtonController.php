@@ -29,7 +29,7 @@ class ButtonController extends Controller
 
         $button = Button::find($id);
 //        Check if name has changed
-        if($button->button_name != $buttonName || $button->questionnaire_id != $questionnaireId) {
+        if($button->button_name != $buttonName || $button->questionnaire_id != $questionnaireId || $button->button_email != $buttonEmail) {
             //if input fields are not the same as the stored values for button
             //update them to be the same
             //will need to incorporate email attached here when developed
