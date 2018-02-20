@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Email;
+use App\Step;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
