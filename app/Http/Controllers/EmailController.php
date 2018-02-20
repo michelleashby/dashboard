@@ -57,14 +57,15 @@ class EmailController extends Controller
         $name = Input::get('name');
         $type = Input::get('type');
         $body = Input::get('body');
+        $active = Input::get('active');
 
         $email = Email::find($id);
         //check if name has changed
-        if($email->name != $name || $email->type != $type || $email->body != $body){
-            $email->name = $name;
+        if($email->email_name != $name || $email->type != $type || $email->body != $body || $email->active != 1){
+            $email->email_name = $name;
             $email->type = $type;
             $email->body = $body;
-            $email->active = true;
+            $email->active = $active;
             $email->updated_at = Carbon::now();
             $email->update();
 

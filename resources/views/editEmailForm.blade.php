@@ -21,6 +21,11 @@
         <h3>Email Content:</h3>
         <textarea name="body" form="createEmail" rows="10" cols="70">{{$email->body}}</textarea>
 
+        <h3>Active?</h3>
+        <input type="radio" form="editEmail" name="active" value="1">Yes<br>
+        <input type="radio" form="editEmail" name="active" value="0">No<br>
+
+
         <input type="submit">
 
     </form>
