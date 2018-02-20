@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Button;
 use Illuminate\Support\Facades\Input;
+use App\Http\Controllers\Controller\EmailController;
 
 class PagesController extends Controller
 {
