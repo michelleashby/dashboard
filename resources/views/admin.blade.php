@@ -23,8 +23,13 @@
                     <tr>
                         <td>{{$button->button_id}}</td>
                         <td>{{$button->button_name}}</td>
-                        {{--<td>@if($button HAS EMAIL DISPLAY THE NAME OF EMAIL else)--}}
-                        <td>No email associated</td>
+                        <td>
+                            @if($button->button_email != null)
+                                {{$button->button_email}}
+                            @else
+                            No email associated
+                        @endif
+                        </td>
                         <td>{{$button->questionnaire_id}}</td>
                         <td>
                             <button type="button" class="btn btn-info enabled" onclick="location.href='/editButton/{{$button->button_id}}'" style="white-space: normal">EDIT</button></td>
