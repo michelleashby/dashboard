@@ -21,38 +21,6 @@ class ButtonController extends Controller
     // rules as to the order of completion and when things can be complete
     // href links or hooks to complete action needed for centralization
 
-    public function editButton($id){
-
-        $buttonName = Input::get('name');
-        $buttonEmail = Input::get('email');
-        $questionnaireId = Input::get('questionnaire_id');
-
-        $button = Button::find($id);
-
-        if($buttonEmail == null){
-            $buttonEmail = $button->button_email;
-        }
-//        Check if data has changed
-        if($button->button_name != $buttonName || $button->questionnaire_id != $questionnaireId || $button->button_email != $buttonEmail) {
-            //if input fields are not the same as the stored values for button
-            //update them to be the same
-            //will need to incorporate email attached here when developed
-            $button->button_name = $buttonName;
-            $button->button_email = $buttonEmail;
-            $button->questionnaire_id = $questionnaireId;
-
-            $button->update();
-
-        } else {
-//            if nothing changed
-            return "No changes detected for button configuration" . '<br><a class="btn btn-primary btn-lg" href="/admin" role="button">Return to Admin</a>';
-
-
-        }
-
-        return redirect()->action('PagesController@displayAdmin');
-    }
-
 
     public function getStudentButtons($id){
         // returns an array of all buttons
