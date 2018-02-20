@@ -89,7 +89,7 @@ class PagesController extends Controller
         $email = new Email();
         $emails = $email->all()->where('active', '=', 1);
 
-        return view('editStep')->with('step', $step)->with('emails', $emails);
+        return view('editStepForm')->with('step', $step)->with('emails', $emails);
     }
 
     public function displayCreateEmail(){
