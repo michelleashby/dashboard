@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Button;
 use Illuminate\Support\Facades\Input;
-use App\Http\Controllers\Controller\EmailController;
+use App\Http\Controllers\EmailController;
 
 class PagesController extends Controller
 {
@@ -65,6 +65,7 @@ class PagesController extends Controller
 
 //            $email = new Email();
 //            $emails = $email->all();
+
             $emails = getEmails();
 
             return view('admin')->with('buttons', $buttons)->with('emails', $emails);
