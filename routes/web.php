@@ -23,7 +23,7 @@ Route::get('/', 'PagesController@displayHome');
 Route::get('/home', 'PagesController@displayHome');
 Route::get('/admin', 'PagesController@displayAdmin');
 Route::get('/createEmailForm', 'PagesController@displayCreateEmail');
-Route::get('/editEmailForm', 'PagesController@displayEditEmail');
+Route::get('/editEmailForm/{id}', 'PagesController@displayEditEmail');
 Route::get('/editButton/{id}', 'PagesController@displayEditButton');
 
 
