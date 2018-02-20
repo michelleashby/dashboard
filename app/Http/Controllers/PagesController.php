@@ -19,11 +19,9 @@ class PagesController extends Controller
     // show the data
     public function displayHome() {
         if (Auth::check()) {
-            //something like the below needs to be setup to separate the into appropriate controllers
-            //$students = getStudents();
-            //$buttons = getStudentButtons();
 
-            $students = StudentController::getStudents();
+            $student = new Student();
+            $students = $student->getStudents();
 
 
 //            //NOTE: for reference
