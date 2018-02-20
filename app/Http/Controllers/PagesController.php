@@ -21,7 +21,7 @@ class PagesController extends Controller
         if (Auth::check()) {
 
 //            (new Student)->getStudents();
-
+            $student = new Student();
 
             //NOTE: for reference
             // custom_field_8 is "Student Type",
