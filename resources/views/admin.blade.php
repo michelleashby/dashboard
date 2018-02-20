@@ -5,34 +5,33 @@
         <h1>Administration Panel</h1>
 
         <div class="container">
-            {{--button_email table that associates them - pull the ifo into a table here--}}
             <table class="table">
                 <thead>
-                <h3>Button Settings</h3>
+                <h3>Step Settings</h3>
 
                 <tr>
                     <th>#</th>
-                    <th>Button</th>
+                    <th>Name</th>
                     <th>Email</th>
                     <th>Questionnaire ID</th>
                     <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($buttons as $button)
+                @foreach($steps as $step)
                     <tr>
-                        <td>{{$button->button_id}}</td>
-                        <td>{{$button->button_name}}</td>
+                        <td>{{$step->step_id}}</td>
+                        <td>{{$step->step_name}}</td>
                         <td>
-                            @if($button->button_email != null)
-                                {{$button->button_email}}
+                            @if($step->email_id != null)
+                                {{$step->email->email_name}}
                             @else
                             No email associated
                         @endif
                         </td>
-                        <td>{{$button->questionnaire_id}}</td>
+                        <td>{{$step->questionnaire_id}}</td>
                         <td>
-                            <button type="button" class="btn btn-info enabled" onclick="location.href='/editButton/{{$button->button_id}}'" style="white-space: normal">EDIT</button></td>
+                            <button type="button" class="btn btn-info enabled" onclick="location.href='/editStep/{{$step->step_id}}'" style="white-space: normal">EDIT</button></td>
                        </td>
                     </tr>
                 @endforeach

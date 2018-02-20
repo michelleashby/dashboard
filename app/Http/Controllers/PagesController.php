@@ -58,13 +58,13 @@ class PagesController extends Controller
 
     public function displayAdmin(){
         if(Auth::check()){
-            $button = new Button();
-            $buttons = $button->all();
+            $step = new Step();
+            $steps = $step->all();
 
             $email = new Email();
             $emails = $email->all();
 
-            return view('admin')->with('buttons', $buttons)->with('emails', $emails);
+            return view('admin')->with('steps', $steps)->with('emails', $emails);
         } else {
             return view('welcome');
         }
