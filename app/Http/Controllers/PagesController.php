@@ -82,18 +82,27 @@ class PagesController extends Controller
 //
 //    }
 
-    public function displayEditButton($id){
 
-        $button = Button::find($id);
-
-        $email = new Email();
-        $emails = $email->all()->where('active', '=', 1);
-
-        return view('editButtonForm')->with('button', $button)->with('emails', $emails);
-    }
+//moved below function to be in buttton controller
+//    public function displayEditButton($id){
+//
+//        $button = Button::find($id);
+//
+//        $email = new Email();
+//        $emails = $email->all()->where('active', '=', 1);
+//
+//        return view('editButtonForm')->with('button', $button)->with('emails', $emails);
+//    }
 
     public function displayCreateEmail(){
         return view('createEmailForm');
+    }
+
+    public function displayEditEmail($id){
+
+        $email = Email::find($id);
+
+        return view('editEmailForm')->with('email', $email);
     }
 
 

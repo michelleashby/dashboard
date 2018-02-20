@@ -13,7 +13,8 @@
         <h3>Button Name: </h3>
         <textarea name="name" form="editButton" rows="1" cols="40">{{$button->button_name}}</textarea><br>
 
-        <h3>Email sent with button:</h3>
+        <h3>Email sent with button currently set to {{$button->button_email}}</h3>
+        <h3>Change to:</h3>
         {{--active emails passed with view--}}
         {{--<input type="radio" form="editButton" name="email" value="{{$email->email_id}}" checked>--}}
         @foreach($emails as $email)
