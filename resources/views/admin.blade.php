@@ -25,7 +25,7 @@
                         <td>{{$button->button_name}}</td>
                         <td>
                             @if($button->button_email != null)
-                                {{$button->email->email_name}}
+                                {{$button->button_email}}
                             @else
                             No email associated
                         @endif
