@@ -23,7 +23,7 @@ class PagesController extends Controller
             //$students = getStudents();
             //$buttons = getStudentButtons();
 
-            $students = getStudents();
+            $students = StudentController::getStudents();
 
 
 //            //NOTE: for reference
