@@ -14,8 +14,8 @@
 
         <h3>Email type currently set to {{$email->type}}</h3>
         <h3>Change to:</h3>
-        <input type="radio" form="editEmail" name="type" value="notify">Initial Email<br>
-        <input type="radio" form="editEmaill" name="type" value="reminder">Reminder Email<br>
+        <input type="radio" form="editEmail" name="type" value="notify">Notify: Initial Email<br>
+        <input type="radio" form="editEmaill" name="type" value="reminder">Reminder: Reminder Email<br>
 
 
         <h3>Email Content:</h3>
