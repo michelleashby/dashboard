@@ -20,7 +20,7 @@
 
 
         <h3>Email Content:</h3>
-        <textarea name="body" form="createEmail" rows="10" cols="70">{{$email->body}}</textarea>
+        <textarea name="body" form="editEmail" rows="10" cols="70">{{$email->body}}</textarea>
 
         <h3>Active?</h3>
         <h4>Leave blank if not changing</h4>
