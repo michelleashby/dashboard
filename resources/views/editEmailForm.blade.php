@@ -13,7 +13,7 @@
         <textarea name="name" form="editEmail" rows="1" cols="40">{{$email->email_name}}</textarea><br>
 
         <h3>Email type currently set to {{$email->type}}</h3>
-        <h4>Leave blank if not changing</h4>
+        <h4>*Leave blank if not changing</h4>
         <h3>Change to:</h3>
         <input type="radio" form="editEmail" name="type" value="notify">Notify: Initial Email<br>
         <input type="radio" form="editEmail" name="type" value="reminder">Reminder: Reminder Email<br>
@@ -29,7 +29,7 @@
                 No
             @endif
         </h3>
-        <h4>Leave blank if not changing</h4>
+        <h4>*Leave blank if not changing</h4>
         <input type="radio" form="editEmail" name="active" value="1">Yes<br>
         <input type="radio" form="editEmail" name="active" value="0">No<br>
 
