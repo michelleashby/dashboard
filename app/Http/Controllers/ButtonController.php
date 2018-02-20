@@ -24,7 +24,7 @@ class ButtonController extends Controller
     public function editButton($id){
 
         $buttonName = Input::get('name');
-        //$buttonEmail = Input::get('email'); //functionality to be added as we build the email form inand ability to toggle valid emails to be sent with button
+        $buttonEmail = Input::get('email'); //functionality to be added as we build the email form inand ability to toggle valid emails to be sent with button
         $questionnaireId = Input::get('questionnaire_id');
 
         $button = Button::find($id);
@@ -34,6 +34,7 @@ class ButtonController extends Controller
             //update them to be the same
             //will need to incorporate email attached here when developed
             $button->button_name = $buttonName;
+            $button->button_email = $buttonEmail;
             $button->questionnaire_id = $questionnaireId;
 
             $button->update();
