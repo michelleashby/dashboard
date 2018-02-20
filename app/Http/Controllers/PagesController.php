@@ -20,8 +20,8 @@ class PagesController extends Controller
     public function displayHome() {
         if (Auth::check()) {
 
-            $student = new Student();
-            $students = $student->getStudents();
+            $students = new Student();
+            $students->getStudents();
 
 
 //            //NOTE: for reference
