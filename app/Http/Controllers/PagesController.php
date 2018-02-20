@@ -20,7 +20,7 @@ class PagesController extends Controller
     public function displayHome() {
         if (Auth::check()) {
 
-            (new Student)->getStudents();
+//            (new Student)->getStudents();
 
 
 //            //NOTE: for reference
@@ -49,7 +49,7 @@ class PagesController extends Controller
 //            ->get();
 ////            dd($students);
 
-//            $students = Student::getStudents();
+            $students = Student::getStudents();
             return view('home')->with('students', $students); //->with('buttons', $buttons);
         } else {
             return view('welcome');
