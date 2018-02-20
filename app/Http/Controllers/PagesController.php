@@ -63,10 +63,8 @@ class PagesController extends Controller
             $button = new Button();
             $buttons = $button->all();
 
-//            $email = new Email();
-//            $emails = $email->all();
-
-            $emails = getEmails();
+            $email = new Email();
+            $emails = $email->all();
 
             return view('admin')->with('buttons', $buttons)->with('emails', $emails);
         } else {
@@ -88,7 +86,10 @@ class PagesController extends Controller
 
         $button = Button::find($id);
 
-        return view('editButtonForm')->with('button', $button);
+        $email = new Email();
+        $emails = $email->all()->where('active', '=', 'true');
+
+        return view('editButtonForm')->with('button', $button)->with('emails', $emails);
     }
 
     public function displayCreateEmail(){

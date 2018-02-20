@@ -21,6 +21,7 @@ class EmailController extends Controller
 
     public function getEmails(){
         //get all emails and return names & id for use in UI
+        //currnetly not working
         $email = new Email();
         $emails = $email->all();
 
