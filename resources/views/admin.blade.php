@@ -47,7 +47,7 @@
 
 
             {{--edit button to be at bottom of table to change the questionnaire_id for future years--}}
-            <button type="button" class="btn btn-info enabled" onclick="location.href='/createEmailForm'" style="white-space: normal">CREATE NEW EMAIL</button>
+            <button type="button" class="btn btn-info enabled" onclick="location.href='/createEmail'" style="white-space: normal">CREATE NEW EMAIL</button>
 
             <table class="table">
                 <thead>
@@ -63,7 +63,7 @@
                     <tr>
                         <td>{{$email->email_id}}</td>
                         <td>{{$email->email_name}}</td>
-                        <td><button type="button" class="btn btn-info enabled" onclick="location.href='/editEmailForm/{{$email->email_id}}'" style="white-space: normal">EDIT</button></td>
+                        <td><button type="button" class="btn btn-info enabled" onclick="location.href='/editEmail/{{$email->email_id}}'" style="white-space: normal">EDIT</button></td>
                     </tr>
                 @endforeach
                 </tbody>
