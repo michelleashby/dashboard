@@ -62,8 +62,9 @@ class PagesController extends Controller
             $button = new Button();
             $buttons = $button->all();
 
-            $email = new Email();
-            $emails = $email->all();
+//            $email = new Email();
+//            $emails = $email->all();
+            $emails = getEmails();
 
             return view('admin')->with('buttons', $buttons)->with('emails', $emails);
         } else {

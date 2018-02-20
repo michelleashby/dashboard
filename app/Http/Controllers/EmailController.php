@@ -20,8 +20,11 @@ class EmailController extends Controller
     // email has email_id, email_name, button_id, type, body, active, create_at & updated_at
 
     public function getEmails(){
-        //get all email and return names & id for use in UI
+        //get all emails and return names & id for use in UI
+        $email = new Email();
+        $emails = $email->all();
 
+        return $emails;
     }
 
     public function createEmail(){

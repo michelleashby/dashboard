@@ -44,7 +44,7 @@ class ButtonController extends Controller
 
         }
 
-        return redirect()->action('PagesController@displayHome');
+        return redirect()->action('PagesController@displayAdmin');
     }
 
 
