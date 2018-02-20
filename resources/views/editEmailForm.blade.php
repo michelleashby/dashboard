@@ -22,7 +22,13 @@
         <h3>Email Content:</h3>
         <textarea name="body" form="editEmail" rows="10" cols="70">{{$email->body}}</textarea>
 
-        <h3>Active?</h3>
+        <h3>Active? Currently
+            @if($email->active == 1)
+                Yes
+            @else
+                No
+            @endif
+        </h3>
         <h4>Leave blank if not changing</h4>
         <input type="radio" form="editEmail" name="active" value="1">Yes<br>
         <input type="radio" form="editEmail" name="active" value="0">No<br>
