@@ -13,8 +13,8 @@
         <textarea name="name" form="createEmail" rows="1" cols="40">Create a name for the email</textarea><br>
 
         <h3>Email type:</h3>
-        <input type="radio" form="createEmail" name="email" value="notify" checked>Initial Email<br>
-        <input type="radio" form="createEmail" name="email" value="reminder">Reminder Email<br>
+        <input type="radio" form="createEmail" name="type" value="notify" checked>Initial Email<br>
+        <input type="radio" form="createEmail" name="type" value="reminder">Reminder Email<br>
 
 
         <h3>Email Content:</h3>
