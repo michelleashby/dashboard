@@ -24,11 +24,15 @@ class ButtonController extends Controller
     public function editButton($id){
 
         $buttonName = Input::get('name');
-        $buttonEmail = Input::get('email'); //functionality to be added as we build the email form inand ability to toggle valid emails to be sent with button
+        $buttonEmail = Input::get('email');
         $questionnaireId = Input::get('questionnaire_id');
 
         $button = Button::find($id);
-//        Check if name has changed
+
+        if($buttonEmail == null){
+            $buttonEmail = $button->button_email;
+        }
+//        Check if data has changed
         if($button->button_name != $buttonName || $button->questionnaire_id != $questionnaireId || $button->button_email != $buttonEmail) {
             //if input fields are not the same as the stored values for button
             //update them to be the same
