@@ -37,6 +37,7 @@ class EmailController extends Controller
         $email->email_name = $name;
         $email->type = $type;
         $email->body = $body;
+        $email->active = true;
         $email->created_at = Carbon::now();
         $email->save();
 
@@ -64,6 +65,7 @@ class EmailController extends Controller
             $email->name = $name;
             $email->type = $type;
             $email->body = $body;
+            $email->active = true;
             $email->updated_at = Carbon::now();
             $email->update();
 
