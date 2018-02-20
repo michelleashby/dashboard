@@ -81,14 +81,14 @@ class PagesController extends Controller
 //    }
 
 
-    public function displayEditButton($id){
+    public function displayStep($id){
 
-        $button = Button::find($id);
+        $step = Step::find($id);
 
         $email = new Email();
         $emails = $email->all()->where('active', '=', 1);
 
-        return view('editButtonForm')->with('button', $button)->with('emails', $emails);
+        return view('editButtonForm')->with('step', $step)->with('emails', $emails);
     }
 
     public function displayCreateEmail(){

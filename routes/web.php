@@ -24,7 +24,7 @@ Route::get('/home', 'PagesController@displayHome');
 Route::get('/admin', 'PagesController@displayAdmin');
 Route::get('/createEmail', 'PagesController@displayCreateEmail');
 Route::get('/editEmail/{id}', 'PagesController@displayEditEmail');
-Route::get('/editStep/{id}', 'StepController@displayStep');
+Route::get('/editStep/{id}', 'PagesController@displayStep');
 
 
 //Form POSTS - go through appropriate controller and redirect back to whatever page BEFORE displaying form
