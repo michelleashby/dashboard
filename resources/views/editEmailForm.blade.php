@@ -5,7 +5,7 @@
     <h4>{{$email->email_name}}</h4>
     {{--this form is used to create an email which is then associated to a button--}}
 
-    <form method="POST" action="/editEmailForm/{{$email->email_id}}" id ="editEmail">
+    <form method="POST" action="/editEmail/{{$email->email_id}}" id ="editEmail">
         {{--following needed for authentication--}}
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -15,7 +15,7 @@
         <h3>Email type currently set to {{$email->type}}</h3>
         <h3>Change to:</h3>
         <input type="radio" form="editEmail" name="type" value="notify">Notify: Initial Email<br>
-        <input type="radio" form="editEmaill" name="type" value="reminder">Reminder: Reminder Email<br>
+        <input type="radio" form="editEmail" name="type" value="reminder">Reminder: Reminder Email<br>
 
 
         <h3>Email Content:</h3>
