@@ -34,7 +34,7 @@ class StepController extends Controller
             //if input fields are not the same as the stored values for button
             //update them to be the same
             //will need to incorporate email attached here when developed
-            $step->step_name = $buttonName;
+            $step->step_name = $stepName;
             $step->questionnaire_id = $questionnaireId;
             $step->step_email = $stepEmail;
 
