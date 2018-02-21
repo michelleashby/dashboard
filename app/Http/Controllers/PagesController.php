@@ -103,5 +103,18 @@ class PagesController extends Controller
         return view('editEmailForm')->with('email', $email);
     }
 
+    public function dbSync(){
+        // Need a function that can be called to sync DB tables from MySchool
+        // As well as populate button table based on status
+        // Tables needing sync include:
+        // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
+        // also need to populate soemthing like:
+        // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
+        // WHERE button.user_id = questionnaire_submission.user_id
+        // AND button->step.questionnaire_id = questionnaire_submission.questionnaire_id
+
+
+    }
+
 
 }

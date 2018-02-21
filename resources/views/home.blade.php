@@ -32,14 +32,16 @@
                 {{--also needing to move all logic to controller to just call a function--}}
 
                 <td>
-                    @if($student->custom_field_1 = "Yes")
-                        <button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </button> </td>
-                    @else
+                    {{--@if($student->custom_field_1 = "Yes")--}}
+                        {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
+                            {{--<span class="glyphicon glyphicon-ok"></span>--}}
+                        {{--</button> </td>--}}
+                    {{--@else--}}
                         {{--ADD @if(student is added to 1106 questionairre) RESEND--}}
-                    <button type="button" class="btn btn-info" style="white-space: normal">Send Data Validation</button> </td>
-                    @endif
+                    {{--<button type="button" class="btn btn-info" style="white-space: normal">Send Data Validation</button> </td>--}}
+                    {{--@endif--}}
+                {{\App\Button::setValidationButton($student)}}
+                {{Button::getValidationButton($student)}}
 
                 {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
                 <td>{{$student->custom_field_8}}</td>

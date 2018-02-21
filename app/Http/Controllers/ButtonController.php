@@ -44,12 +44,18 @@ class ButtonController extends Controller
     // all set functions for buttons follow:
     public function setValidationButton($student){
 
-        $valButton = Button::find(1);
         $id = $student->id;
-        $questionnaire = new Status();
+
+        // need to find button with user_id of the student and step_id 1
+        $button = new Button();
+        $valButton = $button->where('user_id', $id)
+            ->where('step_id', 1)
+            ->get();
+
+        $questStatus = new Status();
         $questionnaireID = $valButton->questionnaire_id;
 
-        $questionnaire = $questionnaire->select('questionnaire_submissions.questionnaire_id',
+        $valStatus = $questStatus->select('questionnaire_submissions.questionnaire_id',
             'questionnaire_submissions.questionnaire_submission_status_id')
             ->where('questionnaire_submissions.user_id','=',$id)
             ->where('questionnaire_submission.questionnaire_id','=',$questionnaireID)
@@ -57,45 +63,51 @@ class ButtonController extends Controller
 
         if($student->custom_field_1 = "Yes") {
 
-        $valButton->class="btn btn-success disabled";
-        $valButton->words="Validation Complete  <span class=\"glyphicon glyphicon-ok\"></span>";
+            $valButton->class="btn btn-success disabled";
+            $valButton->words="Validation Complete  <span class=\"glyphicon glyphicon-ok\"></span>";
 
-            return $valButton;
+            $valButton->update();
             }
-            elseif ($questionnaire->questionnaire_submission_status_id = 1) {
+            elseif ($valStatus->questionnaire_submission_status_id = 1) {
             // If student is in the validation questionnaire and has not completed
                 $valButton->class = "btn btn-info";
                 $valButton->words = "Resend Data Validation";
 
-                $valButton->save();
+                $valButton->update();
             }
             else {
 
                 $valButton->class = "btn btn-info";
                 $valButton->words = "Send Data Validation";
 
-                $valButton->save;
+                $valButton->update();
             }
 
     }
 
-    public function setTypeButton(){
+//    public function setTypeButton(){
         // 3a)student type
         // NEW REQUEST from PK
         // Student type - flag if changes so it can be acknowledged
         // Considering pulling this info and setting in column here:
+        // accessing $student->custom_field_8 gives this information
+        //no need for function, can be called in view
 
-    }
+//    }
 
     public function setEnrolmentButton($student){
 
-        $enrolButton = new Button();
+        $enrolButton = Button::find(2);
         $id = $student->id;
-        $questionnaire = new Status();
+        $type = $student->custom_field_8;
+        $questStatus = new Status();
+        $questionnaireID = $enrolButton->questionnaire_id;
 
-        $questionnaires = $questionnaire->select('questionnaire_submissions.questionnaire_id',
-            'questionnare_submissions.questionnaire_submission_status_id')
+
+        $enrolStatus = $questStatus->select('questionnaire_submissions.questionnaire_id',
+            'questionnaire_submissions.questionnaire_submission_status_id')
             ->where('questionnaire_submissions.user_id','=',$id)
+            ->where('questionnaire_submission.questionnaire_id','=',$questionnaireID)
             ->get();
 
 
@@ -257,6 +269,18 @@ class ButtonController extends Controller
 
     }
 
+    public function getValidationButton($student){
+        $id = $student->user_id;
+
+        $button = new Button();
+
+        $valButton = $button->where('user_id', $id)
+            ->where('step_id', 1)
+            ->get();
+
+        return $valButton;
+    }
+
     //following 'click' button functions deal with the action if a button is clicked
     //button state will disable a click if it should not be clicked
     public function sendValidation(){
@@ -264,10 +288,6 @@ class ButtonController extends Controller
     }
 
     public function resendValidation(){
-
-    }
-
-    public function changeStudentType(){
 
     }
 

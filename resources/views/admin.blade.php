@@ -7,8 +7,8 @@
         <div class="container">
             <table class="table">
                 <thead>
-                <h3>Step Settings</h3>
-
+                <h3>Steps</h3>
+                <h4>Note: step order and addition or deletion can only be managed through the DB directly currently</h4>
                 <tr>
                     <th>#</th>
                     <th>Name</th>
