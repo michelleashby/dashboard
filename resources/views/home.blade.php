@@ -37,7 +37,7 @@
                             <span class="glyphicon glyphicon-ok"></span>
                         </button> </td>
                     @else
-                        ADD @if(student is added to 1106 questionairre) RESEND
+                        {{--ADD @if(student is added to 1106 questionairre) RESEND--}}
                     <button type="button" class="btn btn-info" style="white-space: normal">Send Data Validation</button> </td>
                     @endif
 
