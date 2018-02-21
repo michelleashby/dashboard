@@ -40,8 +40,8 @@
                         {{--ADD @if(student is added to 1106 questionairre) RESEND--}}
                     {{--<button type="button" class="btn btn-info" style="white-space: normal">Send Data Validation</button> </td>--}}
                     {{--@endif--}}
-                {{\App\Button::setValidationButton($student)}}
-                {{Button::getValidationButton($student)}}
+                setValidationButton($student)
+                getValidationButton($student)
 
                 {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
                 <td>{{$student->custom_field_8}}</td>
