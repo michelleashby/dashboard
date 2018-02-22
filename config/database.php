@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('DB_CONNECTION', 'mysql'),
+//    'external' =>env('DB_CONNECTION','mysql2'),
 
     /*
     |--------------------------------------------------------------------------

@@ -41,20 +41,26 @@ class StudentController extends Controller
         return $students;
     }
 
-    public function searchStudents(){
+    public function searchStudents()
+    {
+
         $searchInput = $_POST['searchInput'];
 
-        //currently set up to searchname only  - can search on other columns in future if valuable
-        $searchStudents = DB::table('contacts')
-            ->where('name', 'LIKE', "%{searchInput}%")
-            ->orWhere('surname', 'LIKE', "%{searchInput}%")
-            ->get();
+        if ($searchInput != null) {
 
-        if(count($searchStudents) == 0){
-            return '<h3>Sorry, no results for <u>' . $searchInput . '</u></h3>';
-        }
-        else {
-            return view('searchResult')->with('searchInput', $searchInput)->with('searchStudents', $searchStudents);
+            //currently set up to searchname only  - can search on other columns in future if valuable
+            $students = DB::table('contacts')
+                ->where('name', 'LIKE', "%{searchInput}%")
+                ->orWhere('surname', 'LIKE', "%{searchInput}%")
+                ->get();
+
+            if (count($students) == 0) {
+                return '<h3>Sorry, no results for <u>' . $searchInput . '</u></h3>';
+            } else {
+                return view('home')->with('searchInput', $searchInput)->with('students', $students);
+            }
+        } else {
+            $this->getStudents();
         }
     }
 
