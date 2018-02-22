@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container center-block" style="width: 85%">
+    <li>
+        <form method="POST" action="/student/searchResults">
+            {!! csrf_field() !!}
+
+            <input type="text" name="searchInput" value="{{ old('searchInput') }}">
+
+            <button type="submit">Search</button><br>
+        </form>
+    </li>
     <h1 class="display-3">{{count($students)}} TEST students being admitted to Brentwood</h1>
 
     <table class="table">
