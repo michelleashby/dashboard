@@ -46,6 +46,15 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li>
+                                <form method="POST" action="/student/searchResults">
+                                    {!! csrf_field() !!}
+
+                                    <input type="text" name="searchInput" value="{{ old('searchInput') }}">
+
+                                    <button type="submit">Search</button><br>
+                                </form>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     You are logged in as {{ Auth::user()->name }} <span class="caret"></span>
