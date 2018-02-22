@@ -3,7 +3,6 @@
 @section('content')
 <div class="container center-block" style="width: 85%">
     <div class="pull-right">
-    <li>
         <form method="POST" action="/student/searchResults">
             {!! csrf_field() !!}
 
@@ -11,7 +10,6 @@
 
             <button type="submit">Search</button><br>
         </form>
-    </li>
     </div>
     <h1 class="display-3">{{count($students)}} TEST students being admitted to Brentwood</h1>
 
