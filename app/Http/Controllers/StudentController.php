@@ -49,7 +49,7 @@ class StudentController extends Controller
         if ($searchInput != null) {
 
             //currently set up to searchname only  - can search on other columns in future if valuable
-            $students = DB::table('contacts')
+            $students = Student::table('contacts')
                 ->where('name', 'LIKE', "%{searchInput}%")
                 ->orWhere('surname', 'LIKE', "%{searchInput}%")
                 ->get();
