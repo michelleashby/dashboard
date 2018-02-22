@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container center-block" style="width: 85%">
 
     <h1>You are editing the step: {{$step->step_name}}</h1>
