@@ -51,7 +51,11 @@ class PagesController extends Controller
 //            dd($students);
 
 //            $students = Student::getStudents();
-            return view('home')->with('students', $students); //->with('buttons', $buttons);
+
+            $button = new Button();
+            $buttons = $button->all();
+
+            return view('home')->with('students', $students)->with('buttons', $buttons);
         } else {
             return view('welcome');
         }
@@ -106,13 +110,21 @@ class PagesController extends Controller
     public function dbSync(){
         // Need a function that can be called to sync DB tables from MySchool
         // As well as populate button table based on status
+
+        // Get tables from external DB
         // Tables needing sync include:
         // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
-        // also need to populate soemthing like:
+
+
+        // Local table `button` also needs to populate something like:
         // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
         // WHERE button.user_id = questionnaire_submission.user_id
         // AND button->step.questionnaire_id = questionnaire_submission.questionnaire_id
+        $students = Student()->all;
 
+        foreach ($students as $student){
+            //grab the
+        }
 
     }
 

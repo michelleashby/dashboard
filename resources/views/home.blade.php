@@ -40,6 +40,11 @@
                 {{--Will have button foreach loop here once logic ready for it--}}
                 {{--also needing to move all logic to controller to just call a function--}}
 
+                @foreach($student->buttons as $button)
+                    <td>
+                        <button type="button" class="{{$button->class}}" style="white-space: normal">{{$button->words}}</button>
+                    </td>
+
                 <td>
                     @if($student->custom_field_1 = "Yes")
                         <button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete
