@@ -76,17 +76,20 @@
                 </div>
             </div>
         </nav>
+        <div class="container center-block" style="width: 85%">
+            <div class="pull-right">
 
-        @yield('content')
+                @yield('content')
+
+            </div>
+        </div>
     </div>
 
     <footer class="page-footer font-small blue pt-4 mt-4">
 
         <!--Footer Links-->
+        <div class="container-fluid text-center text-md-left">
             <div class="row">
-
-                <!--First column-->
-                <div class="col-md-6">
                     @yield('footer')
                 </div>
             </div>
