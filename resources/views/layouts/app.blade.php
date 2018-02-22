@@ -83,7 +83,6 @@
     <footer class="page-footer font-small blue pt-4 mt-4">
 
         <!--Footer Links-->
-        <div class="container-fluid text-center text-md-left">
             <div class="row">
 
                 <!--First column-->
@@ -91,7 +90,6 @@
                     @yield('footer')
                 </div>
             </div>
-        </div>
     </footer>
 
     <!-- Scripts -->
