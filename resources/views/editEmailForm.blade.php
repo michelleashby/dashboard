@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container center-block" style="width: 85%">
-        <div class="pull-right">
             <h1>You are editing a correspondence/email</h1>
             <h4>{{$email->email_name}}</h4>
             {{--this form is used to create an email which is then associated to a button--}}
@@ -39,8 +37,6 @@
                 <input type="submit">
 
             </form>
-        </div>
-    </div>
 
 @endsection
 

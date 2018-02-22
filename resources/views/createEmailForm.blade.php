@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container center-block" style="width: 85%">
-        <div class="pull-right">
             <h1>You are adding a new correspondence/email</h1>
             <h4>Once created you will be able to associate this with a specific button</h4>
             {{--this form is used to create an email which is then associated to a button--}}
@@ -25,8 +23,6 @@
                 <input type="submit">
 
             </form>
-        </div>
-    </div>
 
 @stop
 

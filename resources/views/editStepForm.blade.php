@@ -2,8 +2,6 @@
 
 @section('content')
 
-    <div class="container center-block" style="width: 85%">
-
     <h1>You are editing the step: {{$step->step_name}}</h1>
     {{--this form is used to edit which email is associated to which emails so that it can be updated annually--}}
 
@@ -28,9 +26,7 @@
         <input type="submit">
 
     </form>
-
-    </div>
-
+    
 @endsection
 
 @section('footer')
