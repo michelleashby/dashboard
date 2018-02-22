@@ -80,7 +80,19 @@
         @yield('content')
     </div>
 
-    @yield('footer')
+    <footer class="page-footer font-small blue pt-4 mt-4">
+
+        <!--Footer Links-->
+        <div class="container-fluid text-center text-md-left">
+            <div class="row">
+
+                <!--First column-->
+                <div class="col-md-6">
+                    @yield('footer')
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
