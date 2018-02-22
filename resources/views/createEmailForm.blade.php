@@ -25,3 +25,10 @@
     </form>
 
 @endsection
+
+
+@section('footer')
+
+    <br><a href='/home'>Back to Home</a>
+
+@endsection
