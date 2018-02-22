@@ -32,3 +32,7 @@ Route::post('/editStep/{id}', 'StepController@editStep');
 Route::post('/editEmail/{id}', 'EmailController@saveEmail');
 Route::post('/createEmail', 'EmailController@createEmail');
 
+//Search (students) on main page
+Route::post('/home/search', 'StudentController@searchStudents');
+
+

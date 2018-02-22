@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="pull-right">
-        <form method="POST" action="/student/searchResults">
+        <form method="POST" action="/home/search">
             {!! csrf_field() !!}
 
             <input type="text" name="searchInput" value="{{ old('searchInput') }}">
