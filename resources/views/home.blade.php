@@ -36,14 +36,13 @@
 
                 <td>{{$student->name}} {{$student->surname}}  {{$student->user_id}}</td>
 
-                {{--not using the messages ATM that's why it's commented out--}}
                 {{--Will have button foreach loop here once logic ready for it--}}
                 {{--also needing to move all logic to controller to just call a function--}}
 
-                @foreach($student->buttons as $button)
-                    <td>
-                        <button type="button" class="{{$button->class}}" style="white-space: normal">{{$button->words}}</button>
-                    </td>
+                {{--@foreach($student->buttons as $button)--}}
+                    {{--<td>--}}
+                        {{--<button type="button" class="{{$button->class}}" style="white-space: normal">{{$button->words}}</button>--}}
+                    {{--</td>--}}
 
                 <td>
                     @if($student->custom_field_1 = "Yes")
