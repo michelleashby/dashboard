@@ -77,11 +77,7 @@
             </div>
         </nav>
         <div class="container center-block" style="width: 85%">
-            <div class="pull-right">
-
                 @yield('content')
-
-            </div>
         </div>
     </div>
 

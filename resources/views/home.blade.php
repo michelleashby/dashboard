@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container center-block" style="width: 85%">
     <div class="pull-right">
         <form method="POST" action="/student/searchResults">
             {!! csrf_field() !!}
@@ -143,5 +142,4 @@
         @endforeach
         </tbody>
     </table>
-</div>
 @endsection

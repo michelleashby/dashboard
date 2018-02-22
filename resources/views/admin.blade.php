@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container center-block" style="width: 85%">
         <h1>Administration Panel</h1>
 
         <div class="container">
@@ -69,6 +68,4 @@
             </table>
         </div>
 
-
-    </div>
 @endsection
