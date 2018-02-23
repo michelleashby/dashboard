@@ -66,7 +66,7 @@ class StudentController extends Controller
                     'students.custom_field_1',
                     'students.custom_field_9',
                     'students.custom_field_2')
-                ->where('classes.year', '=', 2018)
+                ->where('classes.year', '=', 2017)
                 ->where('contacts.name', 'LIKE', "%{searchInput}%")
                 ->orWhere('contacts.surname', 'LIKE', "%{searchInput}%")
                 ->get();
