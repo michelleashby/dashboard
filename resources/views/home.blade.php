@@ -38,10 +38,12 @@
                 {{--Will have button foreach loop here once logic ready for it--}}
                 {{--also needing to move all logic to controller to just call a function--}}
 
-                {{--@foreach($student->buttons as $button)--}}
-                    {{--<td>--}}
-                        {{--<button type="button" class="{{$button->class}}" style="white-space: normal">{{$button->words}}</button>--}}
-                    {{--</td>--}}
+                {{--{{\App\Status::find($ticket->status_id)->description}}--}}
+                {{$buttons = \App\Button::where('user_id',$student->user_id)}}
+                    @foreach($buttons as $button)
+                        <td>
+                            <button type="button" class="{{$button->class}}" style="white-space: normal">{{$button->words}}</button>
+                        </td>
 
                 <td>
                     @if($student->custom_field_1 = "Yes")
