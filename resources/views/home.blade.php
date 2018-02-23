@@ -39,11 +39,14 @@
                 {{--also needing to move all logic to controller to just call a function--}}
 
                 {{--{{\App\Status::find($ticket->status_id)->description}}--}}
-                {{$buttons = \App\Button::where('user_id',$student->user_id)}}
+                {{--{{$buttons = \App\Button::where('user_id',$student->user_id)}}--}}
                     @foreach($buttons as $button)
+                        @if($button->user_id == $student->user_id)
                         <td>
                             <button type="button" class="{{$button->class}}" style="white-space: normal">{{$button->words}}</button>
                         </td>
+                        @endif
+                    @endforeach
 
                 <td>
                     @if($student->custom_field_1 = "Yes")
