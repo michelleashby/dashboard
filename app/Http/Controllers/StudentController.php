@@ -47,6 +47,8 @@ class StudentController extends Controller
 
         $searchInput = $_POST['searchInput'];
 
+        dd($searchInput);
+
         if ($searchInput != null) {
 
             $student = new Student();
