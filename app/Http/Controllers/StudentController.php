@@ -47,7 +47,7 @@ class StudentController extends Controller
 
         $searchInput = $_POST['searchInput'];
 
-        dd($searchInput);
+//        dd($searchInput);
 
         if ($searchInput != null) {
 
@@ -67,8 +67,8 @@ class StudentController extends Controller
                     'students.custom_field_9',
                     'students.custom_field_2')
                 ->where('classes.year', '=', 2018)
-                ->where('name', 'LIKE', "%{searchInput}%")
-                ->orWhere('surname', 'LIKE', "%{searchInput}%")
+                ->where('contacts.name', 'LIKE', "%{searchInput}%")
+                ->orWhere('contacts.surname', 'LIKE', "%{searchInput}%")
                 ->get();
 
             if (count($students) == 0) {
