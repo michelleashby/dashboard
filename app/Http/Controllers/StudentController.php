@@ -54,11 +54,11 @@ class StudentController extends Controller
             $student = new Student();
 
             //currently set up to searchname only  - can search on other columns in future if valuable
-            $students = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
+            $studentsSearch = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
                 ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
                 ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
                 ->join('students', 'contacts.user_id', '=', 'students.user_id')
-                ->select('contacts.user_id',
+                ->select ('contacts.user_id',
                     'contacts.surname',
                     'contacts.name',
                     'students.custom_field_8',
@@ -70,6 +70,8 @@ class StudentController extends Controller
                 ->where('contacts.name', 'LIKE', $searchInput)
                 ->orWhere('contacts.surname', 'LIKE', $searchInput)
                 ->get();
+
+            $students = array_unique($studentsSearch);
 
             if (count($students) == 0) {
                 return '<h3>Sorry, no results for <u>' . $searchInput . '</u></h3>';
