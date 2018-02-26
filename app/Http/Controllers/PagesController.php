@@ -115,6 +115,11 @@ class PagesController extends Controller
         // Tables needing sync include:
         // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
 
+//        $dbUser = 'brentwood_ro'
+//        $dbPassword = '%+m!$YQM4]X*rov'
+//        $dbDatabase = 'brentwood'
+//        $dbServer = 'door.msm.io'
+
 
         // Local table `button` also needs to populate something like:
         // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
