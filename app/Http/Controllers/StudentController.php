@@ -73,10 +73,13 @@ class StudentController extends Controller
                 ->distinct()
                 ->get();
 
+            $button = new Button();
+            $buttons = $button->all();
+
             if (count($students) == 0) {
                 return '<h3>Sorry, no results for <u>' . $searchInput . '</u></h3>';
             } else {
-                return view('home')->with('searchInput', $searchInput)->with('students', $students);
+                return view('home')->with('searchInput', $searchInput)->with('students', $students)->with('buttons',$button);
             }
         } else {
             $this->getStudents();
