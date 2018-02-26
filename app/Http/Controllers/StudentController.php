@@ -54,19 +54,20 @@ class StudentController extends Controller
             $student = new Student();
 
             //currently set up to searchname only  - can search on other columns in future if valuable
-            $students = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
-                ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
-                ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
-                ->join('students', 'contacts.user_id', '=', 'students.user_id')
-                ->select('contacts.user_id',
-                    'contacts.surname',
-                    'contacts.name',
-                    'students.custom_field_8',
-                    'students.custom_field_13',
-                    'students.custom_field_1',
-                    'students.custom_field_9',
-                    'students.custom_field_2')
-                ->where('classes.year', '=', 2018)
+            $students = $student->getStudents()
+//                ->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
+//                ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
+//                ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
+//                ->join('students', 'contacts.user_id', '=', 'students.user_id')
+//                ->select('contacts.user_id',
+//                    'contacts.surname',
+//                    'contacts.name',
+//                    'students.custom_field_8',
+//                    'students.custom_field_13',
+//                    'students.custom_field_1',
+//                    'students.custom_field_9',
+//                    'students.custom_field_2')
+//                ->where('classes.year', '=', 2018)
                 ->where('contacts.name', 'LIKE', $searchInput)
                 ->orWhere('contacts.surname', 'LIKE', $searchInput)
                 ->distinct()
