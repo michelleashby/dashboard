@@ -42,7 +42,6 @@ class StudentController extends Controller
         return $students;
     }
 
-    // Currently search is not returning results...
     public function searchStudents()
     {
 
@@ -83,7 +82,7 @@ class StudentController extends Controller
                 return view('home')->with('searchInput', $searchInput)->with('students', $students)->with('buttons',$button);
             }
         } else {
-            $this->getStudents();
+            return redirect('home');
         }
     }
 
