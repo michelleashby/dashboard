@@ -21,6 +21,14 @@ class ButtonController extends Controller
     // rules as to the order of completion and when things can be complete
     // href links or hooks to complete action needed for centralization
 
+//Status meanings for questionnaire_submission.questionnaire_submission_status_id
+//Needed for putting buttons in correct state
+//0              =>           "Not invited",
+//1              =>           "Invited but not completed",
+//2              =>           "Completed",
+//3              =>           "Main guardian email missing",
+
+
 
     public function getStudentButtons($id){
         // returns an array of all buttons
@@ -208,6 +216,9 @@ class ButtonController extends Controller
         $email = $student->email;
         $questionnaire_id = 3;
         $bhButton= new Button();
+
+//        Development server dev.bluehealth.ca/api.questionnaires/status
+//        real time go.bluehealth.ca/api.questionnairesstatus
 
         try {
             $client = new $client->request('POST', 'https://go.bluehealth.ca/api.questionnaires/status', [

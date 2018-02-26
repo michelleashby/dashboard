@@ -123,7 +123,21 @@ class PagesController extends Controller
         $students = Student()->all;
 
         foreach ($students as $student){
-            //grab the
+            //grab the students IDs to make sure they each have 8 buttons in table
+            $studentButton = new Button();
+
+            $studentButtonCount = $studentButton->where('user_id',$student->user_id)->count();
+
+            if($studentButtonCount==8){
+                //Update statuses for existing
+
+            } elseif ($studentButtonCount > 0){
+                //add missing buttons
+
+                //update stauses for existing
+            } else {
+                //add all buttons
+            }
         }
 
     }
