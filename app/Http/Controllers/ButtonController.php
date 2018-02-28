@@ -45,6 +45,67 @@ class ButtonController extends Controller
         return $buttons;
     }
 
+    public function createStudentButtons($student){
+        $id = $student->user_id;
+        $button = new Button();
+        $date = date_timestamp_get();
+
+        $buttonsCheck = $button->where('user_id',$id)->count();
+
+        //need to double check that the button does not exist so duplicate buttons are not being created
+        if($buttonsCheck < 1) {
+            $button->user_id = $id;
+            $button->step = 1;
+            $button->created_at = $date;
+
+            $button->save();
+
+            $button->user_id = $id;
+            $button->step = 2;
+            $button->created_at = $date;
+
+            $button->save();
+
+            $button->user_id = $id;
+            $button->step = 3;
+            $button->created_at = $date;
+
+            $button->save();
+
+            $button->user_id = $id;
+            $button->step = 4;
+            $button->created_at = $date;
+
+            $button->save();
+
+            $button->user_id = $id;
+            $button->step = 5;
+            $button->created_at = $date;
+
+            $button->save();
+
+            $button->user_id = $id;
+            $button->step = 6;
+            $button->created_at = $date;
+
+            $button->save();
+
+            $button->user_id = $id;
+            $button->step = 7;
+            $button->created_at = $date;
+
+            $button->save();
+
+            $button->user_id = $id;
+            $button->step = 8;
+            $button->created_at = $date;
+        } else {
+            return "cannot create buttons for user who already has ". $buttonsCheck ." button(s).";
+        }
+
+
+    }
+
 
     // buttons will be greyed out until they can be completed (btn disabled/active)
     // and then green(btn-success) when completed (btn ie.basic when active but not complete)
@@ -54,6 +115,8 @@ class ButtonController extends Controller
 
         $id = $student->id;
         $step =1;
+        $date = date_timestamp_get();
+
 
         // need to find button with user_id of the student and step_id 1
         $button = new Button();
@@ -65,7 +128,7 @@ class ButtonController extends Controller
             //if there is no validation button in the button table, create one
             $valButton->user_id = $id;
             $valButton->step_id = $step;
-            $valButton->created_at = date_timestamp_get();
+            $valButton->created_at = $date;
             $valButton->button_status_id = 0;
 
             $valButton->save();
@@ -103,7 +166,7 @@ class ButtonController extends Controller
 
                 $valButton->update();
             } else {
-                return error;
+                return "error updating validation button";
             }
         }
 

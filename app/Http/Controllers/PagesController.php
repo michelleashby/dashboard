@@ -108,12 +108,14 @@ class PagesController extends Controller
     }
 
     public function dbSync(){
-        // Need a function that can be called to sync DB tables from MySchool
-        // As well as populate button table based on status
+        if(Auth::check()) {
 
-        // Get tables from external DB
-        // Tables needing sync include:
-        // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
+            // Need a function that can be called to sync DB tables from MySchool
+            // As well as populate button table based on status
+
+            // Get tables from external DB
+            // Tables needing sync include:
+            // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
 
 //        $dbUser = 'brentwood_ro'
 //        $dbPassword = '%+m!$YQM4]X*rov'
@@ -121,29 +123,65 @@ class PagesController extends Controller
 //        $dbServer = 'door.msm.io'
 
 
-        // Local table `button` also needs to populate something like:
-        // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
-        // WHERE button.user_id = questionnaire_submission.user_id
-        // AND button->step.questionnaire_id = questionnaire_submission.questionnaire_id
-        $students = Student()->all;
+            // Local table `button` also needs to populate something like:
+            // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
+            // WHERE button.user_id = questionnaire_submission.user_id
+            // AND button->step.questionnaire_id = questionnaire_submission.questionnaire_id
+            $students = Student()->all;
 
-        foreach ($students as $student){
-            //grab the students IDs to make sure they each have 8 buttons in table
-            $studentButton = new Button();
+            foreach ($students as $student) {
+                //grab the students IDs to make sure they each have 8 buttons in table
+                $studentButton = new Button();
 
-            $studentButtonCount = $studentButton->where('user_id',$student->user_id)->count();
+                $studentButtonCount = $studentButton->where('user_id', $student->user_id)->count();
 
-            if($studentButtonCount==8){
-                //Update statuses for existing
-                Button::setValidationButton($student);
+                if ($studentButtonCount == 8 || $studentButtonCount > 0) {
+                    //Update statuses for existing buttons
+                    //Same set function creates the button if it does not exist
+                    //Need to call set function for each button
+                    $studentButton::setValidationButton($student);
 
-            } elseif ($studentButtonCount > 0){
-                //add missing buttons
-
-                //update stauses for existing
-            } else {
-                //add all buttons
+                } else {
+                    //add all buttons
+                    $studentButton::createStudentButtons($student);
+                }
             }
+            $student = new Student();
+
+            //NOTE: for reference
+            // custom_field_8 is "Student Type",
+            // custom_field_13 is "Discount Value CAD",
+            // custom_field_1 is "Data Validation Complete",
+            // custom_field_9 is "Deposit Received",
+            // custom_field_2 is "Enrollment Status"
+            $students = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
+                ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
+                ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
+                ->join('students', 'contacts.user_id', '=', 'students.user_id')
+                ->select('contacts.user_id',
+                    'contacts.surname',
+                    'contacts.name',
+                    'students.custom_field_8',
+                    'students.custom_field_13',
+                    'students.custom_field_1',
+                    'students.custom_field_9',
+                    'students.custom_field_2')
+                ->where('classes.year', '=', 2018)
+                //->where('students.custom_field_1', '=', 'Yes')
+                //->where('students.custom_field_2', '=', 'Attending 2017-2018')
+                //->where('students.custom_field_9', '=', 'Yes')
+                //->orderby('class_levels.class_level_index')
+                ->get();
+//            dd($students);
+
+//            $students = Student::getStudents();
+
+            $button = new Button();
+            $buttons = $button->all();
+
+            return view('home')->with('students', $students)->with('buttons', $buttons);
+        }else {
+            return view('welcome');
         }
 
     }

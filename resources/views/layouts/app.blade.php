@@ -56,7 +56,7 @@
                                         <a href="/admin"}}>Manage</a>
                                     </li>
                                     <li>
-                                        <a href="UNKNOWN">Re-Sync DB</a>
+                                        <a href="/dbsync">Re-Sync DB</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
