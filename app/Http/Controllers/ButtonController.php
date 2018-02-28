@@ -33,7 +33,7 @@ class ButtonController extends Controller
     public function getStudentButtons($id){
         // returns an array of all buttons
         $button = new Button();
-        $buttons = $button->where('user_id', $id)->orderBy('button_id', 'ASC')->get();
+        $buttons = $button->where('student_id', $id)->orderBy('button_id', 'ASC')->get();
 
         return $buttons;
     }
@@ -50,53 +50,53 @@ class ButtonController extends Controller
         $button = new Button();
         $date = date_timestamp_get();
 
-        $buttonsCheck = $button->where('user_id',$id)->count();
+        $buttonsCheck = $button->where('student_id',$id)->count();
 
         //need to double check that the button does not exist so duplicate buttons are not being created
         if($buttonsCheck < 1) {
-            $button->user_id = $id;
+            $button->student_id = $id;
             $button->step = 1;
             $button->created_at = $date;
 
             $button->save();
 
-            $button->user_id = $id;
+            $button->student_id = $id;
             $button->step = 2;
             $button->created_at = $date;
 
             $button->save();
 
-            $button->user_id = $id;
+            $button->student_id = $id;
             $button->step = 3;
             $button->created_at = $date;
 
             $button->save();
 
-            $button->user_id = $id;
+            $button->student_id = $id;
             $button->step = 4;
             $button->created_at = $date;
 
             $button->save();
 
-            $button->user_id = $id;
+            $button->student_id = $id;
             $button->step = 5;
             $button->created_at = $date;
 
             $button->save();
 
-            $button->user_id = $id;
+            $button->student_id = $id;
             $button->step = 6;
             $button->created_at = $date;
 
             $button->save();
 
-            $button->user_id = $id;
+            $button->student_id = $id;
             $button->step = 7;
             $button->created_at = $date;
 
             $button->save();
 
-            $button->user_id = $id;
+            $button->student_id = $id;
             $button->step = 8;
             $button->created_at = $date;
         } else {
@@ -120,13 +120,13 @@ class ButtonController extends Controller
 
         // need to find button with user_id of the student and step_id 1
         $button = new Button();
-        $valButton = $button->where('user_id', $id)
+        $valButton = $button->where('student_id', $id)
             ->where('step_id', 1)
             ->get();
 
         if($valButton == null){
             //if there is no validation button in the button table, create one
-            $valButton->user_id = $id;
+            $valButton->student_id = $id;
             $valButton->step_id = $step;
             $valButton->created_at = $date;
             $valButton->button_status_id = 0;

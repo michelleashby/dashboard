@@ -165,7 +165,7 @@ class PagesController extends Controller
                     $studentButton::createStudentButtons($student);
                 }
             }
-         
+
             $button = new Button();
             $buttons = $button->all();
 
