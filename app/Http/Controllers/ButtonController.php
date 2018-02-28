@@ -13,6 +13,7 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ButtonController extends Controller
 {
