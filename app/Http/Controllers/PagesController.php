@@ -162,7 +162,7 @@ class PagesController extends Controller
 
                 } else {
                     //add all buttons
-                    $this->createStudentButtons($student);
+                    $studentButton->createStudentButtons($student);
                 }
             }
 
