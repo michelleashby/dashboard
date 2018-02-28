@@ -9,6 +9,7 @@ use Symfony\Component\Yaml\Tests\B;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
 
 
@@ -48,7 +49,7 @@ class ButtonController extends Controller
     public function createStudentButtons($student){
         $id = $student->user_id;
         $button = new Button();
-        $date = date_timestamp_get();
+        $date = Carbon::now();
 
         $buttonsCheck = $button->where('student_id',$id)->count();
 
@@ -115,7 +116,7 @@ class ButtonController extends Controller
 
         $id = $student->id;
         $step =1;
-        $date = date_timestamp_get();
+        $date = Carbon::now();
 
 
         // need to find button with user_id of the student and step_id 1
@@ -492,6 +493,75 @@ class ButtonController extends Controller
         } catch (RequestException $re) {
             //for handling exception
         }
+    }
+
+    public function dbSync(){
+        if(Auth::check()) {
+
+            // Need a function that can be called to sync DB tables from MySchool
+            // As well as populate button table based on status
+
+            // Get tables from external DB
+            // Tables needing sync include:
+            // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
+
+//        $dbUser = 'brentwood_ro'
+//        $dbPassword = '%+m!$YQM4]X*rov'
+//        $dbDatabase = 'brentwood'
+//        $dbServer = 'door.msm.io'
+
+
+            // Local table `button` also needs to populate something like:
+            // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
+            // WHERE button.user_id = questionnaire_submission.user_id
+            // AND button->step.questionnaire_id = questionnaire_submission.questionnaire_id
+            $student = new Student();
+            $students =  $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
+                ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
+                ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
+                ->join('students', 'contacts.user_id', '=', 'students.user_id')
+                ->select('contacts.user_id',
+                    'contacts.surname',
+                    'contacts.name',
+                    'students.custom_field_8',
+                    'students.custom_field_13',
+                    'students.custom_field_1',
+                    'students.custom_field_9',
+                    'students.custom_field_2')
+                ->where('classes.year', '=', 2018)
+                //->where('students.custom_field_1', '=', 'Yes')
+                //->where('students.custom_field_2', '=', 'Attending 2017-2018')
+                //->where('students.custom_field_9', '=', 'Yes')
+                //->orderby('class_levels.class_level_index')
+                ->get();
+//            dd($students);
+
+            foreach ($students as $student) {
+                //grab the students IDs to make sure they each have 8 buttons in table
+                $studentButton = new Button();
+
+                $studentButtonCount = $studentButton->where('student_id', $student->user_id)->count();
+
+                if ($studentButtonCount == 8 || $studentButtonCount > 0) {
+                    //Update statuses for existing buttons
+                    //Same set function creates the button if it does not exist
+                    //Need to call set function for each button
+                    $this->setValidationButton($student);
+
+                } else {
+                    //add all buttons
+                    $this->createStudentButtons($student);
+                }
+            }
+
+            $button = new Button();
+            $buttons = $button->all();
+
+            return view('home')->with('students', $students)->with('buttons', $buttons);
+        }else {
+            return view('welcome');
+        }
+
     }
 
 }
