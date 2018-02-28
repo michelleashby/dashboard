@@ -477,7 +477,7 @@ class ButtonController extends Controller
             // Truncate local tables that require syncing
 //            DB::statement('truncate table ');
 
-            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions limit 100');
+            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions limit 10');
             dd($submissions);
 
 
