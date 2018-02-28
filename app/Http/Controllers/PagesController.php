@@ -47,13 +47,14 @@ class PagesController extends Controller
             //->where('students.custom_field_2', '=', 'Attending 2017-2018')
             //->where('students.custom_field_9', '=', 'Yes')
             //->orderby('class_levels.class_level_index')
+//            ->get();
             ->paginate(20);
 //            dd($students);
 
 //            $students = Student::getStudents();
 
             $button = new Button();
-            $buttons = $button->paginate(160);
+            $buttons = $button->all();//paginate(160);
 
             return view('home')->with('students', $students)->with('buttons', $buttons);
         } else {
