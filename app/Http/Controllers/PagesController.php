@@ -127,34 +127,8 @@ class PagesController extends Controller
             // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
             // WHERE button.user_id = questionnaire_submission.user_id
             // AND button->step.questionnaire_id = questionnaire_submission.questionnaire_id
-            $students = Student()->all();
-
-            foreach ($students as $student) {
-                //grab the students IDs to make sure they each have 8 buttons in table
-                $studentButton = new Button();
-
-                $studentButtonCount = $studentButton->where('user_id', $student->user_id)->count();
-
-                if ($studentButtonCount == 8 || $studentButtonCount > 0) {
-                    //Update statuses for existing buttons
-                    //Same set function creates the button if it does not exist
-                    //Need to call set function for each button
-                    $studentButton::setValidationButton($student);
-
-                } else {
-                    //add all buttons
-                    $studentButton::createStudentButtons($student);
-                }
-            }
             $student = new Student();
-
-            //NOTE: for reference
-            // custom_field_8 is "Student Type",
-            // custom_field_13 is "Discount Value CAD",
-            // custom_field_1 is "Data Validation Complete",
-            // custom_field_9 is "Deposit Received",
-            // custom_field_2 is "Enrollment Status"
-            $students = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
+            $students =  $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
                 ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
                 ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
                 ->join('students', 'contacts.user_id', '=', 'students.user_id')
@@ -174,8 +148,24 @@ class PagesController extends Controller
                 ->get();
 //            dd($students);
 
-//            $students = Student::getStudents();
+            foreach ($students as $student) {
+                //grab the students IDs to make sure they each have 8 buttons in table
+                $studentButton = new Button();
 
+                $studentButtonCount = $studentButton->where('user_id', $student->user_id)->count();
+
+                if ($studentButtonCount == 8 || $studentButtonCount > 0) {
+                    //Update statuses for existing buttons
+                    //Same set function creates the button if it does not exist
+                    //Need to call set function for each button
+                    $studentButton::setValidationButton($student);
+
+                } else {
+                    //add all buttons
+                    $studentButton::createStudentButtons($student);
+                }
+            }
+         
             $button = new Button();
             $buttons = $button->all();
 
