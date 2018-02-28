@@ -152,7 +152,7 @@ class PagesController extends Controller
                 //grab the students IDs to make sure they each have 8 buttons in table
                 $studentButton = new Button();
 
-                $studentButtonCount = $studentButton->where('user_id', $student->user_id)->count();
+                $studentButtonCount = $studentButton->where('student_id', $student->user_id)->count();
 
                 if ($studentButtonCount == 8 || $studentButtonCount > 0) {
                     //Update statuses for existing buttons
