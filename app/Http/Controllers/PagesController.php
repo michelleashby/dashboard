@@ -43,6 +43,7 @@ class PagesController extends Controller
             'students.custom_field_9',
             'students.custom_field_2')
             ->where('classes.year', '=', 2018)
+            ->orderby('students.surname')
             //->where('students.custom_field_1', '=', 'Yes')
             //->where('students.custom_field_2', '=', 'Attending 2017-2018')
             //->where('students.custom_field_9', '=', 'Yes')
