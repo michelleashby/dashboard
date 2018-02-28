@@ -10,7 +10,7 @@
             <button type="submit">Search</button><br>
         </form>
     </div>
-    <h1 class="display-3">{{count($students)}} TEST students being admitted to Brentwood</h1>
+    <h1 class="display-3">{{$studentCount}} TEST students being admitted to Brentwood</h1>
 
     <table class="table">
         <thead>
@@ -150,6 +150,11 @@
         @endforeach
         </tbody>
     </table>
+
+    <div class="center-block">
+
     {{ $students->links() }}
+
+    </div>
 
 @endsection

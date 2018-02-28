@@ -51,12 +51,14 @@ class PagesController extends Controller
             ->paginate(20);
 //            dd($students);
 
+            $studentCount = $student->all()->count();
+
 //            $students = Student::getStudents();
 
             $button = new Button();
             $buttons = $button->all();//paginate(160);
 
-            return view('home')->with('students', $students)->with('buttons', $buttons);
+            return view('home')->with('students', $students)->with('buttons', $buttons)->with('studentCount', $studentCount);
         } else {
             return view('welcome');
         }
