@@ -478,8 +478,8 @@ class ButtonController extends Controller
 //        $dbPassword = '%+m!$YQM4]X*rov'
 //        $dbDatabase = 'brentwood'
 //        $dbServer = 'door.msm.io'
-            $contacts = DB::connection('myschoolsql')->select('select * from contacts');
-            dd($contacts);
+            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions');
+            dd($submissions);
 
 
 
