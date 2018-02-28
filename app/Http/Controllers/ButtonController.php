@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Button;
 use App\Status;
+use App\Step;
 use App\Student;
 use Illuminate\Http\Request;
 use Symfony\Component\Yaml\Tests\B;
@@ -77,7 +78,7 @@ class ButtonController extends Controller
     public function setValidationButton($student){
 
         $id = $student->id;
-        $step =1;
+        $step = Step::find(1);
         $date = Carbon::now();
 
 
