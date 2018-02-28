@@ -10,6 +10,13 @@ class Email extends Model
     /**
      * @var string
      */
+
+//    # EMAIL
+//$smtpServer = 'smtp.office365.com'
+//$smtpUser = 'sa_mail@brentwood.bc.ca'
+//$smtpPassword = '5PbiTcQhHlpq1qjPRv4m'
+//$emailFrom = "Brentwood College School <welcome@brentwood.bc.ca>"
+
     protected $table = 'email';
 
     /**

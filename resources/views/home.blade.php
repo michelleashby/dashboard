@@ -33,13 +33,14 @@
         @foreach($students as $student)
             <tr>
 
-                <td>{{$student->name}} {{$student->surname}}  {{$student->user_id}}</td>
+                <td>{{$student->name}} {{$student->surname}} <br> {{$student->user_id}}</td>
 
                 {{--Will have button foreach loop here once logic ready for it--}}
                 {{--also needing to move all logic to controller to just call a function--}}
 
                 {{--{{\App\Status::find($ticket->status_id)->description}}--}}
                 {{--{{$buttons = \App\Button::where('user_id',$student->user_id)}}--}}
+                @if($buttons != null)
                     @foreach($buttons as $button)
                         @if($button->user_id == $student->user_id)
                         <td>
@@ -47,6 +48,7 @@
                         </td>
                         @endif
                     @endforeach
+                @endif
 
                 <td>
                     @if($student->custom_field_1 = "Yes")

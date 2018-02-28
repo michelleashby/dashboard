@@ -79,7 +79,7 @@ class StudentController extends Controller
             if (count($students) == 0) {
                 return '<h3>Sorry, no results for <u>' . $searchInput . '</u></h3>';
             } else {
-                return view('home')->with('searchInput', $searchInput)->with('students', $students)->with('buttons',$button);
+                return view('home')->with('searchInput', $searchInput)->with('students', $students)->with('buttons',$buttons);
             }
         } else {
             return redirect('home');
