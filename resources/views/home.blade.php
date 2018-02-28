@@ -151,7 +151,7 @@
         </tbody>
     </table>
 
-    <div class="center-block">
+    <div class="text-center">
 
     {{ $students->links() }}
 
