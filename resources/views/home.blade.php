@@ -40,6 +40,7 @@
 
                 {{--{{\App\Status::find($ticket->status_id)->description}}--}}
                 {{--{{$buttons = \App\Button::where('user_id',$student->user_id)}}--}}
+                dd($buttons);
                 @if($buttons != null)
                     @foreach($buttons as $button)
                         @if($button->user_id == $student->user_id)
