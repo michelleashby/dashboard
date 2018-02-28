@@ -10,8 +10,7 @@ use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
-
-
+use App\Http\Controllers\Auth;
 
 class ButtonController extends Controller
 {
