@@ -135,6 +135,7 @@ class PagesController extends Controller
 
             if($studentButtonCount==8){
                 //Update statuses for existing
+                Button::setValidationButton($student);
 
             } elseif ($studentButtonCount > 0){
                 //add missing buttons

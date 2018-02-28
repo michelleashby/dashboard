@@ -53,6 +53,7 @@ class ButtonController extends Controller
     public function setValidationButton($student){
 
         $id = $student->id;
+        $step =1;
 
         // need to find button with user_id of the student and step_id 1
         $button = new Button();
@@ -60,36 +61,51 @@ class ButtonController extends Controller
             ->where('step_id', 1)
             ->get();
 
-        $questStatus = new Status();
-        $questionnaireID = $valButton->questionnaire_id;
+        if($valButton == null){
+            //if there is no validation button in the button table, create one
+            $valButton->user_id = $id;
+            $valButton->step_id = $step;
+            $valButton->created_at = date_timestamp_get();
+            $valButton->button_status_id = 0;
 
-        $valStatus = $questStatus->select('questionnaire_submissions.questionnaire_id',
-            'questionnaire_submissions.questionnaire_submission_status_id')
-            ->where('questionnaire_submissions.user_id','=',$id)
-            ->where('questionnaire_submission.questionnaire_id','=',$questionnaireID)
-            ->get();
+            $valButton->save();
+        } else {
+            //if button exists update to correspond with MySchool table status
+            $questStatus = new Status();
+            $questionnaireID = $step->questionnaire_id;
 
-        if($student->custom_field_1 = "Yes") {
+            $valStatus = $questStatus->select('questionnaire_submissions.questionnaire_id',
+                'questionnaire_submissions.questionnaire_submission_status_id')
+                ->where('questionnaire_submissions.user_id', '=', $id)
+                ->where('questionnaire_submission.questionnaire_id', '=', $questionnaireID)
+                ->get();
 
-            $valButton->class="btn btn-success disabled";
-            $valButton->words="Validation Complete  <span class=\"glyphicon glyphicon-ok\"></span>";
+            //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
+            if ($student->custom_field_1 = "Yes") {
 
-            $valButton->update();
-            }
-            elseif ($valStatus->questionnaire_submission_status_id = 1) {
-            // If student is in the validation questionnaire and has not completed
-                $valButton->class = "btn btn-info";
-                $valButton->words = "Resend Data Validation";
+                $valButton->class = "btn btn-success disabled";
+                $valButton->words = "Validation Complete  <span class=\"glyphicon glyphicon-ok\"></span>";
+                $valButton->status_id = 2;
 
                 $valButton->update();
-            }
-            else {
+            } elseif ($valStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
+                // If student is in the validation questionnaire and has not completed
+                $valButton->class = "btn btn-info";
+                $valButton->words = "Resend Data Validation";
+                $valButton->status_id = 1;
+
+                $valButton->update();
+            } elseif ($valStatus->questionnaire_submission_status_id = 0 || $valStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
 
                 $valButton->class = "btn btn-info";
                 $valButton->words = "Send Data Validation";
+                $valButton->status_id = 0;
 
                 $valButton->update();
+            } else {
+                return error;
             }
+        }
 
     }
 
@@ -105,12 +121,19 @@ class ButtonController extends Controller
 
     public function setEnrolmentButton($student){
 
-        $enrolButton = Button::find(2);
         $id = $student->id;
-        $type = $student->custom_field_8;
-        $questStatus = new Status();
-        $questionnaireID = $enrolButton->questionnaire_id;
 
+        // need to find button with user_id of the student and step_id 1
+        $button = new Button();
+        $valButton = $button->where('user_id', $id)
+            ->where('step_id', 2)
+            ->get();
+        $type = $student->custom_field_8;
+
+        $step = 2;
+
+        $questStatus = new Status();
+        $questionnaireID = $step->questionnaire_id;
 
         $enrolStatus = $questStatus->select('questionnaire_submissions.questionnaire_id',
             'questionnaire_submissions.questionnaire_submission_status_id')
@@ -118,23 +141,29 @@ class ButtonController extends Controller
             ->where('questionnaire_submission.questionnaire_id','=',$questionnaireID)
             ->get();
 
-
+        //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
         if($student->custom_field_2 == null){ //if questionnaires has ID of current enrollment and status of 1 invited but not complete
             $enrolButton->class="btn btn-info enabled";
             $enrolButton->words="Resend enrolment reminder";
 
-            return $enrolButton;
-        } elseif ($student->custom_field_2 != null) {
-            $enrolButton->class="btn btn-success disabled";
+            $enrolButton->update();
+        }
+        elseif ($enrolStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
+            // If student is in the validation questionnaire and has not completed
+            $enrolButton->class = "btn btn-info";
             $enrolButton->words=$student->custom_field_2;
 
-            return $enrolButton;
+            $enrolButton->update();
         }
-            else {
+        elseif ($enrolStatus->questionnaire_submission_status_id = 0 || $enrolStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
+
             $enrolButton->class="btn btn-info enabled";
             $enrolButton->words="Send ".$student->custom_field_8." enrolment.";
 
-            return $enrolButton;
+            $enrolButton->update();
+        }
+        else {
+            return error;
         }
 
     }
@@ -147,12 +176,12 @@ class ButtonController extends Controller
             $depButton->class="btn btn-success disabled";
             $depButton->words="<span class=\"glyphicon glyphicon-ok\"></span>";
 
-            return $depButton;
+            $depButton->update();
         } else {
             $depButton->class="btn";
             $depButton->words="<span class=\"glyphicon glyphicon-remove\"></span>";
 
-            return $depButton;
+            $depButton->update();
         }
     }
 
@@ -352,6 +381,8 @@ class ButtonController extends Controller
 
     }
 
+    // Below function will be built into later versions to record data about correspondence
+    // first latest and how many messages sent
     public function increaseMessageCount($bid, $uid){
         //function to increment the amount of times a reminder has been sent for each button
         //need to pass button id here to ensure increasing the correct form's count
