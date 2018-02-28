@@ -47,7 +47,7 @@ class PagesController extends Controller
             //->where('students.custom_field_2', '=', 'Attending 2017-2018')
             //->where('students.custom_field_9', '=', 'Yes')
             //->orderby('class_levels.class_level_index')
-            ->get();
+            ->paginate(20);
 //            dd($students);
 
 //            $students = Student::getStudents();
