@@ -150,4 +150,6 @@
         @endforeach
         </tbody>
     </table>
+    {{ $students->links() }}
+
 @endsection
