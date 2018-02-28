@@ -479,10 +479,9 @@ class ButtonController extends Controller
 //        $dbServer = 'door.msm.io'
 
 
-            // Local table `button` also needs to populate something like:
-            // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
-            // WHERE button.user_id = questionnaire_submission.user_id
-            // AND button->step.questionnaire_id = questionnaire_submission.questionnaire_id
+            // Local table `button` syncing
+            // Create buttons for new students or students missing them
+            // Update buttons for current students is submission status changed
             $student = new Student();
             $students =  $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
                 ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
@@ -497,10 +496,6 @@ class ButtonController extends Controller
                     'students.custom_field_9',
                     'students.custom_field_2')
                 ->where('classes.year', '=', 2018)
-                //->where('students.custom_field_1', '=', 'Yes')
-                //->where('students.custom_field_2', '=', 'Attending 2017-2018')
-                //->where('students.custom_field_9', '=', 'Yes')
-                //->orderby('class_levels.class_level_index')
                 ->get();
 //            dd($students);
 

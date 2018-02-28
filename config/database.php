@@ -55,6 +55,17 @@ return [
             'engine' => null,
         ],
 
+        'myschoolsql' => [
+            'driver'    => 'mysql',
+            'host'      => 'door.msm.io',
+            'database'  => 'brentwood',
+            'username'  => 'brentwood_ro',
+            'password'  => '%+m!$YQM4]X*rov',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
