@@ -49,7 +49,6 @@ class ButtonController extends Controller
 
     public function createStudentButtons($student){
         $id = $student->user_id;
-        $button = new Button();
         $date = Carbon::now();
 
         $buttonsCheck = $button->where('student_id',$id)->count();
@@ -58,7 +57,10 @@ class ButtonController extends Controller
         if($buttonsCheck < 1) {
             $step = new Step;
             $steps = $step->all();
+
             foreach($steps as $step) {
+                $button = new Button();
+
                 $button->student_id = $id;
                 $button->step_id = $step->step_id;
                 $button->created_at = $date;
@@ -507,7 +509,7 @@ class ButtonController extends Controller
 
                 $studentButtonCount = $studentButton->where('student_id', $student->user_id)->count();
 
-                if ($studentButtonCount == 8 || $studentButtonCount > 0) {
+                if ($studentButtonCount > 0) {
                     //Update statuses for existing buttons
                     //Same set function creates the button if it does not exist
                     //Need to call set function for each button
