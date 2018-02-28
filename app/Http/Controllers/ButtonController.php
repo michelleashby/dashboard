@@ -474,11 +474,10 @@ class ButtonController extends Controller
             // Tables needing sync include:
             // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
 
-//        $dbUser = 'brentwood_ro'
-//        $dbPassword = '%+m!$YQM4]X*rov'
-//        $dbDatabase = 'brentwood'
-//        $dbServer = 'door.msm.io'
-            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions')->paginate(100);
+            // Truncate local tables that require syncing
+            DB::statement('truncate table ');
+
+            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions limit 100');
             dd($submissions);
 
 
