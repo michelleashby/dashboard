@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Button;
 use App\Status;
+use App\Student;
 use Illuminate\Http\Request;
 use Symfony\Component\Yaml\Tests\B;
 use GuzzleHttp\Client as GuzzleHttpClient;
