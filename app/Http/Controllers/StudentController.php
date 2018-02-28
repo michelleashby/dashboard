@@ -71,6 +71,7 @@ class StudentController extends Controller
                 ->where('contacts.name', 'LIKE', $searchInput)
                 ->orWhere('contacts.surname', 'LIKE', $searchInput)
                 ->distinct()
+                ->paginate(30)
                 ->get();
 
             $button = new Button();
