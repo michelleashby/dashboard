@@ -56,15 +56,14 @@ class ButtonController extends Controller
 
         //need to double check that the button does not exist so duplicate buttons are not being created
         if($buttonsCheck < 1) {
-            $count = 1;
-            while ($count < 9) {
+            $step = new Step;
+            $steps = $step->all();
+            foreach($steps as $step) {
                 $button->student_id = $id;
-                $button->step_id = $count;
+                $button->step_id = $step->step_id;
                 $button->created_at = $date;
 
                 $button->save();
-
-                $count++;
             }
         } else {
             return "cannot create buttons for user who already has ". $buttonsCheck ." button(s).";
