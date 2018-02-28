@@ -53,7 +53,7 @@ class PagesController extends Controller
 //            $students = Student::getStudents();
 
             $button = new Button();
-            $buttons = $button->all()->paginate(160);
+            $buttons = $button->paginate(160);
 
             return view('home')->with('students', $students)->with('buttons', $buttons);
         } else {
