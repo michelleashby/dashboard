@@ -51,6 +51,7 @@ class ButtonController extends Controller
         $id = $student->user_id;
         $date = Carbon::now();
 
+        $button = new Button();
         $buttonsCheck = $button->where('student_id',$id)->count();
 
         //need to double check that the button does not exist so duplicate buttons are not being created
