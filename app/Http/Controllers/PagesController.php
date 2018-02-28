@@ -127,7 +127,7 @@ class PagesController extends Controller
             // UPDATE button.button_status_id = questionnaire_submission.questionnaire_submission_status_id
             // WHERE button.user_id = questionnaire_submission.user_id
             // AND button->step.questionnaire_id = questionnaire_submission.questionnaire_id
-            $students = Student()->all;
+            $students = Student()->all();
 
             foreach ($students as $student) {
                 //grab the students IDs to make sure they each have 8 buttons in table
