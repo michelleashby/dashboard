@@ -59,7 +59,7 @@ class ButtonController extends Controller
             $count = 1;
             while ($count < 9) {
                 $button->student_id = $id;
-                $button->step_id = $i;
+                $button->step_id = $count;
                 $button->created_at = $date;
 
                 $button->save();
