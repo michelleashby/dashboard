@@ -477,6 +477,9 @@ class ButtonController extends Controller
 //        $dbPassword = '%+m!$YQM4]X*rov'
 //        $dbDatabase = 'brentwood'
 //        $dbServer = 'door.msm.io'
+            $contacts = DB::connection('mysql2')->select('select * from contacts');
+            dd($contacts);
+
 
 
             // Local table `button` syncing
