@@ -40,12 +40,12 @@
 
                 {{--{{\App\Status::find($ticket->status_id)->description}}--}}
                 {{--{{$buttons = \App\Button::where('user_id',$student->user_id)}}--}}
-                dd($buttons);
+                {{dd($buttons)}}
                 @if($buttons != null)
                     @foreach($buttons as $button)
-                        @if($button->user_id == $student->user_id)
+                        @if($button->student_id == $student->user_id)
                         <td>
-                            <button type="button" class="{{$button->class}}" style="white-space: normal">{{$button->words}}</button>
+                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>
                         </td>
                         @endif
                     @endforeach
