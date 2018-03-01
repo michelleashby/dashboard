@@ -107,10 +107,10 @@ class ButtonController extends Controller
             $questStatus = new Status();
             $questionnaireID = $step->questionnaire_id;
 
-            $valStatus = $questStatus->select('questionnaire_submissions.questionnaire_id',
-                'questionnaire_submissions.questionnaire_submission_status_id')
-                ->where('questionnaire_submissions.user_id', '=', $id)
-                ->where('questionnaire_submission.questionnaire_id', '=', $questionnaireID)
+            $valStatus = $questStatus->select('questionnaire_status.questionnaire_id',
+                'questionnaire_status.questionnaire_submission_status_id')
+                ->where('questionnaire_status.user_id','=',$id)
+                ->where('questionnaire_status.questionnaire_id','=',$questionnaireID)
                 ->get();
 
             //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
