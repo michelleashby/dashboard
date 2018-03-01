@@ -487,8 +487,10 @@ class ButtonController extends Controller
 
             foreach($submissions as $submission){
                 //insert into questionnaire submissions
+                $saveSubmission = new Status;
+                $saveSubmission = $submission;
 
-                $submission->save();
+                $saveSubmission->save();
             }
 
             //will really want a mysqldump once connection is working
