@@ -482,16 +482,16 @@ class ButtonController extends Controller
 
             //Trying to narrow down the submissions returned (by date) but would be better to just grab the ones for active questionnaires
             $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions where completion_datetime > "2017%"' );
-//            dd($submissions);
+            dd($submissions);
             $status = new Status();
             foreach($submissions as $submission){
                 //insert into questionnaire submissions if not there
                 //update status if there
                 $statusCheck = $status->where('questionnaire_submission_id',$submission->questionnnaire_submission_id)->get();
                 if(count($statusCheck) == 0){
-                     $statusCheck->save();
+                     $submission->save();
                 }elseif(count($statusCheck) == 1){
-                    $statusCheck->update();
+                    $submission->update();
                 } else {
                     return "error";
                 }
