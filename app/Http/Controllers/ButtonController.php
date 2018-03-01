@@ -489,7 +489,7 @@ class ButtonController extends Controller
                 //insert into questionnaire submissions if not there
                 //update status if there
                 if($status != null) {
-                    $statusCheck = $status->where('questionnaire_submission_id', '=', $submission->questionnnaire_submission_id)->count();
+                    $statusCheck = $status->select('questionnaire_submission_id')->where('questionnaire_submission_id', '=', $submission->questionnnaire_submission_id)->count();
                 } else {
                     $statusCheck = 0;
                 }
