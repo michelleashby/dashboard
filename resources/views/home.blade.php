@@ -43,7 +43,7 @@
                 {{--button foreach loop here for testing buttons are passed - WORKS--}}
 
             {{--@if($buttons != null)--}}
-                    {{--@foreach($buttons as $button)--}}
+                    @foreach($buttons as $button)
                         {{--@if($button->student_id == $student->user_id)--}}
                         {{--<td>--}}
                             {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>--}}
@@ -153,6 +153,7 @@
                     {{--@endif--}}
 
 
+                        @endforeach
             </tr>
         @endforeach
         </tbody>
