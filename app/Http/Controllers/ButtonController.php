@@ -168,10 +168,10 @@ class ButtonController extends Controller
         $questStatus = new Status();
         $questionnaireID = $step->questionnaire_id;
 
-        $enrolStatus = $questStatus->select('questionnaire_submissions.questionnaire_id',
-            'questionnaire_submissions.questionnaire_submission_status_id')
-            ->where('questionnaire_submissions.user_id','=',$id)
-            ->where('questionnaire_submission.questionnaire_id','=',$questionnaireID)
+        $enrolStatus = $questStatus->select('questionnaire_status.questionnaire_id',
+            'questionnaire_status.questionnaire_submission_status_id')
+            ->where('questionnaire_status.user_id','=',$id)
+            ->where('questionnaire_status.questionnaire_id','=',$questionnaireID)
             ->get();
 
         //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
@@ -486,7 +486,7 @@ class ButtonController extends Controller
             DB::connection('mysql')->table('questionnaire_status')->truncate();
 
             foreach($submissions as $submission){
-                //insert into questionnaire submissions
+                //insert into questionnaire status
                 $id = $submission->questionnaire_submission_id;
                 $qid = $submission->questionnaire_id;
                 $uid = $submission->user_id;
