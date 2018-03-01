@@ -480,7 +480,7 @@ class ButtonController extends Controller
 //            DB::statement('DROP TABLE contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions');
 
 
-            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions where completion_datetime > 2017%' );
+            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions where completion_datetime > "2017%"' );
             dd($submissions);
             $status = new Status();
 
