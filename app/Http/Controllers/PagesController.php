@@ -60,7 +60,7 @@ class PagesController extends Controller
                 ->where('classes.year', '=', 2018)
                 ->count();
 
-            $students = $student->getStudents();
+            $students = Student::getStudents();
 
             $button = new Button();
             $buttons = $button->all();
