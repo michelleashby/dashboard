@@ -480,8 +480,10 @@ class ButtonController extends Controller
 //            DB::statement('DROP TABLE contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions');
 
 
-            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions limit 10');
+            $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions where completion_datetime > 2017%' );
             dd($submissions);
+            $status = new Status();
+
             //will really want a mysqldump once connection is working
             //mysqldump may need to be done in shell_exec('your command here')
             //mysqldump -u -p DBname contacts students classes class_students class_levels
