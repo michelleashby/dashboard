@@ -524,7 +524,7 @@ class ButtonController extends Controller
                     'students.custom_field_9',
                     'students.custom_field_2')
                 ->where('classes.year', '=', 2018)
-                ->get();
+                ->paginate(20);
 //            dd($students);
 
             foreach ($students as $student) {
@@ -545,12 +545,27 @@ class ButtonController extends Controller
                 }
             }
 
+            $studentCount = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
+                ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
+                ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
+                ->join('students', 'contacts.user_id', '=', 'students.user_id')
+                ->select('contacts.user_id',
+                    'contacts.surname',
+                    'contacts.name',
+                    'students.custom_field_8',  // custom_field_8 is "Student Type"
+                    'students.custom_field_13', // custom_field_13 is "Discount Value CAD"
+                    'students.custom_field_1',  // custom_field_1 is "Data Validation Complete"
+                    'students.custom_field_9', // custom_field_9 is "Deposit Received"
+                    'students.custom_field_2') // custom_field_2 is "Enrollment Status"
+                ->where('classes.year', '=', 2018)
+                ->count();
+
             $button = new Button();
             $buttons = $button->all();
 
             DB::update('update db_sync set updated_at = NOW()');
 
-            return view('home')->with('students', $students)->with('buttons', $buttons);
+            return view('home')->with('students', $students)->with('buttons', $buttons)->with('studentCount',$studentCount);
         }else {
             return view('welcome');
         }
