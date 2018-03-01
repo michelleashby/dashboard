@@ -466,6 +466,8 @@ class ButtonController extends Controller
 
     public function dbSync(){
         if(Auth::check()) {
+            $date = Carbon::now();
+
 
             // Need a function that can be called to sync DB tables from MySchool
             // As well as populate button table based on status
@@ -475,13 +477,19 @@ class ButtonController extends Controller
             // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
 
             // Truncate local tables that require syncing
-//            DB::statement('truncate table ');
+//            DB::statement('DROP TABLE contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions');
+
 
             $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions limit 10');
             dd($submissions);
+            //will really want a mysqldump once connection is working
+            //mysqldump may need to be done in shell_exec('your command here')
+            //mysqldump -u -p DBname contacts students classes class_students class_levels
+            // questionnaires questionnaire_submissions > dbsync.$date.sql
 
-
-
+            //use .sql file to re-build tables we dropped
+            // Again maybe shell_exec('your command here') with ./dbsync.$date.sql?
+            
             // Local table `button` syncing
             // Create buttons for new students or students missing them
             // Update buttons for current students is submission status changed
@@ -522,6 +530,8 @@ class ButtonController extends Controller
 
             $button = new Button();
             $buttons = $button->all();
+
+            DB::update('update db_sync set updated_at = NOW()');
 
             return view('home')->with('students', $students)->with('buttons', $buttons);
         }else {
