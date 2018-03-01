@@ -6,6 +6,7 @@ use App\Email;
 use App\Step;
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Button;
@@ -60,7 +61,7 @@ class PagesController extends Controller
                 ->where('classes.year', '=', 2018)
                 ->count();
 
-            $students = Student::getStudents();
+            $students = App\Student::getStudents();
 
             $button = new Button();
             $buttons = $button->all();
