@@ -487,10 +487,16 @@ class ButtonController extends Controller
 
             foreach($submissions as $submission){
                 //insert into questionnaire submissions
-                $saveSubmission = new Status;
-                $saveSubmission = $submission;
+                $id = $submission->questionnaire_submission_id;
+                $qid = $submission->questionnaire_id;
+                $uid = $submission->user_id;
+                $status_id = $submission->questionnaire_submission_status_id;
+                $completion = $submission->completion_datetime;
 
-                $saveSubmission->save();
+                DB::connection('mysql')->table('questionnaire_submissions')->insert(
+                    ['questionnaire_submission_id' => $id, 'questionnaire_id' => $qid, 'user_id' => $uid,
+                        'questionnaire_submission_status_id' => $status_id, 'completion_datetime' => $completion]
+                );
             }
 
             //will really want a mysqldump once connection is working
