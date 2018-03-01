@@ -487,7 +487,7 @@ class ButtonController extends Controller
             foreach($submissions as $submission){
                 //insert into questionnaire submissions if not there
                 //update status if there
-                $statusCheck = $status->where('questionnaire_submission_id',$submission->questinnnaire_submission_id)->get();
+                $statusCheck = $status->where('questionnaire_submission_id',$submission->questionnnaire_submission_id)->get();
                 if(count($statusCheck) == 0){
                      $statusCheck->save();
                 }elseif(count($statusCheck) == 1){
