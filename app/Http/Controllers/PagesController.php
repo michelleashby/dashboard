@@ -21,36 +21,29 @@ class PagesController extends Controller
     public function displayHome() {
         if (Auth::check()) {
 
-//            (new Student)->getStudents();
             $student = new Student();
-
-            //NOTE: for reference
-            // custom_field_8 is "Student Type",
-            // custom_field_13 is "Discount Value CAD",
-            // custom_field_1 is "Data Validation Complete",
-            // custom_field_9 is "Deposit Received",
-            // custom_field_2 is "Enrollment Status"
-            $students = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
-            ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
-            ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
-            ->join('students', 'contacts.user_id', '=', 'students.user_id')
-            ->select('contacts.user_id',
-            'contacts.surname',
-            'contacts.name',
-            'students.custom_field_8',
-            'students.custom_field_13',
-            'students.custom_field_1',
-            'students.custom_field_9',
-            'students.custom_field_2')
-            ->where('classes.year', '=', 2018)
-            ->orderby('contacts.surname')
-            //->where('students.custom_field_1', '=', 'Yes')
-            //->where('students.custom_field_2', '=', 'Attending 2017-2018')
-            //->where('students.custom_field_9', '=', 'Yes')
-            //->orderby('class_levels.class_level_index')
-//            ->get();
-            ->paginate(20);
-//            dd($students);
+//
+//            $students = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
+//            ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
+//            ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
+//            ->join('students', 'contacts.user_id', '=', 'students.user_id')
+//            ->select('contacts.user_id',
+//                'contacts.surname',
+//                'contacts.name',
+//                'students.custom_field_8',  // custom_field_8 is "Student Type"
+//                'students.custom_field_13', // custom_field_13 is "Discount Value CAD"
+//                'students.custom_field_1',  // custom_field_1 is "Data Validation Complete"
+//                'students.custom_field_9', // custom_field_9 is "Deposit Received"
+//                'students.custom_field_2') // custom_field_2 is "Enrollment Status"
+//            ->where('classes.year', '=', 2018)
+//            ->orderby('contacts.surname')
+//            //->where('students.custom_field_1', '=', 'Yes')
+//            //->where('students.custom_field_2', '=', 'Attending 2017-2018')
+//            //->where('students.custom_field_9', '=', 'Yes')
+//            //->orderby('class_levels.class_level_index')
+////            ->get();
+//            ->paginate(20);
+////            dd($students);
 
             $studentCount = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
                 ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
@@ -59,18 +52,18 @@ class PagesController extends Controller
                 ->select('contacts.user_id',
                     'contacts.surname',
                     'contacts.name',
-                    'students.custom_field_8',
-                    'students.custom_field_13',
-                    'students.custom_field_1',
-                    'students.custom_field_9',
-                    'students.custom_field_2')
+                    'students.custom_field_8',  // custom_field_8 is "Student Type"
+                    'students.custom_field_13', // custom_field_13 is "Discount Value CAD"
+                    'students.custom_field_1',  // custom_field_1 is "Data Validation Complete"
+                    'students.custom_field_9', // custom_field_9 is "Deposit Received"
+                    'students.custom_field_2') // custom_field_2 is "Enrollment Status"
                 ->where('classes.year', '=', 2018)
                 ->count();
 
-//            $students = Student::getStudents();
+            $students = $student->getStudents();
 
             $button = new Button();
-            $buttons = $button->all();//paginate(160);
+            $buttons = $button->all();
 
             return view('home')->with('students', $students)->with('buttons', $buttons)->with('studentCount', $studentCount);
         } else {
