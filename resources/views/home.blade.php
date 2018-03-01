@@ -31,28 +31,34 @@
         <tbody>
         {{--{{dd($students)}}--}}
         @foreach($students as $student)
-            <tr>
+            <tr> {{--student name and ID: no button used--}}
 
                 <td>{{$student->name}} {{$student->surname}} <br> {{$student->user_id}}</td>
 
-                {{--Will have button foreach loop here once logic ready for it--}}
-                {{--also needing to move all logic to controller to just call a function--}}
 
                 {{--{{\App\Status::find($ticket->status_id)->description}}--}}
                 {{--{{$buttons = \App\Button::where('user_id',$student->user_id)}}--}}
                 {{--{{dd($buttons)}}--}}
-                @if($buttons != null)
-                    @foreach($buttons as $button)
-                        @if($button->student_id == $student->user_id)
+
+                {{--button foreach loop here for testing buttons are passed - WORKS--}}
+
+            {{--@if($buttons != null)--}}
+                    {{--@foreach($buttons as $button)--}}
+                        {{--@if($button->student_id == $student->user_id)--}}
+                        {{--<td>--}}
+                            {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>--}}
+                        {{--</td>--}}
+                        {{--@endif--}}
+                    {{--@endforeach--}}
+                {{--@endif--}}
+
+                <td> {{--data validation--}}
+                    {{--@if($student->custom_field_1 = "Yes")--}}
+                        @if($button->student_id == $student->user_id && $button->step_id = 1)
                         <td>
-                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>
+                        <button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>
                         </td>
                         @endif
-                    @endforeach
-                @endif
-
-                {{--<td>--}}
-                    {{--@if($student->custom_field_1 = "Yes")--}}
                         {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
                             {{--<span class="glyphicon glyphicon-ok"></span>--}}
                         {{--</button> </td>--}}
