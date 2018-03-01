@@ -484,10 +484,11 @@ class ButtonController extends Controller
             $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions where completion_datetime > "2017%"' );
 //            dd($submissions);
             $status = new Status();
+            $status = $status->all();
             foreach($submissions as $submission){
                 //insert into questionnaire submissions if not there
                 //update status if there
-                $statusCheck = $status->select->where('questionnaire_submission_id','=',$submission->questionnnaire_submission_id)->get();
+                $statusCheck = $status->where('questionnaire_submission_id','=',$submission->questionnnaire_submission_id)->get();
                 if(count($statusCheck) == 0){
                      $submission->save();
                 }elseif(count($statusCheck) == 1){
