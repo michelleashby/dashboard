@@ -52,7 +52,8 @@
                     {{--@endforeach--}}
                 {{--@endif--}}
 
-                <td> {{--data validation--}}
+                {{--<td> --}}
+                {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
                         @if($button->student_id == $student->user_id && $button->step_id = 1)
                         <td>
