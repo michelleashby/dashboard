@@ -17,7 +17,7 @@ class Status extends Model
     /**
      * @var string
      */
-    protected $table = 'questionnaire_submissions';
+    protected $table = 'questionnaire_status';
 
     /**
      * @var string
