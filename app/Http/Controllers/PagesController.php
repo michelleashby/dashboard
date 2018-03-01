@@ -43,7 +43,7 @@ class PagesController extends Controller
             //->where('students.custom_field_9', '=', 'Yes')
             //->orderby('class_levels.class_level_index')
 //            ->get();
-            ->paginate(20);
+            ->paginate(10);
 //            dd($students);
 
             $studentCount = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
