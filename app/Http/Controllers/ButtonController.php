@@ -563,7 +563,7 @@ class ButtonController extends Controller
             $button = new Button();
             $buttons = $button->all();
 
-            DB::table('db_sync')->update(['updated_at' => NOW());
+            DB::table('db_sync')->update(['updated_at' => NOW()]);
 
             return view('home')->with('students', $students)->with('buttons', $buttons)->with('studentCount',$studentCount);
         }else {
