@@ -550,8 +550,8 @@ class ButtonController extends Controller
             $button = new Button();
             $buttons = $button->all();
 
-            DB::connection('mysql')->table('db_sync')->insert(
-                ['updated_at' => NOW()]
+            DB::connection('mysql')->table('db_sync')->where('id',1)->update(
+                'updated_at', NOW()
             );
 
 //            DB::table('db_sync')->where('id',1)->update(['updated_at' => NOW()]);
