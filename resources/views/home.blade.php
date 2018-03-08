@@ -37,9 +37,10 @@
 
 
                 {{--{{\App\Status::find($ticket->status_id)->description}}--}}
-                {{$buttons = \App\Button::where('student_id',$student->user_id)}}
+                {{--{{$buttons = \App\Button::where('student_id',$student->user_id)}}--}}
                 {{--{{dd($buttons)}}--}}
 
+                $buttons = $student->button();
 
             {{--@if($buttons != null)--}}
                     @foreach($buttons as $button)
@@ -54,7 +55,7 @@
                 {{--<td> --}}
                 {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
-                        @if($button->student_id == $student->user_id && $button->step_id = 1)
+                        @if($button->step_id = 1)
                         <td>
                         <button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>
                         </td>
