@@ -17,6 +17,8 @@ class Email extends Model
 //$smtpPassword = '5PbiTcQhHlpq1qjPRv4m'
 //$emailFrom = "Brentwood College School <welcome@brentwood.bc.ca>"
 
+    protected $connection = ‘mysql’;
+
     protected $table = 'email';
 
     /**

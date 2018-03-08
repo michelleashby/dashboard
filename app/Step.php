@@ -21,6 +21,8 @@ class Step extends Model
     //Button holds class and words where as the step will have questionnaire_id and email_id
 
 
+    protected $connection = ‘mysql’;
+
     /**
      * @var string
      */
