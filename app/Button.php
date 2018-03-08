@@ -22,7 +22,7 @@ class Button extends Model
 //        return new CustomCollection($models);
 //    }
 
-    protected $connection = ‘mysql’;
+    protected $connection = 'mysql';
 
     /**
      * @var string

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
 
-    protected $connection = ‘mysql’;
+    protected $connection = 'mysql';
 
     // This class is for the Student
     /**

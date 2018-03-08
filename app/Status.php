@@ -11,7 +11,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
-    protected $connection = ‘mysql’;
+    protected $connection = 'mysql';
 
 
     // This class is for statuses
