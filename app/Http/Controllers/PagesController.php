@@ -46,7 +46,21 @@ class PagesController extends Controller
             ->paginate(20);
 //            dd($students);
 
-            $studentCount = $students->count();
+            $studentCount = $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
+                ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
+                ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
+                ->join('students', 'contacts.user_id', '=', 'students.user_id')
+                ->select('contacts.user_id',
+                    'contacts.surname',
+                    'contacts.name',
+                    'students.custom_field_8',  // custom_field_8 is "Student Type"
+                    'students.custom_field_13', // custom_field_13 is "Discount Value CAD"
+                    'students.custom_field_1',  // custom_field_1 is "Data Validation Complete"
+                    'students.custom_field_9', // custom_field_9 is "Deposit Received"
+                    'students.custom_field_2') // custom_field_2 is "Enrollment Status"
+                ->where('classes.year', '=', 2018)
+                ->orderby('contacts.surname')
+                ->count();
 
 //            $students = Student::getStudents();
 
