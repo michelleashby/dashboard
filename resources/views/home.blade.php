@@ -37,10 +37,9 @@
 
 
                 {{--{{\App\Status::find($ticket->status_id)->description}}--}}
-                {{--{{$buttons = \App\Button::where('user_id',$student->user_id)}}--}}
+                {{$buttons = \App\Button::where('student_id',$student->user_id)}}
                 {{--{{dd($buttons)}}--}}
 
-                {{--button foreach loop here for testing buttons are passed - WORKS--}}
 
             {{--@if($buttons != null)--}}
                     @foreach($buttons as $button)
