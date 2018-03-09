@@ -39,7 +39,7 @@
 
 
             @if($studentButtons != null)
-                {{dd($studentButton)}}
+                {{dd($studentButtons)}}
                     @foreach($studentButtons as $button)
                         <td>
                             <button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>
