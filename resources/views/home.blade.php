@@ -49,10 +49,10 @@
 
                 {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
-                        @if($student->button()->step_id = 1)
+                        @if($studentButton->step_id = 1)
                         <td>
-                        <button type="button" class="{{$student->button()->where('step_id',1)->get()}}" style="white-space: normal">
-                            {{$student->button()->where('step_id',1)->get()}}</button>
+                        <button type="button" class="{{$studentButton->button_class}}" style="white-space: normal">
+                            {{$studentButton->button_words}}</button>
                         </td>
                         @endif
                         {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
