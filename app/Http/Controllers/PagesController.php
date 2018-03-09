@@ -63,11 +63,14 @@ class PagesController extends Controller
                 ->count();
 
 //            $students = Student::getStudents();
+            foreach ($students as $student) {
+                $studentButtons = $student->button()->orderby('step_id', 'ASC')->get();
+            }
 
 //            $button = new Button();
 //            $buttons = $button->all();
 
-            return view('home')->with('students', $students)->with('studentCount', $studentCount);
+            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('studentButtons', $studentButtons);
         } else {
             return view('welcome');
         }
