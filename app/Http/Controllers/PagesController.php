@@ -57,7 +57,7 @@ class PagesController extends Controller
 //            }
 
             $button = new Button();
-            $buttons = $button->join('student','button.student_id','=','student.student_id')->orderby('student.surname')->paginate(160);
+            $buttons = $button->join('student','button.student_id','=','student.student_id')->orderby('student.surname')->get();
 
             return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('buttons', $buttons);
         } else {
