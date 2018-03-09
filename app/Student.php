@@ -25,7 +25,7 @@ class Student extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function button(){
-        return $this->hasMany('App\Button', 'user_id');
+        return $this->hasMany('App\Button', 'student_id');
     }
 
 }
