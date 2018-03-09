@@ -52,8 +52,8 @@
 
                         @if($button->step_id = 1 && $button->student_id = $student->student_id)
                         <td>
-                        <button type="button" class="{{$studentButton->button_class}}" style="white-space: normal">
-                            {{$studentButton->button_words}}</button>
+                        <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                            {{$button->button_words}}</button>
                         </td>
                         @endif
                         {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
