@@ -13,7 +13,7 @@ class Student extends Model
     /**
      * @var string
      */
-    protected $table = 'contacts';
+    protected $table = 'student';
 
     /**
      * @var string
