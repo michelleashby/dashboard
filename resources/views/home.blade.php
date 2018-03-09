@@ -91,18 +91,18 @@
                 <td>
                     {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
 
-                        {{--@if($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca")--}}
+                        @if($student->student_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca")
                             {{--this logic does not check AD - need to figure out how to do this--}}
-                            {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">AD Account Exists--}}
-                                {{--<span class="glyphicon glyphicon-ok"></span>--}}
-                            {{--</button>--}}
-                        {{--@else--}}
-                            {{--<button type="button" class="btn bnt-info enabled" style="white-space: normal">Create AD Account</button>--}}
-                        {{--@endif--}}
-                    {{--@else--}}
-                        {{--<button type="button" class="btn disabled" style="white-space: normal">AD Account</button>--}}
-                    {{--@endif--}}
-                {{--</td>--}}
+                            <button type="button" class="btn btn-success disabled" style="white-space: normal">AD Account Exists
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        @else
+                            <button type="button" class="btn bnt-info enabled" style="white-space: normal">Create AD Account</button>
+                        @endif
+                    @else
+                        <button type="button" class="btn disabled" style="white-space: normal">AD Account</button>
+                    @endif
+                </td>
 
                 {{--<td><button type="button" class="btn disabled" style="white-space: normal">Informed Consent</button> </td>--}}
 
