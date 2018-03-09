@@ -38,23 +38,22 @@
                 {{--{{$studentButtons = $student->button()->orderby('step_id', 'ASC')->get()}}--}}
 
 
-            @if($studentButtons != null)
-                {{dd($studentButtons)}}
-                    @foreach($studentButtons as $button)
-                        <td>
-                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>
-                        </td>
-                    @endforeach
+            {{--@if($studentButtons != null)--}}
+                    {{--@foreach($studentButtons as $button)--}}
+                        {{--<td>--}}
+                            {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>--}}
+                        {{--</td>--}}
+                    {{--@endforeach--}}
 
 
                 {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
-                        {{--@if($button->step_id = 1)--}}
-                        {{--<td>--}}
-                        {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">--}}
-                            {{--{{$button->button_words}}</button>--}}
-                        {{--</td>--}}
-                        {{--@endif--}}
+                        {{--@if($student->button()->step_id = 1)--}}
+                        <td>
+                        <button type="button" class="{{$student->button()->where('step_id',1)->button_class}}" style="white-space: normal">
+                            {{$student->button()->where('step_id',1)->button_words}}</button>
+                        </td>
+                        @endif
                         {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
                             {{--<span class="glyphicon glyphicon-ok"></span>--}}
                         {{--</button> </td>--}}
@@ -150,7 +149,6 @@
 
 
                         {{--@endforeach--}}
-                    @endif
 
             </tr>
         @endforeach
