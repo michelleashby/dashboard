@@ -39,7 +39,7 @@
 
 
             {{--@if($studentButtons != null)--}}
-                    {{--@foreach($studentButtons as $button)--}}
+                    @foreach($buttons as $button)
                         {{--<td>--}}
                             {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>--}}
                         {{--</td>--}}
@@ -49,6 +49,7 @@
 
                 {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
+
                         @if($button->step_id = 1 && $button->student_id = $student->student_id)
                         <td>
                         <button type="button" class="{{$studentButton->button_class}}" style="white-space: normal">
@@ -149,7 +150,7 @@
                     {{--@endif--}}
 
 
-                        {{--@endforeach--}}
+                        @endforeach
 
             </tr>
         @endforeach
