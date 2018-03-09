@@ -47,7 +47,7 @@ class PagesController extends Controller
 //            ->paginate(20);
 //            dd($students);
 
-            $studentCount = $student->all()->count();
+            $studentCount = $students->count();
 //            join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
 //                ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
 //                ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
