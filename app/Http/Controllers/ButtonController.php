@@ -558,7 +558,7 @@ class ButtonController extends Controller
 
                 $button = new Button();
                 $studentButtonCount = $button->where('student_id',$student->student_id)->count();
-                dd($studentButtonCount);
+//                dd($studentButtonCount);
 
                 if ($studentButtonCount > 0) {
                     //Update statuses for existing buttons
