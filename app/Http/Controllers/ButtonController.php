@@ -499,34 +499,42 @@ class ButtonController extends Controller
                 );
             }
 
-            // Below is for further dev - need some db work to create a table with just these columns and then
-            // link the student model to that table
-            // but when complete we will have 2 local tables with just the information we need
-            // one for studetns and one for parents/contacts
-//            $mySchoolStudents = DB::connection('myschoolsql')->select('select contacts.user_id,
-//                contacts.surname,
-//                contacts.name,
-//                students.custom_field_8,
-//                students.custom_field_13,
-//                students.custom_field_1,
-//                students.custom_field_9,
-//                students.custom_field_2
-//                FROM contacts
-//                JOIN class_students
-//                ON contacts.user_id = class_students.user_id\
-//                JOIN classes
-//                ON class_students.class_id = classes.class_id
-//                JOIN class_levels
-//                ON classes.class_level_id = class_levels.class_level_id
-//                JOIN students
-//                ON contacts.user_id =students.user_id
-//                WHERE classes.year = 2018');
-//
-//            DB::connection('mysql')->table('student')->truncate();
-//
-//            foreach($mySchoolStudents as $student){
-//
-//            }
+            // student sync
+            $mySchoolStudents = DB::connection('myschoolsql')->select('select contacts.user_id,
+                contacts.surname,
+                contacts.name,
+                students.custom_field_8,
+                students.custom_field_1,
+                students.custom_field_9,
+                students.custom_field_2
+                FROM contacts
+                JOIN class_students
+                ON contacts.user_id = class_students.user_id\
+                JOIN classes
+                ON class_students.class_id = classes.class_id
+                JOIN class_levels
+                ON classes.class_level_id = class_levels.class_level_id
+                JOIN students
+                ON contacts.user_id =students.user_id
+                WHERE classes.year = 2018');
+
+            DB::connection('mysql')->table('student')->truncate();
+
+            foreach($mySchoolStudents as $student){
+                $id = $student->user_id;
+                $surname = $student->surname;
+                $name = $student->name;
+                $type = $student->custom_field_8;
+                $val = $student->custom_field_1;
+                $dep = $student->custom_field_9;
+                $enrol = $student->custom_field_2;
+
+                DB::connection('mysql')->table('student')->insert(
+                ['student_id' => $id,'surname' => $surname, 'name'=> $name,'student_type' => $type,
+                    'data_valadation_complete' => $val, 'deposit_received' => $dep,'enrollment_status' => $enrol]
+                );
+
+            }
 
 
             //may want a mysqldump instead
@@ -558,10 +566,9 @@ class ButtonController extends Controller
 //            dd($students);
 
             foreach ($students as $student) {
-                //grab the students IDs to make sure they each have 8 buttons in table
-                $studentButton = new Button();
+                //grab the students to make sure they each have 8 buttons in table
 
-                $studentButtonCount = $studentButton->where('student_id', $student->user_id)->count();
+                $studentButtonCount = $student->button()->count();
 
                 if ($studentButtonCount > 0) {
                     //Update statuses for existing buttons

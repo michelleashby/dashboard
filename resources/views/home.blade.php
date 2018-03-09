@@ -62,6 +62,7 @@
                     {{--<button type="button" class="btn btn-info" style="white-space: normal">Send Data Validation</button> </td>--}}
                     {{--@endif--}}
 
+                    {{--student-type--}}
                 {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
                 {{--<td>{{$student->custom_field_8}}</td>--}}
 
