@@ -40,6 +40,8 @@
 
             {{--@if($studentButtons != null)--}}
                     @foreach($buttons as $button)
+                    {{--logic in buttons still needs ot be implemented at this point--}}
+                    {{--All buttons in DB should be called like below when dev of buttons is completed--}}
 
                 {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
@@ -103,6 +105,19 @@
                         {{--<button type="button" class="btn disabled" style="white-space: normal">AD Account</button>--}}
                     {{--@endif--}}
                 </td>
+
+                {{--Informed Consent--}}
+                    ($button->step_id = 4 && $button->student_id = $student->student_id)
+                    <td>
+                        <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                            {{$button->button_words}}
+                            @if($button->button_words = "Informed Consent Given")
+                                <span class="glyphicon glyphicon-ok"></span>
+                            @endif
+                        </button>
+                    </td>
+                    @endif
+
 
                 {{--<td><button type="button" class="btn disabled" style="white-space: normal">Informed Consent</button> </td>--}}
 

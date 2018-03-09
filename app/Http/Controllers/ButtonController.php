@@ -119,8 +119,8 @@ class ButtonController extends Controller
             ->where('questionnaire_status.questionnaire_id', '=', $questionnaireID)
             ->get();
 
-        //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
-        if ($student->custom_field_1 = "Yes") {
+        //2 = complete
+        if ($valStatus->questionnaire_submission_status_id = 2) {
             $valButton = Button::find($button_id);
 
             $valButton->button_class = "btn btn-success disabled";
@@ -254,18 +254,57 @@ class ButtonController extends Controller
 
     }
 
-    public function setConsentButton()
+    public function setConsentButton($student)
     {
-        // 5) informed consent has been sent/signed
-        // If AD account complete button active
+        $id = $student->student_id;
+        $step = Step::find(4);
+        $date = Carbon::now();
 
-        // If no correspondence, "send informed consent form"
 
-        // if correspondence greater than 0 "resend consent form"
+        // need to find button with user_id of the student and step_id 1
+        $button = new Button();
+        $button = $button->where('student_id', $id)
+            ->where('step_id', 4)
+            ->first();
 
-        // if complete btn-success "Informed consent signed" with check mark
+        //if button exists update to correspond with MySchool table status
+        $questStatus = new Status();
+        $questionnaireID = $step->questionnaire_id;
+        $button_id = $button->button_id;
 
-        // else button disabled
+        $status = $questStatus->select('questionnaire_status.questionnaire_id',
+            'questionnaire_status.questionnaire_submission_status_id')
+            ->where('questionnaire_status.user_id', '=', $id)
+            ->where('questionnaire_status.questionnaire_id', '=', $questionnaireID)
+            ->get();
+
+        //2 = complete
+        if ($status->questionnaire_submission_status_id = 2) {
+            $conButton = Button::find($button_id);
+
+            $conButton->button_class = "btn btn-success disabled";
+            $conButton->button_words = "Informed Consent Given";
+            $conButton->status_id = 2;
+
+            $conButton->update();
+        } elseif ($status->questionnaire_submission_status_id = 1) { //1 = sent but not complete
+            $conButton = Button::find($button_id);
+
+            // If student is in the validation questionnaire and has not completed
+            $conButton->button_class = "btn btn-info";
+            $conButton->button_words = "Resend Informed Consent";
+            $conButton->status_id = 1;
+
+            $conButton->update();
+        } elseif ($status->questionnaire_submission_status_id = 0 || $status->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
+            $conButton = Button::find($button_id);
+
+            $conButton->button_class = "btn btn-info";
+            $conButton->button_words = "Send Informed Consent Form";
+            $conButton->status_id = 0;
+        }
+
+
 
     }
 
@@ -599,6 +638,7 @@ class ButtonController extends Controller
                     //Same set function creates the button if it does not exist
                     //Need to call set function for each button
                     $this->setValidationButton($student);
+                    $this->setConsentButton($student);
 
                 } else {
                     //add all buttons
