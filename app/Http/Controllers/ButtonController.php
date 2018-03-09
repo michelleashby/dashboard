@@ -535,6 +535,7 @@ class ButtonController extends Controller
             $mySchoolStudents = DB::connection('myschoolsql')->select('SELECT DISTINCT contacts.user_id,
                 contacts.surname,
                 contacts.name,
+                contacts.user_email,
                 students.custom_field_8,
                 students.custom_field_1,
                 students.custom_field_9,
@@ -562,9 +563,10 @@ class ButtonController extends Controller
                 $val = $student->custom_field_1;
                 $dep = $student->custom_field_9;
                 $enrol = $student->custom_field_2;
+                $email = $student->user_email;
 
                 DB::connection('mysql')->table('student')->insert(
-                    ['student_id' => $id, 'surname' => $surname, 'name' => $name, 'student_type' => $type,
+                    ['student_id' => $id, 'surname' => $surname, 'name' => $name, 'student_email' => $email, 'student_type' => $type,
                         'data_valadation_complete' => $val, 'deposit_received' => $dep, 'enrollment_status' => $enrol]
                 );
 

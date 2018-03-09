@@ -75,18 +75,20 @@
                     </button> </td>
                     @endif
 
-                {{--<td>--}}
-                    {{--@if($student->custom_field_9 = "Yes")--}}
-                        {{--<button type="button" class="btn btn-success disabled" aria-label="done">--}}
-                        {{--<span class="glyphicon glyphicon-ok "></span>--}}
-                    {{--@else--}}
-                                {{--<button type="button" class="btn" aria-label="done">--}}
-                        {{--<span class="glyphicon glyphicon-remove"></span>--}}
-                    {{--@endif--}}
-                    {{--</button>--}}
-                {{--</td>--}}
+                {{--deposit received--}}
+                <td>
+                    @if($student->deposit_received = "Yes")
+                        <button type="button" class="btn btn-success disabled" aria-label="done">
+                        <span class="glyphicon glyphicon-ok "></span></button>
+                    @else
+                                <button type="button" class="btn" aria-label="done">
+                        <span class="glyphicon glyphicon-remove"></span></button>
+                    @endif
 
-                {{--<td>--}}
+                </td>
+
+                {{--AD account check--}}
+                <td>
                     {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
 
                         {{--@if($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca")--}}
