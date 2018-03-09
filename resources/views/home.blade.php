@@ -107,7 +107,7 @@
                 </td>
 
                 {{--Informed Consent--}}
-                    ($button->step_id = 4 && $button->student_id = $student->student_id)
+                    @if($button->step_id = 4 && $button->student_id = $student->student_id)
                     <td>
                         <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                             {{$button->button_words}}
@@ -116,7 +116,7 @@
                             @endif
                         </button>
                     </td>
-                    
+                    @endif
 
 
                 {{--<td><button type="button" class="btn disabled" style="white-space: normal">Informed Consent</button> </td>--}}
