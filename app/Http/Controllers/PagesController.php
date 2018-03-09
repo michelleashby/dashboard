@@ -37,6 +37,7 @@ class PagesController extends Controller
 
 
             $dbDate = DB::connection('mysql')->select('select * from db_sync where id=1');
+            dd($dbDate);
 
             return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('buttons', $buttons)->with('dbDate', $dbDate);
         } else {
