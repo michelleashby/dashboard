@@ -118,10 +118,17 @@
                     </td>
                     @endif
 
-
-                {{--<td><button type="button" class="btn disabled" style="white-space: normal">Informed Consent</button> </td>--}}
-
-                {{--<td><button type="button" class="btn disabled" style="white-space: normal">Send Course Selection</button> </td>--}}
+                {{--Course selection --}}
+                    @if($button->step_id = 5 && $button->student_id = $student->student_id)
+                        <td>
+                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                                {{$button->button_words}}
+                                @if($button->button_words = "Course Selection Complete")
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                @endif
+                            </button>
+                        </td>
+                    @endif
 
                 {{--<td>--}}
                     {{--below is NOT correct check need to know what would work--}}

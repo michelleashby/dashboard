@@ -308,18 +308,56 @@ class ButtonController extends Controller
 
     }
 
-    public function setCourseButton()
+    public function setCourseButton($student)
     {
-        // 6) course selection sent/complete
-        // If AD account complete button active
+        $id = $student->student_id;
+        $step = Step::find(5);
+        $date = Carbon::now();
 
-        // If no correspondence, "send course selection"
 
-        // If correspondence greater than 0 "resend course selection"
+        // need to find button with user_id of the student and step_id 1
+        $button = new Button();
+        $button = $button->where('student_id', $id)
+            ->where('step_id', 5)
+            ->first();
 
-        // if complete btn-success "course selection complete" with check mark
+        //if button exists update to correspond with MySchool table status
+        $questStatus = new Status();
+        $questionnaireID = $step->questionnaire_id;
+        $button_id = $button->button_id;
 
-        // else button disabled
+        $status = $questStatus->select('questionnaire_status.questionnaire_id',
+            'questionnaire_status.questionnaire_submission_status_id')
+            ->where('questionnaire_status.user_id', '=', $id)
+            ->where('questionnaire_status.questionnaire_id', '=', $questionnaireID)
+            ->get();
+
+        //2 = complete
+        if ($status->questionnaire_submission_status_id = 2) {
+            $courButton = Button::find($button_id);
+
+            $courButton->button_class = "btn btn-success disabled";
+            $courButton->button_words = "Course Selection Complete";
+            $courButton->status_id = 2;
+
+            $courButton->update();
+        } elseif ($status->questionnaire_submission_status_id = 1) { //1 = sent but not complete
+            $courButton = Button::find($button_id);
+
+            // If student is in the validation questionnaire and has not completed
+            $courButton->button_class = "btn btn-info";
+            $courButton->button_words = "Resend Course Selection";
+            $courButton->status_id = 1;
+
+            $courButton->update();
+        } elseif ($status->questionnaire_submission_status_id = 0 || $status->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
+            $courButton = Button::find($button_id);
+
+            $courButton->button_class = "btn btn-info";
+            $courButton->button_words = "Send Course Selection";
+            $courButton->status_id = 0;
+        }
+
 
     }
 
@@ -639,6 +677,7 @@ class ButtonController extends Controller
                     //Need to call set function for each button
                     $this->setValidationButton($student);
                     $this->setConsentButton($student);
+                    $this->setCourseButton($student);
 
                 } else {
                     //add all buttons
