@@ -25,27 +25,6 @@ class PagesController extends Controller
             $student = new Student();
 
             $students = $student->paginate(20);
-//                $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
-//            ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
-//            ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
-//            ->join('students', 'contacts.user_id', '=', 'students.user_id')
-//            ->select('contacts.user_id',
-//                'contacts.surname',
-//                'contacts.name',
-//                'students.custom_field_8',  // custom_field_8 is "Student Type"
-//                'students.custom_field_13', // custom_field_13 is "Discount Value CAD"
-//                'students.custom_field_1',  // custom_field_1 is "Data Validation Complete"
-//                'students.custom_field_9', // custom_field_9 is "Deposit Received"
-//                'students.custom_field_2') // custom_field_2 is "Enrollment Status"
-//            ->where('classes.year', '=', 2018)
-//            ->orderby('contacts.surname')
-            //->where('students.custom_field_1', '=', 'Yes')
-            //->where('students.custom_field_2', '=', 'Attending 2017-2018')
-            //->where('students.custom_field_9', '=', 'Yes')
-            //->orderby('class_levels.class_level_index')
-//            ->get();
-//            ->paginate(20);
-//            dd($students);
 
             $studentCount = $student->all()->count();
 
@@ -56,10 +35,10 @@ class PagesController extends Controller
                 $buttons = $button->where('student_id',$id)->orderby('step_id', 'ASC')->get();
             }
 
-//            $button = new Button();
-//            $buttons = $button->join('student','button.student_id','=','student.student_id')->orderby('student.surname')->get();
 
-            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('buttons', $buttons);
+            $dbDate = DB::connection('mysql')->select('select updated_at from db_sync where id=1');
+
+            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('buttons', $buttons)->with('dbDate', $dbDate);
         } else {
             return view('welcome');
         }
