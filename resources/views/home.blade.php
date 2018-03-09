@@ -158,7 +158,7 @@
 
     <div class="text-center">
 
-    {{--{{ $students->links() }}--}}
+    {{ $students->links() }}
 
     </div>
 
