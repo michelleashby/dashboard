@@ -509,7 +509,7 @@ class ButtonController extends Controller
                 students.custom_field_2
                 FROM contacts
                 JOIN class_students
-                ON contacts.user_id = class_students.user_id\
+                ON contacts.user_id = class_students.user_id
                 JOIN classes
                 ON class_students.class_id = classes.class_id
                 JOIN class_levels
@@ -592,8 +592,11 @@ class ButtonController extends Controller
             );
 
 //            DB::table('db_sync')->where('id',1)->update(['updated_at' => NOW()]);
+            foreach ($students as $student) {
+                $studentButtons = $student->button()->orderby('step_id', 'ASC')->get();
+            }
 
-            return view('home')->with('students', $students)->with('buttons', $buttons)->with('studentCount',$studentCount);
+            return view('home')->with('students', $students)->with('studentButtons', $studentButtons)->with('studentCount',$studentCount);
         }else {
             return view('welcome');
         }
