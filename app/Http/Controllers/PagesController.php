@@ -51,7 +51,9 @@ class PagesController extends Controller
 
 //            $students = Student::getStudents();
             foreach ($students as $student) {
-                $studentButtons = $student->button()->orderby('step_id', 'ASC')->get();
+                $button = new Button();
+                $id = $student->student_id;
+                $studentButtons = $button->where('student_id',$id)->orderby('step_id', 'ASC')->get();
             }
 
 //            $button = new Button();
