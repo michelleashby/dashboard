@@ -606,6 +606,7 @@ class ButtonController extends Controller
                 $button = new Button();
                 $id = $student->student_id;
                 $buttons = $button->where('student_id', $id)->orderby('step_id', 'ASC')->get();
+            }
 
 
                 $studentCount = $student->all()->count();
@@ -619,12 +620,11 @@ class ButtonController extends Controller
 
 
                 return view('home')->with('students', $students)->with('buttons', $buttons)->with('studentCount', $studentCount);
-            }
-        else {
+            } else {
                 return view('welcome');
             }
 
         }
 
-    }
+    
 }
