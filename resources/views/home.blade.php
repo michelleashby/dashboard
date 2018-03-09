@@ -55,7 +55,7 @@
                         <td>
                         <button type="button" class="{{$valButton->button_class}}" style="white-space: normal">{{$valButton->button_words}}</button>
                         </td>
-                        @endif
+                        {{--@endif--}}
                         {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
                             {{--<span class="glyphicon glyphicon-ok"></span>--}}
                         {{--</button> </td>--}}
@@ -149,7 +149,7 @@
                     {{--@endif--}}
 
 
-                        @endforeach
+                        {{--@endforeach--}}
             </tr>
         @endforeach
         </tbody>
