@@ -116,7 +116,7 @@
                             @endif
                         </button>
                     </td>
-                    @endif
+                    
 
 
                 {{--<td><button type="button" class="btn disabled" style="white-space: normal">Informed Consent</button> </td>--}}
