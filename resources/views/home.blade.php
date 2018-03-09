@@ -52,8 +52,8 @@
                         {{--@if($button->step_id = 1)--}}
                 {{--{{$valButton = $student->button()->where('step_id',1)->get()}}--}}
                         {{--<td>--}}
-                        <button type="button" class="{{$student->button()->where('step_id',1)->button_class}}" style="white-space: normal">
-                            {{$student->button()->where('step_id',1)->button_words}}</button>
+                        <button type="button" class="{{$student->button()->where('step_id',1)->get()->button_class}}" style="white-space: normal">
+                            {{$student->button()->where('step_id',1)->get()->button_words}}</button>
                         </td>
                         {{--@endif--}}
                         {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
