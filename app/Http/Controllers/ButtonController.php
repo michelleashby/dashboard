@@ -120,8 +120,8 @@ class ButtonController extends Controller
             if ($student->custom_field_1 = "Yes") {
                 $valButton = Button::find($button_id);
 
-                $valButton->class = "btn btn-success disabled";
-                $valButton->words = "Validation Complete  <span class=\"glyphicon glyphicon-ok\"></span>";
+                $valButton->button_class = "btn btn-success disabled";
+                $valButton->button_words = "Validation Complete  <span class=\"glyphicon glyphicon-ok\"></span>";
                 $valButton->status_id = 2;
 
                 $valButton->update();
@@ -129,16 +129,16 @@ class ButtonController extends Controller
                 $valButton = Button::find($button_id);
 
                 // If student is in the validation questionnaire and has not completed
-                $valButton->class = "btn btn-info";
-                $valButton->words = "Resend Data Validation";
+                $valButton->button_class = "btn btn-info";
+                $valButton->button_words = "Resend Data Validation";
                 $valButton->status_id = 1;
 
                 $valButton->update();
             } elseif ($valStatus->questionnaire_submission_status_id = 0 || $valStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
                 $valButton = Button::find($button_id);
 
-                $valButton->class = "btn btn-info";
-                $valButton->words = "Send Data Validation";
+                $valButton->button_class = "btn btn-info";
+                $valButton->button_words = "Send Data Validation";
                 $valButton->status_id = 0;
 
                 $valButton->update();
