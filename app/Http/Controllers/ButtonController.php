@@ -83,7 +83,7 @@ class ButtonController extends Controller
     // all set functions for buttons follow:
     public function setValidationButton($student){
 
-        $id = $student->id;
+        $id = $student->student_id;
         $step = Step::find(1);
         $date = Carbon::now();
 
