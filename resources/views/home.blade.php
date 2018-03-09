@@ -99,9 +99,9 @@
                         @else
                             <button type="button" class="btn bnt-info enabled" style="white-space: normal">Create AD Account</button>
                         @endif
-                    @else
-                        <button type="button" class="btn disabled" style="white-space: normal">AD Account</button>
-                    @endif
+                    {{--@else--}}
+                        {{--<button type="button" class="btn disabled" style="white-space: normal">AD Account</button>--}}
+                    {{--@endif--}}
                 </td>
 
                 {{--<td><button type="button" class="btn disabled" style="white-space: normal">Informed Consent</button> </td>--}}
