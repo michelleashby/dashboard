@@ -35,7 +35,7 @@ class PagesController extends Controller
                 $buttons = $button->where('student_id',$id)->orderby('step_id', 'ASC')->get();
             }
 
-            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('buttons', $buttons)->with('dbDate', $dbDate);
+            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('buttons', $buttons);
         } else {
             return view('welcome');
         }
