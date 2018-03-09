@@ -49,7 +49,7 @@
 
                 {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
-                        @if($studentButton->step_id = 1)
+                        @if($button->step_id = 1 && $button->student_id = $student->student_id)
                         <td>
                         <button type="button" class="{{$studentButton->button_class}}" style="white-space: normal">
                             {{$studentButton->button_words}}</button>

@@ -50,16 +50,16 @@ class PagesController extends Controller
             $studentCount = $student->all()->count();
 
 //            $students = Student::getStudents();
-            foreach ($students as $student) {
-                $button = new Button();
-                $id = $student->student_id;
-                $studentButtons = $button->where('student_id',$id)->orderby('step_id', 'ASC')->get();
-            }
+//            foreach ($students as $student) {
+//                $button = new Button();
+//                $id = $student->student_id;
+//                $studentButtons = $button->where('student_id',$id)->orderby('step_id', 'ASC')->get();
+//            }
 
-//            $button = new Button();
-//            $buttons = $button->all();
+            $button = new Button();
+            $buttons = $button->all();
 
-            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('studentButtons', $studentButtons);
+            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('buttons', $buttons);
         } else {
             return view('welcome');
         }
