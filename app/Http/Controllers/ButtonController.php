@@ -576,9 +576,9 @@ class ButtonController extends Controller
 //            $button = new Button();
 //            $buttons = $button->all();
 
-            DB::connection('mysql')->table('db_sync')->where('id',1)->update(
+            DB::connection('mysql')->table('db_sync')->where('id',1)->update([
                 'updated_at', $date
-            );
+            ]);
 
 
             return view('home')->with('students', $students)->with('studentButtons', $studentButtons)->with('studentCount',$studentCount);
