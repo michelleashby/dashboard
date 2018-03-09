@@ -556,7 +556,8 @@ class ButtonController extends Controller
             foreach ($students as $student) {
                 //grab the students to make sure they each have 8 buttons in table
 
-                $studentButtonCount = $student->button()->count();
+                $button = new Button();
+                $studentButtonCount = $button->where('student_id',$student->student_id)->count();
                 dd($studentButtonCount);
 
                 if ($studentButtonCount > 0) {
