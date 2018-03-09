@@ -33,7 +33,7 @@
         @foreach($students as $student)
             <tr> {{--student name and ID: no button used--}}
 
-                <td>{{$student->name}} {{$student->surname}} <br> {{$student->user_id}}</td>
+                <td>{{$student->name}} {{$student->surname}} <br> {{$student->student_id}}</td>
 
                 {{--{{$studentButtons = $student->button()->orderby('step_id', 'ASC')->get()}}--}}
 
