@@ -93,18 +93,18 @@ class ButtonController extends Controller
         $button = $button->where('student_id', $id)
             ->where('step_id', 1)
             ->get();
-        dd($button);
-
-        if($button == null){
-            $valButton = new Button();
-            //if there is no validation button in the button table, create one
-            $valButton->student_id = $id;
-            $valButton->step_id = $step;
-            $valButton->created_at = $date;
-            $valButton->button_status_id = 0;
-
-            $valButton->save();
-        } else {
+//        dd($button);
+//
+//        if($button == null){
+//            $valButton = new Button();
+//            //if there is no validation button in the button table, create one
+//            $valButton->student_id = $id;
+//            $valButton->step_id = $step;
+//            $valButton->created_at = $date;
+//            $valButton->button_status_id = 0;
+//
+//            $valButton->save();
+//        } else {
             //if button exists update to correspond with MySchool table status
             $questStatus = new Status();
             $questionnaireID = $step->questionnaire_id;
@@ -142,9 +142,9 @@ class ButtonController extends Controller
                 $valButton->status_id = 0;
 
                 $valButton->update();
-            } else {
-                return "error updating validation button";
-            }
+//            } else {
+//                return "error updating validation button";
+//            }
         }
 
     }
