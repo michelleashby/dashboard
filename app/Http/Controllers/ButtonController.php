@@ -49,7 +49,7 @@ class ButtonController extends Controller
     }
 
     public function createStudentButtons($student){
-        $id = $student->user_id;
+        $id = $student->student_id;
         $date = Carbon::now();
 
         $button = new Button();
@@ -536,7 +536,6 @@ class ButtonController extends Controller
 
             }
 
-
             //may want a mysqldump instead
             //mysqldump may need to be done in shell_exec('your command here')
             //mysqldump -u -p DBname contacts students classes class_students class_levels
@@ -549,20 +548,7 @@ class ButtonController extends Controller
             // Create buttons for new students or students missing them
             // Update buttons for current students is submission status changed
             $student = new Student();
-            $students =  $student->join('class_students', 'contacts.user_id', '=', 'class_students.user_id')
-                ->join('classes', 'class_students.class_id', '=', 'classes.class_id')
-                ->join('class_levels', 'classes.class_level_id', '=', 'class_levels.class_level_id')
-                ->join('students', 'contacts.user_id', '=', 'students.user_id')
-                ->select('contacts.user_id',
-                    'contacts.surname',
-                    'contacts.name',
-                    'students.custom_field_8',
-                    'students.custom_field_13',
-                    'students.custom_field_1',
-                    'students.custom_field_9',
-                    'students.custom_field_2')
-                ->where('classes.year', '=', 2018)
-                ->paginate(20);
+            $students =  $student->paginate(20);
 //            dd($students);
 
             foreach ($students as $student) {
@@ -580,9 +566,12 @@ class ButtonController extends Controller
                     //add all buttons
                     $this->createStudentButtons($student);
                 }
+
+                $studentButtons = $student->button()->orderby('step_id', 'ASC')->get();
+
             }
 
-            $studentCount = $students->count();
+            $studentCount = $student->all()->count();
 
 //            $button = new Button();
 //            $buttons = $button->all();
@@ -591,10 +580,6 @@ class ButtonController extends Controller
                 'updated_at', NOW()
             );
 
-//            DB::table('db_sync')->where('id',1)->update(['updated_at' => NOW()]);
-            foreach ($students as $student) {
-                $studentButtons = $student->button()->orderby('step_id', 'ASC')->get();
-            }
 
             return view('home')->with('students', $students)->with('studentButtons', $studentButtons)->with('studentCount',$studentCount);
         }else {
