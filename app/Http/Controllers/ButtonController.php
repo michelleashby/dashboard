@@ -577,7 +577,7 @@ class ButtonController extends Controller
 //            $buttons = $button->all();
 
             DB::connection('mysql')->table('db_sync')->where('id',1)->update([
-                'updated_at', $date
+                'updated_at' => $date
             ]);
 
 
