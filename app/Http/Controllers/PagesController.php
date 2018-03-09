@@ -47,7 +47,7 @@ class PagesController extends Controller
 //            ->paginate(20);
 //            dd($students);
 
-            $studentCount = $students->count();
+            $studentCount = $student->all()->count();
 
 //            $students = Student::getStudents();
             foreach ($students as $student) {
