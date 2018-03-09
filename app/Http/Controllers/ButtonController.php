@@ -500,7 +500,7 @@ class ButtonController extends Controller
             }
 
             // student sync
-            $mySchoolStudents = DB::connection('myschoolsql')->select('select contacts.user_id,
+            $mySchoolStudents = DB::connection('myschoolsql')->select('SELECT DISTINCT contacts.user_id,
                 contacts.surname,
                 contacts.name,
                 students.custom_field_8,
