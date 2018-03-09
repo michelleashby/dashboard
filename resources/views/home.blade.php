@@ -53,7 +53,7 @@
                         <button type="button" class="{{$student->button()->where('step_id',1)->button_class}}" style="white-space: normal">
                             {{$student->button()->where('step_id',1)->button_words}}</button>
                         </td>
-                        @endif
+                        {{--@endif--}}
                         {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
                             {{--<span class="glyphicon glyphicon-ok"></span>--}}
                         {{--</button> </td>--}}
