@@ -31,7 +31,9 @@
         <tbody>
         {{--{{dd($students)}}--}}
         @foreach($students as $student)
-            <tr> {{--student name and ID: no button used--}}
+            @foreach($buttons as $button)
+
+                <tr> {{--student name and ID: no button used--}}
 
                 <td>{{$student->name}} {{$student->surname}} <br> {{$student->student_id}}</td>
 
@@ -39,7 +41,6 @@
 
 
             {{--@if($studentButtons != null)--}}
-                    @foreach($buttons as $button)
                     {{--logic in buttons still needs ot be implemented at this point--}}
                     {{--All buttons in DB should be called like below when dev of buttons is completed--}}
 
@@ -67,15 +68,16 @@
                     {{--Need enrolment to check if any emails sent as well as if it's still null--}}
                     @if($student->enrollment_status == null)
                         {{--This years' re-enrollment questionnaires are 157-161 - need to grab student type to determine which they get--}}
-                        <button type="button" class="btn btn-info enabled" style="white-space: normal">send enrolment reminder</button> </td>
+                        <button type="button" class="btn btn-info enabled" style="white-space: normal">send enrolment reminder</button>
                     {{--Will also need if thay are new to school ---}}
                     {{--This years' enrollment questionnaires are not made yet - need to grab student type again to determine which they get--}}
 
                 @else
                     <button type="button" class="btn btn-success disabled" style="white-space: normal">{{$student->enrollment_status}}
                         <span class="glyphicon glyphicon-ok"></span>
-                    </button> </td>
+                    </button>
                     @endif
+                </td>
 
                 {{--deposit received--}}
                 <td>
@@ -130,7 +132,8 @@
                         </td>
                     @endif
 
-                {{--<td>--}}
+                {{--Blue Health--}}
+                <td>
                     {{--below is NOT correct check need to know what would work--}}
                     {{--@if($student->insurance_no != null)--}}
                         {{--this logic does not check AD - need to figure out how to do this--}}
@@ -148,23 +151,27 @@
                         {{--<button type="button" class="btn disabled" style="white-space: normal">Send Health Form</button>--}}
 
                     {{--@endif--}}
-                {{--</td>--}}
+                </td>
 
-                {{--<td>--}}
+                {{--Orientation email--}}
+                <td>
                     {{--need to figure out the column in DB to check for this data still (if complete)--}}
                     {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
                         {{--<button type="button" class="btn btn-info enabled" style="white-space: normal">Send Orientation Email</button> </td>--}}
                     {{--@else--}}
                         {{--<button type="button" class="btn disabled" style="white-space: normal">Resend Orientation Email</button> </td>--}}
                     {{--@endif--}}
+                </td>
 
-                {{--<td>--}}
+                {{--Head Prefect Email--}}
+                <td>
                     {{--need to figure out the column in DB to check for this data still (if complete)--}}
                     {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
                         {{--<button type="button" class="btn b btn-info enabled" style="white-space: normal">Send Head Prefect Email</button> </td>--}}
                     {{--@else--}}
                         {{--<button type="button" class="btn disabled" style="white-space: normal">Resend Head Prefect Email</button> </td>--}}
                     {{--@endif--}}
+                </td>
 
 
                         @endforeach
