@@ -93,6 +93,7 @@ class ButtonController extends Controller
         $button = $button->where('student_id', $id)
             ->where('step_id', 1)
             ->get();
+        dd($button);
 
         if($button == null){
             $valButton = new Button();
