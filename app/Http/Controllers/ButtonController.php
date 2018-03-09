@@ -557,6 +557,7 @@ class ButtonController extends Controller
                 //grab the students to make sure they each have 8 buttons in table
 
                 $studentButtonCount = $student->button()->count();
+                dd($studentButtonCount);
 
                 if ($studentButtonCount > 0) {
                     //Update statuses for existing buttons
