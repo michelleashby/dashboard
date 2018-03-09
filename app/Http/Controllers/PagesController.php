@@ -64,8 +64,8 @@ class PagesController extends Controller
 
 //            $students = Student::getStudents();
 
-//            $button = new Button();
-//            $buttons = $button->all();
+            $button = new Button();
+            $buttons = $button->all();
 
             return view('home')->with('students', $students)->with('studentCount', $studentCount);
         } else {

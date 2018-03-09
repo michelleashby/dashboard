@@ -499,7 +499,37 @@ class ButtonController extends Controller
                 );
             }
 
-            //will really want a mysqldump once connection is working
+            // Below is for further dev - need some db work to create a table with just these columns and then
+            // link the student model to that table
+            // but when complete we will have 2 local tables with just the information we need
+            // one for studetns and one for parents/contacts
+//            $mySchoolStudents = DB::connection('myschoolsql')->select('select contacts.user_id,
+//                contacts.surname,
+//                contacts.name,
+//                students.custom_field_8,
+//                students.custom_field_13,
+//                students.custom_field_1,
+//                students.custom_field_9,
+//                students.custom_field_2
+//                FROM contacts
+//                JOIN class_students
+//                ON contacts.user_id = class_students.user_id\
+//                JOIN classes
+//                ON class_students.class_id = classes.class_id
+//                JOIN class_levels
+//                ON classes.class_level_id = class_levels.class_level_id
+//                JOIN students
+//                ON contacts.user_id =students.user_id
+//                WHERE classes.year = 2018');
+//
+//            DB::connection('mysql')->table('student')->truncate();
+//
+//            foreach($mySchoolStudents as $student){
+//
+//            }
+
+
+            //may want a mysqldump instead
             //mysqldump may need to be done in shell_exec('your command here')
             //mysqldump -u -p DBname contacts students classes class_students class_levels
             // questionnaires questionnaire_submissions > dbsync.$date.sql
@@ -547,8 +577,8 @@ class ButtonController extends Controller
 
             $studentCount = $students->count();
 
-            $button = new Button();
-            $buttons = $button->all();
+//            $button = new Button();
+//            $buttons = $button->all();
 
             DB::connection('mysql')->table('db_sync')->where('id',1)->update(
                 'updated_at', NOW()
