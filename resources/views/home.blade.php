@@ -53,7 +53,11 @@
                         @if($button->step_id = 1 && $button->student_id = $student->student_id)
                         <td>
                         <button type="button" class="{{$button->button_class}}" style="white-space: normal">
-                            {{$button->button_words}}</button>
+                            {{$button->button_words}}
+                            @if($button->button_words = "Validation Complete")
+                                <span class="glyphicon glyphicon-ok"></span>
+                            @endif
+                        </button>
                         </td>
                         @endif
                         {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
@@ -66,7 +70,7 @@
 
                     {{--student-type--}}
                 {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
-                {{--<td>{{$student->custom_field_8}}</td>--}}
+                <td>{{$student->student_type}}</td>
 
                 {{--<td>--}}
                     {{--Need enrolment to check if any emails sent as well as if it's still null--}}

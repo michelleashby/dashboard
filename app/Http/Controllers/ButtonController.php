@@ -121,7 +121,7 @@ class ButtonController extends Controller
                 $valButton = Button::find($button_id);
 
                 $valButton->button_class = "btn btn-success disabled";
-                $valButton->button_words = "Validation Complete  <span class=\"glyphicon glyphicon-ok\"></span>";
+                $valButton->button_words = "Validation Complete";
                 $valButton->status_id = 2;
 
                 $valButton->update();
@@ -578,7 +578,10 @@ class ButtonController extends Controller
                     $this->createStudentButtons($student);
                 }
 
-                $studentButtons = $student->button()->orderby('step_id', 'ASC')->get();
+                    $button = new Button();
+                    $id = $student->student_id;
+                    $buttons = $button->where('student_id',$id)->orderby('step_id', 'ASC')->get();
+                }
 
             }
 
@@ -592,7 +595,7 @@ class ButtonController extends Controller
             ]);
 
 
-            return view('home')->with('students', $students)->with('studentButtons', $studentButtons)->with('studentCount',$studentCount);
+            return view('home')->with('students', $students)->with('buttons', $buttons)->with('studentCount',$studentCount);
         }else {
             return view('welcome');
         }
