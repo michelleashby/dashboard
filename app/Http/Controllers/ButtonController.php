@@ -626,5 +626,5 @@ class ButtonController extends Controller
 
         }
 
-    
+
 }

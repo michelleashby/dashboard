@@ -40,12 +40,6 @@
 
             {{--@if($studentButtons != null)--}}
                     @foreach($buttons as $button)
-                        {{--<td>--}}
-                            {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">{{$button->button_words}}</button>--}}
-                        {{--</td>--}}
-                    {{--@endforeach--}}
-                {{--@endif--}}
-
 
                 {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
@@ -60,31 +54,26 @@
                         </button>
                         </td>
                         @endif
-                        {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Validation Complete--}}
-                            {{--<span class="glyphicon glyphicon-ok"></span>--}}
-                        {{--</button> </td>--}}
-                    {{--@else--}}
-                        {{--ADD @if(student is added to 1106 questionairre) RESEND--}}
-                    {{--<button type="button" class="btn btn-info" style="white-space: normal">Send Data Validation</button> </td>--}}
-                    {{--@endif--}}
+
 
                     {{--student-type--}}
                 {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
                 <td>{{$student->student_type}}</td>
 
-                {{--<td>--}}
+                {{--Enrollment check--}}
+                <td>
                     {{--Need enrolment to check if any emails sent as well as if it's still null--}}
-                    {{--@if($student->custom_field_2 == null)--}}
+                    @if($student->enrollment_status == null)
                         {{--This years' re-enrollment questionnaires are 157-161 - need to grab student type to determine which they get--}}
-                        {{--<button type="button" class="btn btn-info enabled" style="white-space: normal">send enrolment reminder</button> </td>--}}
+                        <button type="button" class="btn btn-info enabled" style="white-space: normal">send enrolment reminder</button> </td>
                     {{--Will also need if thay are new to school ---}}
                     {{--This years' enrollment questionnaires are not made yet - need to grab student type again to determine which they get--}}
 
-                {{--@else--}}
-                    {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">{{$student->custom_field_2}}--}}
-                        {{--<span class="glyphicon glyphicon-ok"></span>--}}
-                    {{--</button> </td>--}}
-                    {{--@endif--}}
+                @else
+                    <button type="button" class="btn btn-success disabled" style="white-space: normal">{{$student->enrollment_status}}
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button> </td>
+                    @endif
 
                 {{--<td>--}}
                     {{--@if($student->custom_field_9 = "Yes")--}}
