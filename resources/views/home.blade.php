@@ -35,7 +35,7 @@
 
                 <td>{{$student->name}} {{$student->surname}} <br> {{$student->user_id}}</td>
 
-                {{$studentButtons = $student->button()->orderby('step_id', 'ASC')->get()}}
+                $studentButtons = $student->button()->orderby('step_id', 'ASC')->get();
 
 
             @if($studentButtons != null)
