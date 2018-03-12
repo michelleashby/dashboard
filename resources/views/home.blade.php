@@ -178,12 +178,12 @@
                         {{--<button type="button" class="btn disabled" style="white-space: normal">Resend Head Prefect Email</button> </td>--}}
                     {{--@endif--}}
                 </td>
+                        @endif
 
 
                         @endforeach
 
             </tr>
-                @endif
         @endforeach
         </tbody>
     </table>
