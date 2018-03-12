@@ -230,26 +230,46 @@ class ButtonController extends Controller
 
     public function setADButton($student)
     {
+        $id = $student->student_id;
+        $step = Step::find(3);
+        $date = Carbon::now();
 
-        $adButton = new Button();
+
+        // need to find button with user_id of the student and step_id 1
+        $button = new Button();
+        $button = $button->where('student_id', $id)
+            ->where('step_id', 3)
+            ->first();
+
+        //if button exists update to correspond with MySchool table status
+        $questStatus = new Status();
+        $questionnaireID = $step->questionnaire_id;
+        $button_id = $button->button_id;
+
+
 
         if ($student->custom_field_9 = "Yes" && $student->custom_field_2 != null) {
             if ($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca") {
-                $adButton->class = "btn btn-success disabled";
-                $adButton->words = "AD Account Exists <span class=\"glyphicon glyphicon-ok\"></span>";
+                $adButton = Button::find($button_id);
+                $adButton->button_class = "btn btn-success disabled";
+                $adButton->button_words = "AD Account Exists";
 
-                return $adButton;
+                $adButton->update();
             } else {
-                $adButton->class = "btn bnt-info enabled";
-                $adButton->words = "Create AD Account";
+                $adButton = Button::find($button_id);
 
-                return $adButton;
+                $adButton->button_class = "btn bnt-info enabled";
+                $adButton->button_words = "Create AD Account";
+
+                $adButton->update();
             }
         } else {
-            $adButton->class = "btn disabled";
-            $adButton->words = "AD Account";
+            $adButton = Button::find($button_id);
 
-            return $adButton;
+            $adButton->button_class = "btn disabled";
+            $adButton->button_words = "AD Account cannot be created yet";
+
+            $adButton->update();
         }
 
     }
