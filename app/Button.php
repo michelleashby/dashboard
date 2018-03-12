@@ -39,7 +39,7 @@ class Button extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function student(){
-        return $this->hasOne('App\Student', 'student_id');
+        return $this->belongsTo('App\Student', 'student_id');
     }
 
     public function step(){
