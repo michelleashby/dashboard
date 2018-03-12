@@ -143,7 +143,6 @@
                         <td>
                             <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                                 {{$button->button_words}}
-                                @endif
                             </button>
                             {{--need to figure out the column in DB to check for this data still (if complete)--}}
                             {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
@@ -152,6 +151,8 @@
                             {{--<button type="button" class="btn disabled" style="white-space: normal">Resend Orientation Email</button> </td>--}}
                             {{--@endif--}}
                         </td>
+                        @endif
+
 
                         {{--Head Prefect Email--}}
                         @if($button->step_id = 8)
@@ -159,7 +160,6 @@
                             <td>
                                 <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                                     {{$button->button_words}}
-                                    @endif
                                 </button>
                                 {{--need to figure out the column in DB to check for this data still (if complete)--}}
                                 {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
@@ -170,7 +170,9 @@
                             </td>
                             @endif
 
-                            @endforeach
+                    @endif
+
+                @endforeach
 
             </tr>
         @endforeach
