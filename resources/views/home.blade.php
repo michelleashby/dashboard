@@ -31,7 +31,7 @@
         <tbody>
         {{--{{dd($students)}}--}}
         @foreach($students as $student)
-            @foreach($buttons as $button)
+            @foreach($student->button as $button)
                 @if($button->student_id = $student->student_id)
 
                 <tr> {{--student name and ID: no button used--}}
@@ -179,7 +179,6 @@
                     {{--@endif--}}
                 </td>
                         @endif
-
 
                         @endforeach
 
