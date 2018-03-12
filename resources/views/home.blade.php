@@ -100,7 +100,7 @@
                         @if($student->student_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca")
                             {{--this logic does not check AD - need to figure out how to do this--}}
                             <button type="button" class="btn btn-success disabled" style="white-space: normal">AD Account Exists
-                                <span class="glyphicon glyphicon-ok"></span>
+                                <br><span class="glyphicon glyphicon-ok"></span>
                             </button>
                         @else
                             <button type="button" class="btn bnt-info enabled" style="white-space: normal">Create AD Account</button>
@@ -116,7 +116,7 @@
                         <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                             {{$button->button_words}}
                             @if($button->button_words = "Informed Consent Given")
-                                <span class="glyphicon glyphicon-ok"></span>
+                                <br></b><span class="glyphicon glyphicon-ok"></span>
                             @endif
                         </button>
                     </td>
@@ -128,7 +128,7 @@
                             <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                                 {{$button->button_words}}
                                 @if($button->button_words = "Course Selection Complete")
-                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <br><span class="glyphicon glyphicon-ok"></span>
                                 @endif
                             </button>
                         </td>
@@ -139,8 +139,8 @@
                         <td>
                             <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                                 {{$button->button_words}}
-                                @if($button->button_words = "Blues Health Complete")
-                                    <span class="glyphicon glyphicon-ok"></span>
+                                @if($button->button_words = "Blue Health Complete")
+                                    <br><span class="glyphicon glyphicon-ok"></span>
                                 @endif
                             </button>
                         </td>
