@@ -577,17 +577,10 @@ class ButtonController extends Controller
         if (Auth::check()) {
             $date = Carbon::now();
 
-
-            // Need a function that can be called to sync DB tables from MySchool
-            // As well as populate button table based on status
-
             // Get tables from external DB
             // Tables needing sync include:
-            // contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions
-
+            // contacts to students or contacts (parents) and questionnaire_submissions
             // Truncate local tables that require syncing
-//            DB::statement('DROP TABLE contacts,students,classes,class_students,class_levels,questionnaires,questionnaire_submissions');
-
 
             //Trying to narrow down the submissions returned (by date) but would be better to just grab the ones for active questionnaires
             $submissions = DB::connection('myschoolsql')->select('select * from questionnaire_submissions where completion_datetime > "2017%"');
@@ -649,21 +642,11 @@ class ButtonController extends Controller
 
             }
 
-            //may want a mysqldump instead
-            //mysqldump may need to be done in shell_exec('your command here')
-            //mysqldump -u -p DBname contacts students classes class_students class_levels
-            // questionnaires questionnaire_submissions > dbsync.$date.sql
-
-            //use .sql file to re-build tables we dropped
-            // Again maybe shell_exec('your command here') with ./dbsync.$date.sql?
-
-            // Local table `button` syncing
-            // Create buttons for new students or students missing them
-            // Update buttons for current students is submission status changed
             $student = new Student();
             $students = $student->paginate(20);
 //            dd($students);
 
+            // Local table `button` syncing
             foreach ($students as $student) {
                 //grab the students to make sure they each have 8 buttons in table
 
@@ -684,23 +667,17 @@ class ButtonController extends Controller
                     $this->createStudentButtons($student);
                 }
 
-                $button = new Button();
-                $id = $student->student_id;
-                $buttons = $button->where('student_id', $id)->orderby('step_id', 'ASC')->get();
             }
 
+            $students = $student->paginate(20);
 
-                $studentCount = $student->all()->count();
+            $studentCount = $student->all()->count();
 
-//            $button = new Button();
-//            $buttons = $button->all();
-
-                DB::connection('mysql')->table('db_sync')->where('id', 1)->update([
+            DB::connection('mysql')->table('db_sync')->where('id', 1)->update([
                     'updated_at' => $date
                 ]);
 
-
-                return view('home')->with('students', $students)->with('buttons', $buttons)->with('studentCount', $studentCount);
+                return view('home')->with('students', $students)->with('studentCount', $studentCount);
             } else {
                 return view('welcome');
             }

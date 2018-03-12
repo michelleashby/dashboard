@@ -28,14 +28,7 @@ class PagesController extends Controller
 
             $studentCount = $student->all()->count();
 
-//            $students = Student::getStudents();
-            foreach ($students as $student) {
-                $button = new Button();
-                $id = $student->student_id;
-                $buttons = $button->where('student_id',$id)->orderby('step_id', 'ASC')->get();
-            }
-
-            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('buttons', $buttons);
+            return view('home')->with('students', $students)->with('studentCount', $studentCount);
         } else {
             return view('welcome');
         }
@@ -54,17 +47,6 @@ class PagesController extends Controller
             return view('welcome');
         }
     }
-
-    // below is for search box function to be developed eventually
-//    public function search() {
-//        // Should be able to search by form student name or form status
-//        $serachInput = $_POST['searchInput'];
-//
-//        $searchStudents = DB::table('students')
-//            ->where('first_name', 'LIKE', "{$searchInput}");
-//
-//    }
-
 
     public function displayStep($id){
 
