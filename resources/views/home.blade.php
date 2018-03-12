@@ -31,7 +31,6 @@
         <tbody>
         {{--{{dd($students)}}--}}
         @foreach($students as $student)
-            @foreach($student->button as $button)
 
                 <tr> {{--student name and ID: no button used--}}
 
@@ -39,6 +38,7 @@
 
                 {{--{{$studentButtons = $student->button()->orderby('step_id', 'ASC')->get()}}--}}
 
+                    @foreach($student->button as $button)
 
             {{--@if($studentButtons != null)--}}
                     {{--logic in buttons still needs ot be implemented at this point--}}
