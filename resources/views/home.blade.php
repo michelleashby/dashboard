@@ -39,10 +39,10 @@
                 {{--@foreach($student->button as $button)--}}
                 @foreach($buttons->sortby('student_id')->sortby('step_id') as $button)
 
+                    @if($button->sudent_id = $student->student_id)
                     {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
 
-                    @if($button->step_id = 1)
                         <td>
                             <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                                 {{$button->button_words}}
@@ -51,8 +51,6 @@
                                 @endif
                             </button>
                         </td>
-                    @endif
-
 
                     {{--student-type--}}
                     {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
@@ -170,6 +168,7 @@
                                 {{--<button type="button" class="btn disabled" style="white-space: normal">Resend Head Prefect Email</button> </td>--}}
                                 {{--@endif--}}
                             </td>
+                            @endif
 
                             @endforeach
 
