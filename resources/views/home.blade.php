@@ -38,7 +38,7 @@
 
                 {{--{{$studentButtons = $student->button()->orderby('step_id', 'ASC')->get()}}--}}
 
-                    @foreach($student->button as $button)
+                    @foreach($student->button->orderby('step_id') as $button)
 
             {{--@if($studentButtons != null)--}}
                     {{--logic in buttons still needs ot be implemented at this point--}}
