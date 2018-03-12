@@ -619,8 +619,12 @@ class ButtonController extends Controller
                 ON classes.class_level_id = class_levels.class_level_id
                 JOIN students
                 ON contacts.user_id =students.user_id
-                WHERE classes.year = 2018
-                AND contacts.user_id > 1810');
+                WHERE classes.year = 2019
+                AND class_levels.class_level_label != "Withdrawn"
+                AND class_levels.class_level_label != "Graduated"
+                AND class_levels.class_level_label != "Accepted" 
+                AND class_levels.class_level_label != "Not processed" 
+                AND class_levels.class_level_label != "Completed" ');
             //LAST LINE HERE IS A HACK BECAUSE OLD DATA WAS GETTING THROUGH OTHER WHERE CLAUSE
 
             DB::connection('mysql')->table('student')->truncate();
