@@ -32,6 +32,7 @@
         {{--{{dd($students)}}--}}
         @foreach($students as $student)
             @foreach($buttons as $button)
+                @if($button->student_id = $student->student_id)
 
                 <tr> {{--student name and ID: no button used--}}
 
@@ -182,6 +183,7 @@
                         @endforeach
 
             </tr>
+                @endif
         @endforeach
         </tbody>
     </table>
