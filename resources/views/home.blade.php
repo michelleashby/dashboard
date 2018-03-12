@@ -56,6 +56,8 @@
                             @endif
                         </button>
                         </td>
+                            @else
+                            <td>No Data</td>
                         @endif
 
 
@@ -133,28 +135,25 @@
                     @endif
 
                 {{--Blue Health--}}
-                <td>
-                    {{--below is NOT correct check need to know what would work--}}
-                    {{--@if($student->insurance_no != null)--}}
-                        {{--this logic does not check AD - need to figure out how to do this--}}
-                        {{--<button type="button" class="btn btn-success disabled" style="white-space: normal">Health Form Complete--}}
-                            {{--p<span class="glyphicon glyphicon-ok"></span>--}}
-                        {{--</button>--}}
-                    {{--@elseif($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
-                        {{--add a check that messages >= 0--}}
-                        {{--@if($button->messages = 0)--}}
-                            {{--<button type="button" class="btn btn-info enabled" style="white-space: normal">Send Health Form</button>--}}
-                            {{--@else--}}
-                            {{--<button type="button" class="btn btn-info enabled" style="white-space: normal">Send Health Form Reminder</button>--}}
-                    {{--@endif--}}
-                    {{--@else--}}
-                        {{--<button type="button" class="btn disabled" style="white-space: normal">Send Health Form</button>--}}
-
-                    {{--@endif--}}
-                </td>
+                    @if($button->step_id = 6 && $button->student_id = $student->student_id)
+                        <td>
+                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                                {{$button->button_words}}
+                                @if($button->button_words = "Blues Health Complete")
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                @endif
+                            </button>
+                        </td>
+                        @endif
 
                 {{--Orientation email--}}
-                <td>
+                    @if($button->step_id = 7 && $button->student_id = $student->student_id)
+
+                    <td>
+                        <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                            {{$button->button_words}}
+                            @endif
+                        </button>
                     {{--need to figure out the column in DB to check for this data still (if complete)--}}
                     {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
                         {{--<button type="button" class="btn btn-info enabled" style="white-space: normal">Send Orientation Email</button> </td>--}}
@@ -164,7 +163,13 @@
                 </td>
 
                 {{--Head Prefect Email--}}
-                <td>
+                        @if($button->step_id = 8 && $button->student_id = $student->student_id)
+
+                        <td>
+                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                                {{$button->button_words}}
+                                @endif
+                            </button>
                     {{--need to figure out the column in DB to check for this data still (if complete)--}}
                     {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
                         {{--<button type="button" class="btn b btn-info enabled" style="white-space: normal">Send Head Prefect Email</button> </td>--}}
