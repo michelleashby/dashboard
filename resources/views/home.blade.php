@@ -32,7 +32,6 @@
         {{--{{dd($students)}}--}}
         @foreach($students as $student)
             @foreach($student->button as $button)
-                @if($button->student_id = $student->student_id)
 
                 <tr> {{--student name and ID: no button used--}}
 
@@ -48,7 +47,7 @@
                 {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
 
-                        @if($button->step_id = 1 && $button->student_id = $student->student_id)
+                        @if($button->step_id = 1)
                         <td>
                         <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                             {{$button->button_words}}
@@ -112,7 +111,7 @@
                 </td>
 
                 {{--Informed Consent--}}
-                    @if($button->step_id = 4 && $button->student_id = $student->student_id)
+                    @if($button->step_id = 4)
                     <td>
                         <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                             {{$button->button_words}}
@@ -124,7 +123,7 @@
                     @endif
 
                 {{--Course selection --}}
-                    @if($button->step_id = 5 && $button->student_id = $student->student_id)
+                    @if($button->step_id = 5)
                         <td>
                             <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                                 {{$button->button_words}}
@@ -136,7 +135,7 @@
                     @endif
 
                 {{--Blue Health--}}
-                    @if($button->step_id = 6 && $button->student_id = $student->student_id)
+                    @if($button->step_id = 6)
                         <td>
                             <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                                 {{$button->button_words}}
@@ -148,7 +147,7 @@
                         @endif
 
                 {{--Orientation email--}}
-                    @if($button->step_id = 7 && $button->student_id = $student->student_id)
+                    @if($button->step_id = 7)
 
                     <td>
                         <button type="button" class="{{$button->button_class}}" style="white-space: normal">
@@ -164,7 +163,7 @@
                 </td>
 
                 {{--Head Prefect Email--}}
-                        @if($button->step_id = 8 && $button->student_id = $student->student_id)
+                        @if($button->step_id = 8)
 
                         <td>
                             <button type="button" class="{{$button->button_class}}" style="white-space: normal">
