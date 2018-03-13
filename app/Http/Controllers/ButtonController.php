@@ -701,7 +701,7 @@ class ButtonController extends Controller
                     'updated_at' => $date
                 ]);
 
-            return redirect()->route('/home');
+            return Redirect::to('/home');
             } else {
                 return view('welcome');
             }
