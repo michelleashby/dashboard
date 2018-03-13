@@ -28,10 +28,9 @@ class PagesController extends Controller
 
             $studentCount = $student->all()->count();
 
-            $dbSyncs = DB::connection('mysql')->select('select * from db_sync');
-            $dbDate = $dbSyncs->first();
+            $dbSync = DB::connection('mysql')->select('select updated_at from db_sync order by updated_at DESC limit 1');
 
-            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('dbDate', $dbDate);
+            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('dbDate', $dbSync);
         } else {
             return view('welcome');
         }
