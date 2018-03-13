@@ -30,7 +30,7 @@ class PagesController extends Controller
 
             $dbSync = DB::connection('mysql')->select('select updated_at from db_sync order by updated_at DESC limit 1');
             foreach($dbSync as $date){
-                $dbDate = $date['updated_at'];
+                $dbDate = $date->updated_at;
             }
 //            dd($dbSync);
 
