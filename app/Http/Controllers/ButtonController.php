@@ -210,30 +210,6 @@ class ButtonController extends Controller
 
     }
 
-    public function setPaidButton($student)
-    {
-        $button = new Button();
-        $button = $button->where('student_id', $id)
-            ->where('step_id', 2)
-            ->first();
-
-        $button_id = $button->button_id;
-
-        if ($student->custom_field_9 = "Yes") {
-            $depButton = Button::find($button_id);
-            $depButton->class = "btn btn-success disabled";
-            $depButton->words = "<span class=\"glyphicon glyphicon-ok\"></span>";
-
-            $depButton->update();
-        } else {
-            $depButton->class = "btn";
-            $depButton->words = "<span class=\"glyphicon glyphicon-remove\"></span>";
-
-            $depButton->update();
-        }
-    }
-
-
     public function setADButton($student)
     {
         $id = $student->student_id;
@@ -390,32 +366,33 @@ class ButtonController extends Controller
     {
         // uses Bluehealth API
         $email = $student->email;
-        $questionnaire_id = 3;
+        $questionnaire_id = 6;
         $bhButton = new Button();
 
 //        Development server dev.bluehealth.ca/api.questionnaires/status
 //        real time go.bluehealth.ca/api.questionnairesstatus
 
-        try {
-            $client = new $client->request('POST', 'https://go.bluehealth.ca/api.questionnaires/status', [
-                'query' => ['action' => 'AddQuestionnaireRecipient', 'patient_email' => $email, 'questionnaire_id' => $questionnaire_id],
-                'api_key' => ['cJaXrT2Ik8iG7Hps6IrGMXKILGgnzNPD']
-            ]);
-
-            //echo $apiRequest->getStatusCode());
-            //echo $apiRequest->getHeader('content-type));
-
-            $content = json_decode($apiRequest->getBody()->getContents());
-        } catch (RequestException $re) {
-            //for handling exception
-        }
+//        try {
+//            $client = new $client->request('POST', 'https://go.bluehealth.ca/api.questionnaires/status', [
+//                'query' => ['action' => 'AddQuestionnaireRecipient', 'patient_email' => $email, 'questionnaire_id' => $questionnaire_id],
+//                'api_key' => ['cJaXrT2Ik8iG7Hps6IrGMXKILGgnzNPD']
+//            ]);
+//
+//            //echo $apiRequest->getStatusCode());
+//            //echo $apiRequest->getHeader('content-type));
+//
+//            $content = json_decode($apiRequest->getBody()->getContents());
+//        } catch (RequestException $re) {
+//            //for handling exception
+//        }
 
         if (true) {
+//            $bhButton = Button::find();
             //apiRequest->"complete"=true
             $bhButton->class = "btn btn-success disabled";
             $bhButton->words = "Health form complete <span class=\"glyphicon glyphicon-ok\"></span>";
 
-            return $bhButton;
+            $bhButton;
         } else {
             $bhButton->class = "btn bnt-info enabled";
             $bhButton->words = "Not Complete: send email";
@@ -427,10 +404,16 @@ class ButtonController extends Controller
     }
 
 
-    public function setOrientationButton()
+    public function setOrientationButton($student)
     {
-        // 8) Orientation email sent
-        // If ???? complete button active
+        $id = $student->student_id;
+        $step = 7;
+        $button = new Button();
+
+        $button = $button->where('student_id', $id)
+            ->where('step_id', 7)
+            ->first();
+
 
         // If no correspondence, "send orientation email"
 
@@ -556,7 +539,6 @@ class ButtonController extends Controller
         $buttonID = $bid;
         $userID = $uid;
 
-        //student_button is the table with a column called messages
 //        $button = Button::find($buttonID);
 //        $msgCount = $button->messages;
 //        if($msgCount = null){
@@ -582,19 +564,19 @@ class ButtonController extends Controller
         $user_id = $uid;
         $questionnaire_id = $qid;
 
-        try {
-            $client = new $client->request('POST', 'https://brentwood.msm.io/custom/brentwood/data/api.php', [
-                'query' => ['action' => 'AddQuestionnaireRecipient', 'user_id' => $user_id, 'questionnaire_id' => $questionnaire_id],
-                'apikey' => [81633913542557427]
-            ]);
-
-            //echo $apiRequest->getStatusCode();
-            //echo $apiRequest->getHeader('content-type));
-
-            $content = json_decode($apiRequest->getBody()->getContents());
-        } catch (RequestException $re) {
-            //for handling exception
-        }
+//        try {
+//            $client = new $client->request('POST', 'https://brentwood.msm.io/custom/brentwood/data/api.php', [
+//                'query' => ['action' => 'AddQuestionnaireRecipient', 'user_id' => $user_id, 'questionnaire_id' => $questionnaire_id],
+//                'apikey' => [81633913542557427]
+//            ]);
+//
+//            //echo $apiRequest->getStatusCode();
+//            //echo $apiRequest->getHeader('content-type));
+//
+//            $content = json_decode($apiRequest->getBody()->getContents());
+//        } catch (RequestException $re) {
+//            //for handling exception
+//        }
     }
 
     public function dbSync()
@@ -690,6 +672,7 @@ class ButtonController extends Controller
                     $this->setValidationButton($student);
                     $this->setConsentButton($student);
                     $this->setCourseButton($student);
+                    $this->
 
                 } else {
                     //add all buttons
