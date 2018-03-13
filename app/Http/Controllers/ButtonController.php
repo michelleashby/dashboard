@@ -170,10 +170,12 @@ class ButtonController extends Controller
 
         // need to find button with user_id of the student and step_id 1
         $button = new Button();
-        $valButton = $button->where('user_id', $id)
+        $button = $button->where('user_id', $id)
             ->where('step_id', 2)
             ->get();
         $type = $student->custom_field_8;
+        $button_id = $button->button_id;
+
 
         $step = 2;
 
@@ -188,17 +190,22 @@ class ButtonController extends Controller
 
         //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
         if ($student->custom_field_2 == null) { //if questionnaires has ID of current enrollment and status of 1 invited but not complete
+            $enrolButton = Button::find($button_id);
+
             $enrolButton->class = "btn btn-info enabled";
             $enrolButton->words = "Resend enrolment reminder";
 
             $enrolButton->update();
         } elseif ($enrolStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
             // If student is in the validation questionnaire and has not completed
+            $enrolButton = Button::find($button_id);
+
             $enrolButton->class = "btn btn-info";
             $enrolButton->words = $student->custom_field_2;
 
             $enrolButton->update();
         } elseif ($enrolStatus->questionnaire_submission_status_id = 0 || $enrolStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
+            $enrolButton = Button::find($button_id);
 
             $enrolButton->class = "btn btn-info enabled";
             $enrolButton->words = "Send " . $student->custom_field_8 . " enrolment.";
@@ -672,11 +679,18 @@ class ButtonController extends Controller
                     $this->setValidationButton($student);
                     $this->setConsentButton($student);
                     $this->setCourseButton($student);
-                    $this->
+                    $this->setEnrolmentButton($student);
+                    $this->setADButton($student);
 
                 } else {
                     //add all buttons
                     $this->createStudentButtons($student);
+
+                    $this->setValidationButton($student);
+                    $this->setConsentButton($student);
+                    $this->setCourseButton($student);
+                    $this->setEnrolmentButton($student);
+                    $this->setADButton($student);
                 }
 
             }
