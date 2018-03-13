@@ -48,7 +48,12 @@ class PagesController extends Controller
             $email = new Email();
             $emails = $email->all();
 
-            return view('admin')->with('steps', $steps)->with('emails', $emails);
+            $dbSync = DB::connection('mysql')->select('select updated_at from db_sync order by updated_at DESC limit 1');
+            foreach($dbSync as $date){
+                $dbDate = $date->updated_at;
+            }
+
+            return view('admin')->with('steps', $steps)->with('emails', $emails)->with('dbDate', $dbDate);
         } else {
             return view('welcome');
         }
