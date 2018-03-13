@@ -211,10 +211,15 @@ class ButtonController extends Controller
 
     public function setPaidButton($student)
     {
+        $button = new Button();
+        $button = $button->where('student_id', $id)
+            ->where('step_id', 2)
+            ->first();
 
-        $depButton = new Button();
+        $button_id = $button->button_id;
 
         if ($student->custom_field_9 = "Yes") {
+            $depButton = Button::find($button_id);
             $depButton->class = "btn btn-success disabled";
             $depButton->words = "<span class=\"glyphicon glyphicon-ok\"></span>";
 
@@ -232,7 +237,6 @@ class ButtonController extends Controller
     {
         $id = $student->student_id;
         $step = Step::find(3);
-        $date = Carbon::now();
 
 
         // need to find button with user_id of the student and step_id 1
@@ -667,7 +671,7 @@ class ButtonController extends Controller
             }
 
             $student = new Student();
-            $students = $student->paginate(20);
+            $students = $student->all();
 //            dd($students);
 
             // Local table `button` syncing
@@ -693,15 +697,11 @@ class ButtonController extends Controller
 
             }
 
-            $students = $student->paginate(20);
-
-            $studentCount = $student->all()->count();
-
             DB::connection('mysql')->table('db_sync')->where('id', 1)->update([
                     'updated_at' => $date
                 ]);
 
-                return view('home')->with('students', $students)->with('studentCount', $studentCount);
+            return redirect()->route('/home');
             } else {
                 return view('welcome');
             }

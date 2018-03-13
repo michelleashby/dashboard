@@ -28,7 +28,10 @@ class PagesController extends Controller
 
             $studentCount = $student->all()->count();
 
-            return view('home')->with('students', $students)->with('studentCount', $studentCount);
+            $dbSyncs = DB::connection('mysql')->select('select * from db_sync');
+            $dbDate = $dbsyncs->first();
+
+            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('dbDate', $dbDate);
         } else {
             return view('welcome');
         }

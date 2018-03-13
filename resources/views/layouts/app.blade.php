@@ -57,7 +57,7 @@
                                     </li>
                                     <li>
                                         <a href="/dbsync">Re-Sync DB</a>
-                                        {{--Last Sync: {{$dbDate}}--}}
+                                        <h8>Last Sync: {{$dbDate->updated_at}}<h8>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
