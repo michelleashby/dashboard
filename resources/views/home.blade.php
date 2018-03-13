@@ -40,39 +40,36 @@
                 {{--@foreach($buttons->sortby('student_id')->sortby('step_id') as $button)--}}
                 {{--{{$button->student_id}} {{$button->step_id}}--}}
 
-                    {{--@if($button->sudent_id = $student->student_id)--}}
+                    @if($button->sudent_id = $student->student_id)
                     {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
-
+                    @if($button->step_id = 1)
                         <td>
-                            getValidationButton($student)
-                            {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">--}}
-                                {{--{{$button->button_words}}--}}
-                                {{--@if($button->button_words = "Validation Complete")--}}
-                                    {{--<span class="glyphicon glyphicon-ok"></span>--}}
-                                {{--@endif--}}
-                            {{--</button>--}}
+                            {{--getValidationButton($student)--}}
+                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                                {{$button->button_words}}
+                                @if($button->button_words = "Validation Complete")
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                @endif
+                            </button>
                         </td>
+                    @endif
 
                     {{--student-type--}}
                     {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
                     <td>{{$student->student_type}}</td>
 
                     {{--Enrollment check--}}
-                    <td>
-                        {{--Need enrolment to check if any emails sent as well as if it's still null--}}
-                        @if($student->enrollment_status == null)
-                            {{--This years' re-enrollment questionnaires are 157-161 - need to grab student type to determine which they get--}}
-                            <button type="button" class="btn btn-info enabled" style="white-space: normal">send enrolment reminder</button>
-                            {{--Will also need if thay are new to school ---}}
-                            {{--This years' enrollment questionnaires are not made yet - need to grab student type again to determine which they get--}}
-
-                        @else
-                            <button type="button" class="btn btn-success disabled" style="white-space: normal">{{$student->enrollment_status}}
-                                <span class="glyphicon glyphicon-ok"></span>
+                    @if($button->step_id = 2)
+                        <td>
+                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                                {{$button->button_words}}
+                                @if($button->button_words = "AD Account Exists")
+                                    <br></b><span class="glyphicon glyphicon-ok"></span>
+                                @endif
                             </button>
-                        @endif
-                    </td>
+                        </td>
+                    @endif
 
                     {{--deposit received--}}
                     <td>
@@ -87,21 +84,17 @@
                     </td>
 
                     {{--AD account check--}}
-                    <td>
-                        {{--@if($student->custom_field_9 = "Yes" && $student->custom_field_2 != null)--}}
-
-                        @if($student->student_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca")
-                            {{--this logic does not check AD - need to figure out how to do this--}}
-                            <button type="button" class="btn btn-success disabled" style="white-space: normal">AD Account Exists
-                                <br><span class="glyphicon glyphicon-ok"></span>
+                    @if($button->step_id = 3)
+                        <td>
+                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                                {{$button->button_words}}
+                                @if($button->button_words = "AD Account Exists")
+                                    <br></b><span class="glyphicon glyphicon-ok"></span>
+                                @endif
                             </button>
-                        @else
-                            <button type="button" class="btn bnt-info enabled" style="white-space: normal">Create AD Account</button>
-                        @endif
-                        {{--@else--}}
-                        {{--<button type="button" class="btn disabled" style="white-space: normal">AD Account</button>--}}
-                        {{--@endif--}}
-                    </td>
+                        </td>
+                    @endif
+
 
                     {{--Informed Consent--}}
                     @if($button->step_id = 4)
@@ -172,7 +165,7 @@
                             </td>
                             @endif
 
-                    {{--@endif--}}
+                    @endif
 
                 @endforeach
 
