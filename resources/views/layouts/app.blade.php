@@ -57,7 +57,8 @@
                                     </li>
                                     <li>
                                         <a href="/dbsync">Re-Sync DB</a>
-                                        <h8>Last Sync: {{ var_dump($dbDate)}}<h8>
+                                        {{--array(1) { [0]=> object(stdClass)#263 (1) { ["updated_at"]=> string(19) "2018-03-12 22:35:22" } }--}}
+                                        <h8>Last Sync: {{ $dbDate["updated_at"]}}<h8>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
