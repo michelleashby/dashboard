@@ -45,12 +45,13 @@
                     {{--@if($student->custom_field_1 = "Yes")--}}
 
                         <td>
-                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
-                                {{$button->button_words}}
-                                @if($button->button_words = "Validation Complete")
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                @endif
-                            </button>
+                            getValidationButton($student)
+                            {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">--}}
+                                {{--{{$button->button_words}}--}}
+                                {{--@if($button->button_words = "Validation Complete")--}}
+                                    {{--<span class="glyphicon glyphicon-ok"></span>--}}
+                                {{--@endif--}}
+                            {{--</button>--}}
                         </td>
 
                     {{--student-type--}}
