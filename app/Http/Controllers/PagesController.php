@@ -29,7 +29,7 @@ class PagesController extends Controller
             $studentCount = $student->all()->count();
 
             $dbSyncs = DB::connection('mysql')->select('select * from db_sync');
-            $dbDate = $dbsyncs->first();
+            $dbDate = $dbSyncs->first();
 
             return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('dbDate', $dbDate);
         } else {
