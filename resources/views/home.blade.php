@@ -50,7 +50,6 @@
                                 @endif
                             </button>
                         </td>
-                    @endif
 
                     {{--student-type--}}
                     {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
