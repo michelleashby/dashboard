@@ -51,6 +51,22 @@
                     </button>
                     </td>
 
+                    {{--student-type--}}
+                    {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
+                    <td>{{$student->student_type}}</td>
+
+                    {{--deposit received--}}
+                    <td>
+                    @if($student->deposit_received = "Yes")
+                    <button type="button" class="btn btn-success disabled" aria-label="done">
+                    <span class="glyphicon glyphicon-ok "></span></button>
+                    @else
+                    <button type="button" class="btn" aria-label="done">
+                    <span class="glyphicon glyphicon-remove"></span></button>
+                    @endif
+
+                    </td>
+
                     {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
                     {{--@if($button->step_id = 1)--}}
