@@ -36,9 +36,9 @@
 
                 <td>{{$student->name}} {{$student->surname}} <br> {{$student->student_id}}</td>
 
-                @foreach($student->button->sortby('step_id')->take(8) as $button)
+                @foreach($student->button->sortby('step_id') as $button)
                 {{--@foreach($buttons->sortby('student_id')->sortby('step_id') as $button)--}}
-                {{--{{$button->student_id}} {{$button->step_id}}--}}
+                {{$button->student_id}} {{$button->step_id}}
 
                     @if($button->sudent_id = $student->student_id)
                     {{--data validation--}}
