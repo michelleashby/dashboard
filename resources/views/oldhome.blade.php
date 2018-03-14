@@ -58,7 +58,7 @@
 
                     <td>
                     <button type="button" class="{{$button->button_class}}" style="white-space: normal">
-                    {{$button->button_words, $button->student_id}}
+                    {{$button->button_words}}, {{$button->student_id}}
 
                     </button>
                     </td>
