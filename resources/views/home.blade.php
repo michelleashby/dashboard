@@ -36,7 +36,7 @@
 
                 <td>{{$student->name}} {{$student->surname}} <br> {{$student->student_id}}</td>
 
-                @foreach($buttons as $button)
+                @foreach($student->button as $button)
                 {{--@foreach($buttons->sortby('student_id')->sortby('step_id') as $button)--}}
                 {{--{{$button->student_id}} {{$button->step_id}}--}}
 

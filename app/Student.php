@@ -18,7 +18,7 @@ class Student extends Model
     /**
      * @var string
      */
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'student_id';
 
     /**
      * Creates a hasMany relationship between student->buttons
