@@ -43,12 +43,12 @@
 
                     {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
-                    @if($button->step_id = 1)
+                    @if($student->button->step_id = 1)
                         <td>
                             {{--getValidationButton($student)--}}
-                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
-                                {{$button->button_words}}
-                                @if($button->button_words = "Validation Complete")
+                            <button type="button" class="{{$student->button->button_class}}" style="white-space: normal">
+                                {{$student->button->button_words}}
+                                @if($student->button->button_words = "Validation Complete")
                                     <span class="glyphicon glyphicon-ok"></span>
                                 @endif
                             </button>
