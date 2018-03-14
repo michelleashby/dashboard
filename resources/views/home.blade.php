@@ -45,9 +45,9 @@
                     {{--getValidationButton($student)--}}
                     <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                     {{$button->button_words}}
-                    @if($button->button_words = "Validation Complete")
-                    <span class="glyphicon glyphicon-ok"></span>
-                    @endif
+                    {{--@if($button->button_words = "Validation Complete")--}}
+                    {{--<span class="glyphicon glyphicon-ok"></span>--}}
+                    {{--@endif--}}
                     </button>
                     </td>
 
