@@ -192,7 +192,6 @@
                             {{--</td>--}}
                             {{--@endif--}}
 
-
                 @endforeach
                 {{--@endif--}}
 
