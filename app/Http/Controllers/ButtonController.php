@@ -442,7 +442,7 @@ class ButtonController extends Controller
 
     public function getValidationButton($student)
     {
-        $id = $student->user_id;
+        $id = $student->student_id;
 
         $button = new Button();
 
