@@ -166,7 +166,7 @@ class ButtonController extends Controller
         $button_id = $button->button_id;
 
 
-        $step = 2;
+        $step = Step::find(2);
 
         $questStatus = new Status();
         $questionnaireID = $step->questionnaire_id;
