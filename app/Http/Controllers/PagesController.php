@@ -33,8 +33,11 @@ class PagesController extends Controller
                 $dbDate = $date->updated_at;
             }
 //            dd($dbSync);
+            $button = new Button();
+            $buttons = $button->all();
 
-            return view('home')->with('students', $students)->with('studentCount', $studentCount)->with('dbDate', $dbDate);
+            return view('home')->with('students', $students)->with('studentCount', $studentCount)
+                ->with('dbDate', $dbDate)->with('buttons', $buttons);
         } else {
             return view('welcome');
         }
