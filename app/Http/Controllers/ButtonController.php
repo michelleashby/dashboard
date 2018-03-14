@@ -161,6 +161,7 @@ class ButtonController extends Controller
         $button = $button->where('student_id', $id)
             ->where('step_id', 2)
             ->first();
+        dd($button);
         $type = $student->custom_field_8;
         $button_id = $button->button_id;
 
