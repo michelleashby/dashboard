@@ -154,14 +154,14 @@ class ButtonController extends Controller
     public function setEnrolmentButton($student)
     {
 
-        $id = $student->id;
+        $id = $student->student_id;
 
         // need to find button with user_id of the student and step_id 1
         $button = new Button();
         $button = $button->where('student_id', $id)
             ->where('step_id', 2)
             ->first();
-        dd($button);
+//        dd($button);
         $type = $student->custom_field_8;
         $button_id = $button->button_id;
 
