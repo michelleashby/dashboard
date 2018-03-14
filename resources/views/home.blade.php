@@ -38,7 +38,7 @@
 
                 {{--student-type--}}
                 {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
-                <td>{{$student->student_type}}</td>
+                <td>{{$student->type}}</td>
 
                 {{--deposit received--}}
                 <td>

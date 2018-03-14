@@ -226,7 +226,7 @@ class ButtonController extends Controller
         $button_id = $button->button_id;
 
         if($button_id != null){
-            if ($student->custom_field_9 = "Yes" && $student->custom_field_2 != null) {
+            if ($student->deposit_received = "Yes" && $student->data_valadation_complete != null) {
                 if ($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca") {
                     $adButton = Button::find($button_id);
                     $adButton->button_class = "btn btn-success disabled";
@@ -372,19 +372,19 @@ class ButtonController extends Controller
 //        Development server dev.bluehealth.ca/api.questionnaires/status
 //        real time go.bluehealth.ca/api.questionnairesstatus
 
-//        try {
-//            $client = new $client->request('POST', 'https://go.bluehealth.ca/api.questionnaires/status', [
-//                'query' => ['action' => 'AddQuestionnaireRecipient', 'patient_email' => $email, 'questionnaire_id' => $questionnaire_id],
-//                'api_key' => ['cJaXrT2Ik8iG7Hps6IrGMXKILGgnzNPD']
-//            ]);
-//
-//            //echo $apiRequest->getStatusCode());
-//            //echo $apiRequest->getHeader('content-type));
-//
-//            $content = json_decode($apiRequest->getBody()->getContents());
-//        } catch (RequestException $re) {
-//            //for handling exception
-//        }
+        try {
+            $client = new $client->request('POST', 'https://go.bluehealth.ca/api.questionnaires/status', [
+                'query' => ['action' => 'AddQuestionnaireRecipient', 'patient_email' => $email, 'questionnaire_id' => $questionnaire_id],
+                'api_key' => ['cJaXrT2Ik8iG7Hps6IrGMXKILGgnzNPD']
+            ]);
+
+            //echo $apiRequest->getStatusCode());
+            //echo $apiRequest->getHeader('content-type));
+
+            $content = json_decode($apiRequest->getBody()->getContents());
+        } catch (RequestException $re) {
+            //for handling exception
+        }
 
         if (true) {
 //            $bhButton = Button::find();
