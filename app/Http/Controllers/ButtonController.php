@@ -86,11 +86,9 @@ class ButtonController extends Controller
     // all set functions for buttons follow:
     public function setValidationButton($student)
     {
-
         $id = $student->student_id;
         $step = Step::find(1);
         $date = Carbon::now();
-
 
         // need to find button with user_id of the student and step_id 1
         $button = new Button();
@@ -162,7 +160,7 @@ class ButtonController extends Controller
         $button = new Button();
         $button = $button->where('student_id', $id)
             ->where('step_id', 2)
-            ->get();
+            ->first();
         $type = $student->custom_field_8;
         $button_id = $button->button_id;
 
