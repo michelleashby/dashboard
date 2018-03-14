@@ -56,6 +56,7 @@
                     {{--will want this to flag if it changes for some reason... may be advanced function (wish list)--}}
                     <td>{{$student->student_type}}</td>
 
+                foreach($student->button as $button)
                     {{--Enrollment check--}}
                     @if($button->step_id = 2)
                         <td>
@@ -161,8 +162,6 @@
                                 {{--@endif--}}
                             </td>
                             @endif
-
-                    @endif
 
                 @endforeach
 
