@@ -36,11 +36,11 @@
 
                 <td>{{$student->name}} {{$student->surname}} <br> {{$student->student_id}}</td>
 
+                @if($student->button->sudent_id = $student->student_id)
+
                 @foreach($student->button->sortby('step_id') as $button)
-                {{--@foreach($buttons->sortby('student_id')->sortby('step_id') as $button)--}}
                 {{$button->student_id}} {{$button->step_id}}
 
-                    @if($button->sudent_id = $student->student_id)
                     {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
                     @if($button->step_id = 1)
@@ -165,9 +165,9 @@
                             </td>
                             @endif
 
-                    @endif
 
                 @endforeach
+                @endif
 
             </tr>
         @endforeach
