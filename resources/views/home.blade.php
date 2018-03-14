@@ -42,7 +42,7 @@
                 {{--{{$button->student_id}} {{$button->step_id}}--}}
 
                     <td>
-                    getValidationButton($student)
+                    {{--getValidationButton($student)--}}
                     <button type="button" class="{{$button->button_class}}" style="white-space: normal">
                     {{$button->button_words}}
                     @if($button->button_words = "Validation Complete")
