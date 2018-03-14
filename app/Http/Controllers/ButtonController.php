@@ -183,23 +183,23 @@ class ButtonController extends Controller
             if ($student->custom_field_2 == null) { //if questionnaires has ID of current enrollment and status of 1 invited but not complete
                 $enrolButton = Button::find($button_id);
 
-                $enrolButton->class = "btn btn-info enabled";
-                $enrolButton->words = "Resend enrolment reminder";
+                $enrolButton->button_class = "btn btn-info enabled";
+                $enrolButton->button_words = "Resend enrolment reminder";
 
                 $enrolButton->update();
             } elseif ($enrolStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
                 // If student is in the validation questionnaire and has not completed
                 $enrolButton = Button::find($button_id);
 
-                $enrolButton->class = "btn btn-info";
-                $enrolButton->words = $student->custom_field_2;
+                $enrolButton->button_class = "btn btn-info";
+                $enrolButton->button_words = $student->custom_field_2;
 
                 $enrolButton->update();
             } elseif ($enrolStatus->questionnaire_submission_status_id = 0 || $enrolStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
                 $enrolButton = Button::find($button_id);
 
-                $enrolButton->class = "btn btn-info enabled";
-                $enrolButton->words = "Send " . $student->custom_field_8 . " enrolment.";
+                $enrolButton->button_class = "btn btn-info enabled";
+                $enrolButton->button_words = "Send " . $student->custom_field_8 . " enrolment.";
 
                 $enrolButton->update();}
         } else {
