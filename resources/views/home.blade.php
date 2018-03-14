@@ -36,19 +36,16 @@
 
                 <td>{{$student->name}} {{$student->surname}} <br> {{$student->student_id}}</td>
 
-                @foreach($student->button->sortby('step_id') as $button)
-                {{--@foreach($buttons->sortby('student_id')->sortby('step_id') as $button)--}}
-                {{--{{$button->student_id}} {{$button->step_id}}--}}
-
-                    @if($button->sudent_id = $student->student_id)
                     {{--data validation--}}
                     {{--@if($student->custom_field_1 = "Yes")--}}
-                    @if($button->step_id = 1)
                         <td>
                             {{--getValidationButton($student)--}}
-                            <button type="button" class="{{$button->button_class}}" style="white-space: normal">
-                                {{$button->button_words}}
-                                @if($button->button_words = "Validation Complete")
+                            <button type="button" class="{{$student->button->where('student_id',$student->student_id)
+                            ->where('step_id',1)->button_class}}" style="white-space: normal">
+                                {{$student->button->where('student_id',$student->student_id)
+                            ->where('step_id',1)->button_words}}
+                                @if($student->button->where('student_id',$student->student_id)
+                            ->where('step_id',1)->button_words = "Validation Complete")
                                     <span class="glyphicon glyphicon-ok"></span>
                                 @endif
                             </button>
