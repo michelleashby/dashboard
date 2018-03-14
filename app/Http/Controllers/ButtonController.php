@@ -98,18 +98,7 @@ class ButtonController extends Controller
             ->where('step_id', 1)
             ->first();
 //        dd($button);
-//
-//        if($button == null){
-//            $valButton = new Button();
-//            //if there is no validation button in the button table, create one
-//            $valButton->student_id = $id;
-//            $valButton->step_id = $step;
-//            $valButton->created_at = $date;
-//            $valButton->button_status_id = 0;
-//
-//            $valButton->save();
-//        } else {
-        //if button exists update to correspond with MySchool table status
+
         $questStatus = new Status();
         $questionnaireID = $step->questionnaire_id;
         $button_id = $button->button_id;
@@ -120,35 +109,36 @@ class ButtonController extends Controller
             ->where('questionnaire_status.questionnaire_id', '=', $questionnaireID)
             ->get();
 
-        //2 = complete
-        if ($valStatus->questionnaire_submission_status_id = 2) {
-            $valButton = Button::find($button_id);
+        if($button_id != null){
+            //2 = complete
+            if ($valStatus->questionnaire_submission_status_id = 2) {
+                $valButton = Button::find($button_id);
 
-            $valButton->button_class = "btn btn-success disabled";
-            $valButton->button_words = "Validation Complete";
-            $valButton->status_id = 2;
+                $valButton->button_class = "btn btn-success disabled";
+                $valButton->button_words = "Validation Complete";
+                $valButton->status_id = 2;
 
-            $valButton->update();
-        } elseif ($valStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
-            $valButton = Button::find($button_id);
+                $valButton->update();
+            } elseif ($valStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
+                $valButton = Button::find($button_id);
 
-            // If student is in the validation questionnaire and has not completed
-            $valButton->button_class = "btn btn-info";
-            $valButton->button_words = "Resend Data Validation";
-            $valButton->status_id = 1;
+                // If student is in the validation questionnaire and has not completed
+                $valButton->button_class = "btn btn-info";
+                $valButton->button_words = "Resend Data Validation";
+                $valButton->status_id = 1;
 
-            $valButton->update();
-        } elseif ($valStatus->questionnaire_submission_status_id = 0 || $valStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
-            $valButton = Button::find($button_id);
+                $valButton->update();
+            } elseif ($valStatus->questionnaire_submission_status_id = 0 || $valStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
+                $valButton = Button::find($button_id);
 
-            $valButton->button_class = "btn btn-info";
-            $valButton->button_words = "Send Data Validation";
-            $valButton->status_id = 0;
+                $valButton->button_class = "btn btn-info";
+                $valButton->button_words = "Send Data Validation";
+                $valButton->status_id = 0;
 
-            $valButton->update();
-//            } else {
-//                return "error updating validation button";
-//            }
+                $valButton->update();
+            } else {
+                return "error updating validation button";
+            }
         }
 
     }
@@ -188,31 +178,33 @@ class ButtonController extends Controller
             ->where('questionnaire_status.questionnaire_id', '=', $questionnaireID)
             ->get();
 
-        //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
-        if ($student->custom_field_2 == null) { //if questionnaires has ID of current enrollment and status of 1 invited but not complete
-            $enrolButton = Button::find($button_id);
+        if($button_id != null){
 
-            $enrolButton->class = "btn btn-info enabled";
-            $enrolButton->words = "Resend enrolment reminder";
+                //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
+            if ($student->custom_field_2 == null) { //if questionnaires has ID of current enrollment and status of 1 invited but not complete
+                $enrolButton = Button::find($button_id);
 
-            $enrolButton->update();
-        } elseif ($enrolStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
-            // If student is in the validation questionnaire and has not completed
-            $enrolButton = Button::find($button_id);
+                $enrolButton->class = "btn btn-info enabled";
+                $enrolButton->words = "Resend enrolment reminder";
 
-            $enrolButton->class = "btn btn-info";
-            $enrolButton->words = $student->custom_field_2;
+                $enrolButton->update();
+            } elseif ($enrolStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
+                // If student is in the validation questionnaire and has not completed
+                $enrolButton = Button::find($button_id);
 
-            $enrolButton->update();
-        } elseif ($enrolStatus->questionnaire_submission_status_id = 0 || $enrolStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
-            $enrolButton = Button::find($button_id);
+                $enrolButton->class = "btn btn-info";
+                $enrolButton->words = $student->custom_field_2;
 
-            $enrolButton->class = "btn btn-info enabled";
-            $enrolButton->words = "Send " . $student->custom_field_8 . " enrolment.";
+                $enrolButton->update();
+            } elseif ($enrolStatus->questionnaire_submission_status_id = 0 || $enrolStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
+                $enrolButton = Button::find($button_id);
 
-            $enrolButton->update();
+                $enrolButton->class = "btn btn-info enabled";
+                $enrolButton->words = "Send " . $student->custom_field_8 . " enrolment.";
+
+                $enrolButton->update();}
         } else {
-            return error;
+            return "error updating enrollment button";
         }
 
     }
@@ -234,30 +226,32 @@ class ButtonController extends Controller
         $questionnaireID = $step->questionnaire_id;
         $button_id = $button->button_id;
 
+        if($button_id != null){
+            if ($student->custom_field_9 = "Yes" && $student->custom_field_2 != null) {
+                if ($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca") {
+                    $adButton = Button::find($button_id);
+                    $adButton->button_class = "btn btn-success disabled";
+                    $adButton->button_words = "AD Account Exists";
 
+                    $adButton->update();
+                } else {
+                    $adButton = Button::find($button_id);
 
-        if ($student->custom_field_9 = "Yes" && $student->custom_field_2 != null) {
-            if ($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca") {
-                $adButton = Button::find($button_id);
-                $adButton->button_class = "btn btn-success disabled";
-                $adButton->button_words = "AD Account Exists";
+                    $adButton->button_class = "btn bnt-info enabled";
+                    $adButton->button_words = "Create AD Account";
 
-                $adButton->update();
+                    $adButton->update();
+                }
             } else {
                 $adButton = Button::find($button_id);
 
-                $adButton->button_class = "btn bnt-info enabled";
-                $adButton->button_words = "Create AD Account";
+                $adButton->button_class = "btn disabled";
+                $adButton->button_words = "AD Account cannot be created yet";
 
                 $adButton->update();
             }
         } else {
-            $adButton = Button::find($button_id);
-
-            $adButton->button_class = "btn disabled";
-            $adButton->button_words = "AD Account cannot be created yet";
-
-            $adButton->update();
+            return "error updating AD button";
         }
 
     }
