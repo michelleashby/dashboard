@@ -62,7 +62,7 @@
                     <td>
                         {{--{{ Form::button($button->button_words, array('class' => $button->button_class, 'style' => 'white-space: normal'))}}--}}
 
-                        <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                        <button type="submit" class="{{$button->button_class}}" style="white-space: normal">
                     {{$button->button_words}}, {{$button->student_id}}
 
                     {{--</button>--}}
