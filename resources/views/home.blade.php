@@ -42,7 +42,7 @@
                 {{--deposit received--}}
                 <td>
                     @if($student->deposit_received = "Yes")
-                        <button type="button" class="btn btn-success disabled" aria-label="done">
+                        <button type="submit" class="btn btn-success disabled" aria-label="done">
                             <span class="glyphicon glyphicon-ok "></span></button>
                     @else
                         <button type="button" class="btn" aria-label="done">
