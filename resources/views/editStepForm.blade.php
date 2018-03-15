@@ -24,7 +24,7 @@
         <textarea name="questionnaire_id" form="editStep" rows="1" cols="8">{{$step->questionnaire_id}}</textarea><br>
 
         <h3>Notes or Description:</h3>
-        <textarea name="description" form="editStep" rows="1" cols="8">{{$step->description}}</textarea><br>
+        <textarea name="description" form="editStep" rows="8" cols="40">{{$step->description}}</textarea><br>
 
         <input type="submit">
 
