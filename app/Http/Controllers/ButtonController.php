@@ -609,11 +609,12 @@ class ButtonController extends Controller
             }
 
             // student sync
+            //note: student type held in custom_feild_8 year round and switched at time of new admits to 7
             $mySchoolStudents = DB::connection('myschoolsql')->select('SELECT DISTINCT contacts.user_id,
                 contacts.surname,
                 contacts.name,
                 contacts.user_email,
-                students.custom_field_8,
+                students.custom_field_7,
                 students.custom_field_1,
                 students.custom_field_9,
                 students.custom_field_2
@@ -640,7 +641,7 @@ class ButtonController extends Controller
                 $id = $student->user_id;
                 $surname = $student->surname;
                 $name = $student->name;
-                $type = $student->custom_field_8;
+                $type = $student->custom_field_7;
                 $val = $student->custom_field_1;
                 $dep = $student->custom_field_9;
                 $enrol = $student->custom_field_2;
