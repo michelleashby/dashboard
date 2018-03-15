@@ -67,7 +67,12 @@ class PagesController extends Controller
         $email = new Email();
         $emails = $email->all()->where('active', '=', 1);
 
-        return view('editStepForm')->with('step', $step)->with('emails', $emails);
+        $dbSync = DB::connection('mysql')->select('select updated_at from db_sync order by updated_at DESC limit 1');
+        foreach($dbSync as $date){
+            $dbDate = $date->updated_at;
+        }
+
+        return view('editStepForm')->with('step', $step)->with('emails', $emails)->with('dbDate', $dbDate);
     }
 
     public function displayCreateEmail(){
@@ -78,7 +83,12 @@ class PagesController extends Controller
 
         $email = Email::find($id);
 
-        return view('editEmailForm')->with('email', $email);
+        $dbSync = DB::connection('mysql')->select('select updated_at from db_sync order by updated_at DESC limit 1');
+        foreach($dbSync as $date){
+            $dbDate = $date->updated_at;
+        }
+
+        return view('editEmailForm')->with('email', $email)->with('dbDate', $dbDate);
     }
 
 
