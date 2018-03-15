@@ -155,6 +155,7 @@ class ButtonController extends Controller
     {
 
         $id = $student->student_id;
+        $type = $student->student_type;
 
         // need to find button with user_id of the student and step_id 1
         $button = new Button();
@@ -162,7 +163,6 @@ class ButtonController extends Controller
             ->where('step_id', 2)
             ->first();
 //        dd($button);
-        $type = $student->custom_field_8;
         $button_id = $button->button_id;
 
 
@@ -180,11 +180,12 @@ class ButtonController extends Controller
         if($button_id != null){
 
                 //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
-            if ($student->custom_field_2 == null) { //if questionnaires has ID of current enrollment and status of 1 invited but not complete
+            if ($student->enrollment_status == null) { //if questionnaires has ID of current enrollment and status of 1 invited but not complete
                 $enrolButton = Button::find($button_id);
 
                 $enrolButton->button_class = "btn btn-info enabled";
                 $enrolButton->button_words = "Resend enrolment reminder";
+                $enrolButton->extra = $type;
 
                 $enrolButton->update();
             } elseif ($enrolStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
@@ -192,14 +193,17 @@ class ButtonController extends Controller
                 $enrolButton = Button::find($button_id);
 
                 $enrolButton->button_class = "btn btn-info";
-                $enrolButton->button_words = $student->custom_field_2;
+                $enrolButton->button_words = $type;
+                $enrolButton->extra = $type;
+
 
                 $enrolButton->update();
             } elseif ($enrolStatus->questionnaire_submission_status_id = 0 || $enrolStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
                 $enrolButton = Button::find($button_id);
 
                 $enrolButton->button_class = "btn btn-info enabled";
-                $enrolButton->button_words = "Send " . $student->custom_field_8 . " enrolment.";
+                $enrolButton->button_words = "Send " . $type. " enrolment.";
+                $enrolButton->extra = $type;
 
                 $enrolButton->update();}
         } else {
