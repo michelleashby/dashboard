@@ -50,5 +50,11 @@ class StudentController extends Controller
         }
     }
 
+    public function onClick($sid, $bid){
+        $studentID = $sid;
+        $buttonID = $bid;
+        Return "route works " . $studentID . " " . $buttonID;
+    }
+
 
 }

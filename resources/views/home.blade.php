@@ -56,7 +56,7 @@
 
                 @foreach($student->button as $button)
                 {{--{{$button->student_id}} {{$button->step_id}}--}}
-                    <form method="POST" action="/home/{{$button->button_id}}" id ="onClick">
+                    <form method="POST" action="/home/{{$student->student_id}}/{{$button->button_id}}" id ="onClick">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <td>

@@ -35,4 +35,6 @@ Route::post('/createEmail', 'EmailController@createEmail');
 //Search (students) on main page
 Route::post('/home/search', 'StudentController@searchStudents');
 
+//Post from home buttons
+Route::post('/home/{sid}/{bit}', 'StudentController@onClick');
 
