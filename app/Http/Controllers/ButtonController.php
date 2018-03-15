@@ -157,7 +157,7 @@ class ButtonController extends Controller
         $id = $student->student_id;
         $type = $student->student_type;
 
-        // need to find button with user_id of the student and step_id 1
+        // need to find button with user_id of the student and step_id 2
         $button = new Button();
         $button = $button->where('student_id', $id)
             ->where('step_id', 2)
@@ -171,7 +171,7 @@ class ButtonController extends Controller
         $questStatus = new Status();
         $questionnaireID = $step->questionnaire_id;
 
-        $enrolStatus = $questStatus->select('questionnaire_status.questionnaire_id',
+        $status = $questStatus->select('questionnaire_status.questionnaire_id',
             'questionnaire_status.questionnaire_submission_status_id')
             ->where('questionnaire_status.user_id', '=', $id)
             ->where('questionnaire_status.questionnaire_id', '=', $questionnaireID)
@@ -179,8 +179,7 @@ class ButtonController extends Controller
 
         if($button_id != null){
 
-                //if ($valStatus->questionnaire_submission_status_id = 2) //2 = complete
-            if ($student->enrollment_status == null) { //if questionnaires has ID of current enrollment and status of 1 invited but not complete
+            if ($status->questionnaire_submission_status_id = 1) { //1 = sent but not complete
                 $enrolButton = Button::find($button_id);
 
                 $enrolButton->button_class = "btn btn-info enabled";
@@ -188,7 +187,7 @@ class ButtonController extends Controller
                 $enrolButton->extra = $type;
 
                 $enrolButton->update();
-            } elseif ($enrolStatus->questionnaire_submission_status_id = 1) { //1 = sent but not complete
+            } elseif ($status->questionnaire_submission_status_id = 2) { //2 = complete
                 // If student is in the validation questionnaire and has not completed
                 $enrolButton = Button::find($button_id);
 
@@ -198,7 +197,7 @@ class ButtonController extends Controller
 
 
                 $enrolButton->update();
-            } elseif ($enrolStatus->questionnaire_submission_status_id = 0 || $enrolStatus->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
+            } elseif ($status->questionnaire_submission_status_id = 0 || $status->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
                 $enrolButton = Button::find($button_id);
 
                 $enrolButton->button_class = "btn btn-info enabled";
