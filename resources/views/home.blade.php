@@ -60,10 +60,10 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <td>
-                        {{ Form::button($button->button_words, array('class' => $button->button_class, 'style' => 'white-space: normal'))}}
+                        {{--{{ Form::button($button->button_words, array('class' => $button->button_class, 'style' => 'white-space: normal'))}}--}}
 
-                        {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">--}}
-                    {{--{{$button->button_words}}, {{$button->student_id}}--}}
+                        <button type="button" class="{{$button->button_class}}" style="white-space: normal">
+                    {{$button->button_words}}, {{$button->student_id}}
 
                     {{--</button>--}}
                     </td>
