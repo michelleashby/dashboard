@@ -11,8 +11,10 @@
         </form>
     </div>
     <h1 class="display-3">{{$studentCount}} TEST students being admitted to Brentwood</h1>
+    <form method="POST" action="/home/{{$button->button_id}}" id ="onClick">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-    <table class="table">
+        <table class="table">
         <thead>
         <tr>
             <th>Student Name & ID</th>
@@ -57,10 +59,12 @@
                 {{--{{$button->student_id}} {{$button->step_id}}--}}
 
                     <td>
-                    <button type="button" class="{{$button->button_class}}" style="white-space: normal">
-                    {{$button->button_words}}, {{$button->student_id}}
+                        {{ Form::button($button->button_words, array('class' => $button->button_class, 'style' => 'white-space: normal'))}}
 
-                    </button>
+                        {{--<button type="button" class="{{$button->button_class}}" style="white-space: normal">--}}
+                    {{--{{$button->button_words}}, {{$button->student_id}}--}}
+
+                    {{--</button>--}}
                     </td>
 
                 @endforeach
@@ -70,6 +74,7 @@
         @endforeach
         </tbody>
     </table>
+    </form>
 
     <div class="text-center">
 
