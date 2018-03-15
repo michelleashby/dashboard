@@ -330,6 +330,8 @@ class ButtonController extends Controller
         $questionnaireID = $step->questionnaire_id;
         $button_id = $button->button_id;
 
+        //using relation may be easier for cleaning this up:
+        //$status = $button->status;
         $status = $questStatus->select('questionnaire_status.questionnaire_id',
             'questionnaire_status.questionnaire_submission_status_id')
             ->where('questionnaire_status.user_id', '=', $id)

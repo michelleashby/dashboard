@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Button;
+use App\Email;
+use App\Step;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -53,7 +55,36 @@ class StudentController extends Controller
     public function onClick($sid, $bid){
         $studentID = $sid;
         $buttonID = $bid;
-        Return "route works " . $studentID . " " . $buttonID;
+//        for testing:
+//        Return "route works " . $studentID . " " . $buttonID;
+
+        $student = Student::find($studentID);
+        $button = Button::find($buttonID);
+
+        $step = Step::find($button->step_id);
+
+        $email = Email::find($step->email);
+
+        //if enrolment email should = 0
+        //have to figure out which email to send based on type
+        if($email->email_id == 0) {
+            if ($student->student_type = "Canadian BC") {
+
+            } elseif ($student->student_type = "Canadian Boarding") {
+
+            } elseif ($student->student_type = "US Boarding") {
+
+            } elseif ($student->student_type = "International Boarding") {
+
+            } else {
+                return "Student Type of " . $student->student_type . " not recognised" .
+                    "<br><a href='/home'>Back to Home</a>";
+            }
+        } else {
+            //API call function
+        }
+
+
     }
 
 
