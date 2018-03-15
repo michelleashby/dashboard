@@ -11,6 +11,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Email</th>
                     <th>Questionnaire ID</th>
                     <th></th>
@@ -21,6 +22,7 @@
                     <tr>
                         <td>{{$step->step_id}}</td>
                         <td>{{$step->step_name}}</td>
+                        <td>{{$step->description}}</td>
                         <td>
                             @if($step->email_id != null)
                                 {{$step->email->email_name}}

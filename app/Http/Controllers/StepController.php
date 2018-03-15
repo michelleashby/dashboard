@@ -23,6 +23,7 @@ class StepController extends Controller
         $stepName = Input::get('name');
         $stepEmail = Input::get('email');
         $questionnaireId = Input::get('questionnaire_id');
+        $description = Input::get('description');
 
         $step = Step::find($id);
 
@@ -30,13 +31,15 @@ class StepController extends Controller
             $stepEmail = $step->step_email;
         }
 //        Check if data has changed
-        if ($step->step_name != $stepName || $step->questionnaire_id != $questionnaireId || $step->step_email != $stepEmail) {
+        if ($step->description != $description || $step->step_name != $stepName ||
+            $step->questionnaire_id != $questionnaireId || $step->step_email != $stepEmail) {
             //if input fields are not the same as the stored values for button
             //update them to be the same
             //will need to incorporate email attached here when developed
             $step->step_name = $stepName;
             $step->questionnaire_id = $questionnaireId;
             $step->email_id = $stepEmail;
+            $step->description = $description;
 
             $step->update();
 
