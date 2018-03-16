@@ -600,7 +600,7 @@ class ButtonController extends Controller
                     AND class_levels.class_level_label != "Not processed" 
                     AND class_levels.class_level_label != "Completed" )
                 AND relationships.is_main IN(1,2)
-                JOIN relationship_type
+                JOIN relationship_types
                 ON relationships.relationship_type_id = relationship_type.relationship_type_id');
 
             DB::connection('mysql')->table('contact')->truncate();
