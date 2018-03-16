@@ -53,57 +53,6 @@ class StudentController extends Controller
         }
     }
 
-    public function onClick($bid){
-        $buttonID = $bid;
-//        for testing:
-//        Return "route works " . $buttonID;
-
-        $button = Button::find($buttonID);
-        $student = $button->student();
-
-        $step = Step::find($button->step_id);
-
-        $email = $step->email();
-
-        //if enrolment email should = 0
-        //have to figure out which email to send based on type
-        if($email == null) {
-            return "no email associated with this button - please contact admin. " .
-                "<br><a href='/home'>Back to Home</a>";
-        } elseif($step->email != null && $button->button_status_id == 0) {
-            if ($student->student_type = "Canadian BC") {
-                return "route works - got to " . $student->student_type .
-                    "<br><a href='/home'>Back to Home</a>";
-
-
-            } elseif ($student->student_type = "Canadian Boarding") {
-                return "route works - got to " . $student->student_type .
-                    "<br><a href='/home'>Back to Home</a>";
-
-            } elseif ($student->student_type = "US Boarding") {
-                return "route works - got to " . $student->student_type .
-                    "<br><a href='/home'>Back to Home</a>";
-
-            } elseif ($student->student_type = "International Boarding") {
-                return "route works - got to " . $student->student_type .
-                    "<br><a href='/home'>Back to Home</a>";
-
-            } else {
-                return "Student Type of " . $student->student_type . " not recognised" .
-                    "<br><a href='/home'>Back to Home</a>";
-            }
-        }elseif($email->email_name = "bluehealth") {
-            //API call for bluehealth
-
-        } else {
-            //API call function
-            return "route works but logic is not";
-
-        }
-
-
-
-    }
 
 
 }

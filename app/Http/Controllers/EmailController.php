@@ -9,7 +9,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Button;
 use App\Email;
+use App\Step;
+use App\Student;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 
@@ -87,43 +90,44 @@ class EmailController extends Controller
 
     //following 'click' button functions deal with the action if a button is clicked
     //button state will disable a click if it should not be clicked
-    //all send functions require a parent id to be passed so that it can be mailed to them
-    public function sendValidation($emai)
+    //all send functions require a email to be passed so that it can be mailed
+    // Bleu health and enrolment require their own functions but other emails can be sent via linked email id
+    public function sendLocalEnrol($email)
     {
 
     }
 
-    public function resendValidation($email)
+    public function resendLocalEnrol($email)
     {
 
     }
 
-    public function sendEnrolment($email)
+    public function sendCanEnrol($email)
     {
 
     }
 
-    public function resendEnrolment($email)
+    public function resendCanEnrol($email)
     {
 
     }
 
-    public function sendInformedConsent($email)
+    public function sendUSEnrol($email)
     {
 
     }
 
-    public function resendIC($email)
+    public function resendUSEnrol($email)
     {
 
     }
 
-    public function sendCourseSelection($email)
+    public function sendIntEnrol($email)
     {
 
     }
 
-    public function resendCS($email)
+    public function resendIntEnrol($email)
     {
 
     }
@@ -135,23 +139,116 @@ class EmailController extends Controller
 
     }
 
-    public function sendOrientation($email)
+    public function resendHealth($email)
+    {
+        //API call will know/deal with send or resend once Mike completes dev of this feature
+
+
+    }
+
+    public function sendEmail($bid)
     {
 
     }
 
-    public function resendOrientation($email)
+    public function resendEmail($bid)
     {
 
     }
 
-    public function sendPrefect($email)
-    {
+    public function onClick($bid){
+        $buttonID = $bid;
+//        for testing:
+//        Return "route works " . $buttonID;
 
-    }
+        $button = Button::find($buttonID);
+        $student = $button->student();
 
-    public function resendPrefect($email)
-    {
+        $step = Step::find($button->step_id);
+
+        $email = $step->email();
+
+        //status codes: 0 not sent, 1 sent but not complete, 2 complete
+
+        //have to figure out which email to send based on type
+        if($email == null) {
+            return "no email associated with this button - please contact Helpdesk and let them know. " .
+                "<br><a href='/home'>Back to Home</a>";
+        } elseif($step->email != null && $email->email_id == 0) {  //enrolment email should be id of 0
+            if ($button->status_id == 0) { // 0 = not sent
+                if ($student->student_type = "Canadian BC") {
+                    return "route works - got to " . $student->student_type .
+                        "<br><a href='/home'>Back to Home</a>";
+                    //send initial email
+                    $parents = $student->contact();
+
+                    foreach($parents as $parent){
+                        if($parent->parent_email != null) {
+                            $this->sendLocalEnrol($parent->parent_email);
+                        }
+                    }
+
+                    //change button status to 1 sent but not complete
+
+                    //add to questionnaire in MySchool using API
+
+
+                } elseif ($student->student_type = "Canadian Boarding") {
+                    return "route works - got to " . $student->student_type .
+                        "<br><a href='/home'>Back to Home</a>";
+
+                } elseif ($student->student_type = "US Boarding") {
+                    return "route works - got to " . $student->student_type .
+                        "<br><a href='/home'>Back to Home</a>";
+
+                } elseif ($student->student_type = "International Boarding") {
+                    return "route works - got to " . $student->student_type .
+                        "<br><a href='/home'>Back to Home</a>";
+
+                } else {
+                    return "Student Type of " . $student->student_type . " not recognised" .
+                        "<br><a href='/home'>Back to Home</a>";
+                }
+            } elseif ($button->status_id == 1) { // 1 = sent but not complete
+                if ($student->student_type = "Canadian BC") {
+                    return "route works - got to " . $student->student_type .
+                        "<br><a href='/home'>Back to Home</a>";
+                    //send reminder email
+                    $parents = $student->contact();
+
+                    foreach($parents as $parent){
+                        if($parent->parent_email != null) {
+                            $this->resendLocalEnrol($parent->parent_email);
+                        }
+                    }
+
+                } elseif ($student->student_type = "Canadian Boarding") {
+                    return "route works - got to " . $student->student_type .
+                        "<br><a href='/home'>Back to Home</a>";
+
+                } elseif ($student->student_type = "US Boarding") {
+                    return "route works - got to " . $student->student_type .
+                        "<br><a href='/home'>Back to Home</a>";
+
+                } elseif ($student->student_type = "International Boarding") {
+                    return "route works - got to " . $student->student_type .
+                        "<br><a href='/home'>Back to Home</a>";
+
+                } else {
+                    return "Student Type of " . $student->student_type . " not recognised" .
+                        "<br><a href='/home'>Back to Home</a>";
+                }
+            }
+        }elseif($email->email_name = "bluehealth") {
+            //API call for bluehealth
+
+        } else {
+            //API call function
+            return "route works but logic is not";
+
+        }
+
+
 
     }
 
