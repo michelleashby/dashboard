@@ -615,7 +615,7 @@ class ButtonController extends Controller
                 $sid = $parent->student_user_id;
 
                 DB::connection('mysql')->table('contact')->insert(
-                    ['parent_id' => $id, 'surname' => $surname, 'name' => $name, 'parent_email' => $email, 'realtionship' => $rel,
+                    ['parent_id' => $id, 'surname' => $surname, 'name' => $name, 'parent_email' => $email, 'relationship' => $rel,
                         'student_id' => $sid]
                 );
             }
