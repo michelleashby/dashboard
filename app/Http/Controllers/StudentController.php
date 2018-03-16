@@ -43,7 +43,8 @@ class StudentController extends Controller
             $studentCount = $student->all()->count();
 
             if (count($students) == 0) {
-                return '<h3>Sorry, no results for <u>' . $searchInput . '</u></h3>';
+                return '<h3>Sorry, no results for <u>' . $searchInput . '</u></h3>' .
+                    "<br><a href='/home'>Back to Home</a>";
             } else {
                 return view('home')->with('searchInput', $searchInput)->with('students', $students)->with('studentCount', $studentCount);
             }
@@ -52,23 +53,26 @@ class StudentController extends Controller
         }
     }
 
-    public function onClick($sid, $bid){
-        $studentID = $sid;
+    public function onClick($bid){
         $buttonID = $bid;
 //        for testing:
 //        Return "route works " . $studentID . " " . $buttonID;
 
-        $student = Student::find($studentID);
         $button = Button::find($buttonID);
+        $student = $button->student;
 
         $step = Step::find($button->step_id);
 
-        $email = Email::find($step->email);
+        $email = $step->email;
 
         //if enrolment email should = 0
         //have to figure out which email to send based on type
-        if($button->button_status_id == 0) {
+        if($step->email = null) {
+            return "no email associated with this button - please contact admin. " .
+                "<br><a href='/home'>Back to Home</a>";
+        } elseif($step->email != null && $button->button_status_id == 0) {
             if ($student->student_type = "Canadian BC") {
+
 
             } elseif ($student->student_type = "Canadian Boarding") {
 
@@ -80,7 +84,7 @@ class StudentController extends Controller
                 return "Student Type of " . $student->student_type . " not recognised" .
                     "<br><a href='/home'>Back to Home</a>";
             }
-        } elseif($email->email_name = "bluehealth") {
+        }elseif($email->email_name = "bluehealth") {
             //API call for bluehealth
 
         } else {

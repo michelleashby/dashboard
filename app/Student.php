@@ -28,4 +28,8 @@ class Student extends Model
         return $this->hasMany('App\Button', 'student_id');
     }
 
+    public function contact(){
+        return $this->hasMany('App\Contact', 'student_id');
+    }
+
 }

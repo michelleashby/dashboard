@@ -88,69 +88,69 @@ class EmailController extends Controller
     //following 'click' button functions deal with the action if a button is clicked
     //button state will disable a click if it should not be clicked
     //all send functions require a parent id to be passed so that it can be mailed to them
-    public function sendValidation($pid)
+    public function sendValidation($emai)
     {
 
     }
 
-    public function resendValidation($pid)
+    public function resendValidation($email)
     {
 
     }
 
-    public function sendEnrolment($pid)
+    public function sendEnrolment($email)
     {
 
     }
 
-    public function resendEnrolment($pid)
+    public function resendEnrolment($email)
     {
 
     }
 
-    public function sendInformedConsent($pid)
+    public function sendInformedConsent($email)
     {
 
     }
 
-    public function resendIC()
+    public function resendIC($email)
     {
 
     }
 
-    public function sendCourseSelection()
+    public function sendCourseSelection($email)
     {
 
     }
 
-    public function resendCS()
+    public function resendCS($email)
     {
 
     }
 
-    public function sendHealth()
+    public function sendHealth($email)
     {
         //API call will know/deal with send or resend once Mike completes dev of this feature
 
 
     }
 
-    public function sendOrientation()
+    public function sendOrientation($email)
     {
 
     }
 
-    public function resendOrientation()
+    public function resendOrientation($email)
     {
 
     }
 
-    public function sendPrefect()
+    public function sendPrefect($email)
     {
 
     }
 
-    public function resendPrefect()
+    public function resendPrefect($email)
     {
 
     }

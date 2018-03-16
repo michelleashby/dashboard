@@ -13,7 +13,7 @@ class Contact extends Model
     /**
      * @var string
      */
-    protected $table = 'parents';
+    protected $table = 'contact';
 
     /**
      * @var string
@@ -25,7 +25,7 @@ class Contact extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function student(){
-        return $this->hasMany('App\Student', 'user_id');
+        return $this->hasMany('App\Student', 'student_id');
     }
 
 }
