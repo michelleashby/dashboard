@@ -31,6 +31,6 @@ class Email extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function step(){
-        return $this->hasMany('App\Step', 'email_id');
+        return $this->hasOne('App\Step', 'email_id');
     }
 }
