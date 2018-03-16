@@ -577,8 +577,8 @@ class ButtonController extends Controller
                 contacts.surname,
                 contacts.name,
                 contacts.user_email,
-                relationship_type.realtionship_type_label,
-                relationship.student_user_id
+                relationship_types.realtionship_type_label,
+                relationships.student_user_id
                 FROM contacts
                 JOIN relationships
                 ON contacts.user_id = relationships.contact_user_id
