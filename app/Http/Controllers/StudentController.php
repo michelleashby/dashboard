@@ -35,8 +35,8 @@ class StudentController extends Controller
             $student = new Student();
 
             //currently set up to searchname only  - can search on other columns in future if valuable
-            $students = $student->where('contacts.name', 'LIKE', $searchInput)
-                ->orWhere('contacts.surname', 'LIKE', $searchInput)
+            $students = $student->where('student.name', 'LIKE', $searchInput)
+                ->orWhere('student.surname', 'LIKE', $searchInput)
                 ->distinct()
                 ->get();
 
