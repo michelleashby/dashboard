@@ -475,9 +475,7 @@ class ButtonController extends Controller
     }
 
     public function cleanUpOldButtons(){
-        DB::connection('mysql')->table('button')->delete('DELETE * from button WHERE student_id NOT IN (SELECT student_id
-            FROM student)'
-        );
+        DB::table('button')->where(DB::raw('select * where student_id not in(select student_id from student)'))->delete();
     }
 
     public function dbSync()
