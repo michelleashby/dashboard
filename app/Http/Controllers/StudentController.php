@@ -67,7 +67,7 @@ class StudentController extends Controller
 
         //if enrolment email should = 0
         //have to figure out which email to send based on type
-        if($step->email = null) {
+        if($email == null) {
             return "no email associated with this button - please contact admin. " .
                 "<br><a href='/home'>Back to Home</a>";
         } elseif($step->email != null && $button->button_status_id == 0) {
