@@ -155,7 +155,6 @@ class ButtonController extends Controller
     {
 
         $id = $student->student_id;
-        $type = $student->student_type;
 
         // need to find button with user_id of the student and step_id 2
         $button = new Button();
@@ -184,7 +183,7 @@ class ButtonController extends Controller
 
                 $enrolButton->button_class = "btn btn-info enabled";
                 $enrolButton->button_words = "Resend enrolment reminder";
-                $enrolButton->extra = $type;
+                $enrolButton->extra = $student->student_type;
                 $enrolButton->status_id = 1;
 
                 $enrolButton->update();
@@ -193,8 +192,8 @@ class ButtonController extends Controller
                 $enrolButton = Button::find($button_id);
 
                 $enrolButton->button_class = "btn btn-info";
-                $enrolButton->button_words = $type;
-                $enrolButton->extra = $type;
+                $enrolButton->button_words = $student->student_type;
+                $enrolButton->extra = $student->student_type;
                 $enrolButton->status_id = 2;
 
                 $enrolButton->update();
@@ -202,8 +201,8 @@ class ButtonController extends Controller
                 $enrolButton = Button::find($button_id);
 
                 $enrolButton->button_class = "btn btn-info enabled";
-                $enrolButton->button_words = "Send " . $type. " enrolment.";
-                $enrolButton->extra = $type;
+                $enrolButton->button_words = "Send " . $student->student_type. " enrolment.";
+                $enrolButton->extra = $student->student_type;
                 $enrolButton->status_id = 0;
 
                 $enrolButton->update();}
