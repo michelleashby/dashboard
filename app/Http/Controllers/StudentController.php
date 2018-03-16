@@ -59,7 +59,7 @@ class StudentController extends Controller
 //        Return "route works " . $studentID . " " . $buttonID;
 
         $button = Button::find($buttonID);
-        $student = $button->student;
+        $student = $button->student();
 
         $step = Step::find($button->step_id);
 
