@@ -445,92 +445,6 @@ class ButtonController extends Controller
 
     }
 
-    public function getValidationButton($student)
-    {
-        $id = $student->student_id;
-
-        $button = new Button();
-
-        $valButton = $button->where('user_id', $id)
-            ->where('step_id', 1)
-            ->get();
-
-        return $valButton;
-    }
-
-    //following 'click' button functions deal with the action if a button is clicked
-    //button state will disable a click if it should not be clicked
-    public function sendValidation()
-    {
-
-    }
-
-    public function resendValidation()
-    {
-
-    }
-
-    public function sendEnrolment()
-    {
-
-    }
-
-    public function resendEnrolment()
-    {
-
-    }
-
-    public function ADCreation()
-    {
-
-    }
-
-    public function sendInformedConsent()
-    {
-
-    }
-
-    public function resendIC()
-    {
-
-    }
-
-    public function sendCourseSelection()
-    {
-
-    }
-
-    public function resendCS()
-    {
-
-    }
-
-    public function sendHealth()
-    {
-        //API call will know/deal with send or resend once Mike completes dev of this feature
-
-
-    }
-
-    public function sendOrientation()
-    {
-
-    }
-
-    public function resendOrientation()
-    {
-
-    }
-
-    public function sendPrefect()
-    {
-
-    }
-
-    public function resendPrefect()
-    {
-
-    }
 
     // Below function will be built into later versions to record data about correspondence
     // first latest and how many messages sent
@@ -657,6 +571,52 @@ class ButtonController extends Controller
                         'data_valadation_complete' => $val, 'deposit_received' => $dep, 'enrollment_status' => $enrol]
                 );
 
+            }
+
+            $mySchoolParents = DB::connection('myschoolsql')->select('SELECT DISTINCT contacts.user_id,
+                contacts.surname,
+                contacts.name,
+                contacts.user_email,
+                relationship_type.realtionship_type_label,
+                relationship.student_user_id
+                FROM contacts
+                JOIN relationships
+                ON contacts.user_id = relationships.contact_user_id
+                WHERE relationship.student_user_id
+                IN (SELECT DISTINCT contacts.user_id
+                    FROM contacts
+                    JOIN class_students
+                    ON contacts.user_id = class_students.user_id
+                    JOIN classes
+                    ON class_students.class_id = classes.class_id
+                    JOIN class_levels
+                    ON classes.class_level_id = class_levels.class_level_id
+                    JOIN students
+                    ON contacts.user_id =students.user_id
+                    WHERE classes.year = 2019
+                    AND class_levels.class_level_label != "Withdrawn"
+                    AND class_levels.class_level_label != "Graduated"
+                    AND class_levels.class_level_label != "Accepted" 
+                    AND class_levels.class_level_label != "Not processed" 
+                    AND class_levels.class_level_label != "Completed" )
+                AND relationships.is_main IN(1,2)
+                JOIN relationship_type
+                ON relationships.relationship_type_id = relationship_type.relationship_type_id');
+
+            DB::connection('mysql')->table('contact')->truncate();
+
+            foreach ($mySchoolParents as $parent) {
+                $id = $parent->user_id;
+                $name = $parent->name;
+                $surname = $parent->surname;
+                $email = $parent->user_email;
+                $rel = $parent->relationship_type_label;
+                $sid = $parent->student_user_id;
+
+                DB::connection('mysql')->table('contact')->insert(
+                    ['parent_id' => $id, 'surname' => $surname, 'name' => $name, 'parent_email' => $email, 'realtionship' => $rel,
+                        'student_id' => $sid]
+                );
             }
 
             $student = new Student();

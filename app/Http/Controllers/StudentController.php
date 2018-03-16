@@ -67,7 +67,7 @@ class StudentController extends Controller
 
         //if enrolment email should = 0
         //have to figure out which email to send based on type
-        if($email->email_id == 0) {
+        if($button->button_status_id == 0) {
             if ($student->student_type = "Canadian BC") {
 
             } elseif ($student->student_type = "Canadian Boarding") {
@@ -80,9 +80,14 @@ class StudentController extends Controller
                 return "Student Type of " . $student->student_type . " not recognised" .
                     "<br><a href='/home'>Back to Home</a>";
             }
+        } elseif($email->email_name = "bluehealth") {
+            //API call for bluehealth
+
         } else {
             //API call function
+
         }
+
 
 
     }
