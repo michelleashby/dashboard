@@ -222,15 +222,11 @@ class ButtonController extends Controller
         $button = $button->where('student_id', $id)
             ->where('step_id', 3)
             ->first();
-
-        //if button exists update to correspond with MySchool table status
-        $questStatus = new Status();
-        $questionnaireID = $step->questionnaire_id;
         $button_id = $button->button_id;
 
         if($button_id != null){
             if ($student->deposit_received = "Yes" && $student->data_valadation_complete != null) {
-                if ($student->user_email = "{{$student->name}}.{{$student->surname}}.@brentwood.ca") {
+                if (strpos($student->user_email, "@brentwood.ca" !== false)) {
                     $adButton = Button::find($button_id);
                     $adButton->button_class = "btn btn-success disabled";
                     $adButton->button_words = "AD Account Exists";

@@ -175,9 +175,7 @@ class EmailController extends Controller
         } elseif($step->email_id == 0) {  //enrolment email should be id of 0
             if ($button->status_id == 0) { // 0 = not sent
                 if ($student->student_type = "Canadian BC") {
-                    return "route works - got to " . $student->student_type .
-                        "<br><a href='/home'>Back to Home</a>";
-                    //send initial email
+                    //send initial email to all contacts
                     $parents = $student->contact();
 
                     foreach($parents as $parent){
@@ -187,6 +185,8 @@ class EmailController extends Controller
                     }
 
                     //change button status to 1 sent but not complete
+                    $button->status_id = 1;
+                    $button->save();
 
                     //add to questionnaire in MySchool using API
 
@@ -266,15 +266,8 @@ class EmailController extends Controller
                     }
                 }
             }
-
-
-            //API call function
-            return "route works but logic is not";
-
         }
-
-
-
+        return redirect('home');
     }
 
 
