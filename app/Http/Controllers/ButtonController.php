@@ -584,7 +584,7 @@ class ButtonController extends Controller
                 ON contacts.user_id = relationships.contact_user_id
                 JOIN relationship_types
                 ON relationships.relationship_type_id = relationship_types.relationship_type_id
-                WHERE relationship.student_user_id
+                WHERE relationships.student_user_id
                 IN (SELECT DISTINCT contacts.user_id
                     FROM contacts
                     JOIN class_students
