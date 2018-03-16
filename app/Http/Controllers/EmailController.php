@@ -270,5 +270,25 @@ class EmailController extends Controller
         return redirect('home');
     }
 
+    public function apiCall($uid, $qid)
+    {
+        $user_id = $uid;
+        $questionnaire_id = $qid;
+
+//        try {
+//            $client = new $client->request('POST', 'https://brentwood.msm.io/custom/brentwood/data/api.php', [
+//                'query' => ['action' => 'AddQuestionnaireRecipient', 'user_id' => $user_id, 'questionnaire_id' => $questionnaire_id],
+//                'apikey' => [81633913542557427]
+//            ]);
+//
+//            //echo $apiRequest->getStatusCode();
+//            //echo $apiRequest->getHeader('content-type));
+//
+//            $content = json_decode($apiRequest->getBody()->getContents());
+//        } catch (RequestException $re) {
+//            //for handling exception
+//        }
+    }
+
 
 }
