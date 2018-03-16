@@ -185,6 +185,7 @@ class ButtonController extends Controller
                 $enrolButton->button_class = "btn btn-info enabled";
                 $enrolButton->button_words = "Resend enrolment reminder";
                 $enrolButton->extra = $type;
+                $enrolButton->status_id = 1;
 
                 $enrolButton->update();
             } elseif ($status->questionnaire_submission_status_id = 2) { //2 = complete
@@ -194,7 +195,7 @@ class ButtonController extends Controller
                 $enrolButton->button_class = "btn btn-info";
                 $enrolButton->button_words = $type;
                 $enrolButton->extra = $type;
-
+                $enrolButton->status_id = 2;
 
                 $enrolButton->update();
             } elseif ($status->questionnaire_submission_status_id = 0 || $status->questionnaire_submission_status_id = null) { // 0 = not sent or null record not created
@@ -203,6 +204,7 @@ class ButtonController extends Controller
                 $enrolButton->button_class = "btn btn-info enabled";
                 $enrolButton->button_words = "Send " . $type. " enrolment.";
                 $enrolButton->extra = $type;
+                $enrolButton->status_id = 0;
 
                 $enrolButton->update();}
         } else {
@@ -230,6 +232,7 @@ class ButtonController extends Controller
                     $adButton = Button::find($button_id);
                     $adButton->button_class = "btn btn-success disabled";
                     $adButton->button_words = "AD Account Exists";
+                    $adButton->status_id = 2;
 
                     $adButton->update();
                 } else {
@@ -237,6 +240,7 @@ class ButtonController extends Controller
 
                     $adButton->button_class = "btn bnt-info enabled";
                     $adButton->button_words = "Create AD Account";
+                    $adButton->status_id = 1;
 
                     $adButton->update();
                 }
@@ -245,6 +249,7 @@ class ButtonController extends Controller
 
                 $adButton->button_class = "btn disabled";
                 $adButton->button_words = "AD Account cannot be created yet";
+                $adButton->status_id = 0;
 
                 $adButton->update();
             }
@@ -302,6 +307,8 @@ class ButtonController extends Controller
             $conButton->button_class = "btn btn-info";
             $conButton->button_words = "Send Informed Consent Form";
             $conButton->status_id = 0;
+
+            $conButton->update();
         }
 
 
@@ -531,7 +538,8 @@ class ButtonController extends Controller
                 AND class_levels.class_level_label != "Graduated"
                 AND class_levels.class_level_label != "Accepted" 
                 AND class_levels.class_level_label != "Not processed" 
-                AND class_levels.class_level_label != "Completed" ');
+                AND class_levels.class_level_label != "Completed" 
+                ORDER BY contacts.surname');
             //LAST LINE HERE IS A HACK BECAUSE OLD DATA WAS GETTING THROUGH OTHER WHERE CLAUSE
 
             DB::connection('mysql')->table('student')->truncate();
