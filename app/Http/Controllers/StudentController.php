@@ -7,6 +7,7 @@ use App\Email;
 use App\Step;
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
