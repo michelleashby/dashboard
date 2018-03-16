@@ -251,6 +251,7 @@ class EmailController extends Controller
                     }
                 }
                 // add to questionnaire
+                $this->apiCall($student->student_id, $step->questionnaire_id);
 
                 //change button status
                 $button->status_id = 1;

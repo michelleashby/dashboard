@@ -474,6 +474,12 @@ class ButtonController extends Controller
         return $name;
     }
 
+    public function cleanUpOldButtons(){
+        DB::connection('mysql')->table('button')->delete('DELETE from button WHERE student_id NOT IN (SELECT student_id
+            FROM student)'
+        );
+    }
+
     public function dbSync()
     {
         if (Auth::check()) {
@@ -599,6 +605,8 @@ class ButtonController extends Controller
             $student = new Student();
             $students = $student->all();
 //            dd($students);
+            //clean up old buttons
+            $this->cleanUpOldButtons();
 
             // Local table `button` syncing
             foreach ($students as $student) {
