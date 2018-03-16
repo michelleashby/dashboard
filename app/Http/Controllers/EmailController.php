@@ -174,7 +174,7 @@ class EmailController extends Controller
         if($email == null) {
             return "no email associated with this button - please contact Helpdesk and let them know. " .
                 "<br><a href='/home'>Back to Home</a>";
-        } elseif($step->email != null && $email->email_id == 0) {  //enrolment email should be id of 0
+        } elseif($step->email_id != null && $email->email_id == 0) {  //enrolment email should be id of 0
             if ($button->status_id == 0) { // 0 = not sent
                 if ($student->student_type = "Canadian BC") {
                     return "route works - got to " . $student->student_type .
