@@ -166,15 +166,13 @@ class EmailController extends Controller
 
         $step = Step::find($button->step_id);
 
-        $email = $step->email();
-
         //status codes: 0 not sent, 1 sent but not complete, 2 complete
 
         //have to figure out which email to send based on type
-        if($email == null) {
+        if($step->email_id == null) {
             return "no email associated with this button - please contact Helpdesk and let them know. " .
                 "<br><a href='/home'>Back to Home</a>";
-        } elseif($step->email_id != null && $email->email_id == 0) {  //enrolment email should be id of 0
+        } elseif($step->email_id == 0) {  //enrolment email should be id of 0
             if ($button->status_id == 0) { // 0 = not sent
                 if ($student->student_type = "Canadian BC") {
                     return "route works - got to " . $student->student_type .
@@ -239,10 +237,37 @@ class EmailController extends Controller
                         "<br><a href='/home'>Back to Home</a>";
                 }
             }
-        }elseif($email->email_name = "bluehealth") {
+        }elseif($step->email()->email_name = "bluehealth") {
             //API call for bluehealth
 
         } else {
+            if($button->status_id == 0) { //0 = not sent
+                //send email
+                $parents = $student->contact();
+
+                foreach($parents as $parent) {
+                    if ($parent->parent_email != null) {
+                        $this->sendEmail($button->button_id);
+                    }
+                }
+                // add to questionnaire
+
+                //change button status
+                $button->status_id = 1;
+                $button->save();
+
+            } elseif($button->status_id == 1){ //1 = sent but not complete
+                //send reminder email
+                $parents = $student->contact();
+
+                foreach ($parents as $parent) {
+                    if ($parent->parent_email != null) {
+                        $this->sendEmail($button->button_id);
+                    }
+                }
+            }
+
+
             //API call function
             return "route works but logic is not";
 
