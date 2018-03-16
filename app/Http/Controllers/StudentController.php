@@ -72,13 +72,21 @@ class StudentController extends Controller
                 "<br><a href='/home'>Back to Home</a>";
         } elseif($step->email != null && $button->button_status_id == 0) {
             if ($student->student_type = "Canadian BC") {
+                return "route works - got to " . $student->student_type .
+                    "<br><a href='/home'>Back to Home</a>";
 
 
             } elseif ($student->student_type = "Canadian Boarding") {
+                return "route works - got to " . $student->student_type .
+                    "<br><a href='/home'>Back to Home</a>";
 
             } elseif ($student->student_type = "US Boarding") {
+                return "route works - got to " . $student->student_type .
+                    "<br><a href='/home'>Back to Home</a>";
 
             } elseif ($student->student_type = "International Boarding") {
+                return "route works - got to " . $student->student_type .
+                    "<br><a href='/home'>Back to Home</a>";
 
             } else {
                 return "Student Type of " . $student->student_type . " not recognised" .
@@ -89,6 +97,7 @@ class StudentController extends Controller
 
         } else {
             //API call function
+            return "route works but logic is not";
 
         }
 
