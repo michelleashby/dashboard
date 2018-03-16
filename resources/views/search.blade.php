@@ -10,7 +10,7 @@
             <button type="submit">Search</button><br>
         </form>
     </div>
-    <h1 class="display-3">{{$studentCount}} NEW students being admitted to Brentwood</h1>
+    <h1 class="display-3">Search returned {{$studentCount}} students</h1>
 
 
         <table class="table">

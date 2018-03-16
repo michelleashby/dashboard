@@ -42,11 +42,16 @@ class StudentController extends Controller
 
             $studentCount = $student->all()->count();
 
+            $dbSync = DB::connection('mysql')->select('select updated_at from db_sync order by updated_at DESC limit 1');
+            foreach($dbSync as $date){
+                $dbDate = $date->updated_at;
+            }
+
             if (count($students) == 0) {
                 return '<h3>Sorry, no results for <u>' . $searchInput . '</u></h3>' .
                     "<br><a href='/home'>Back to Home</a>";
             } else {
-                return view('home')->with('searchInput', $searchInput)->with('students', $students)->with('studentCount', $studentCount);
+                return view('search')->with('searchInput', $searchInput)->with('students', $students)->with('studentCount', $studentCount)->with('dbDate', $dbDate);
             }
         } else {
             return redirect('home');
