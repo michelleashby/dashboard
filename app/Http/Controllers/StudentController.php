@@ -56,7 +56,7 @@ class StudentController extends Controller
     public function onClick($bid){
         $buttonID = $bid;
 //        for testing:
-//        Return "route works " . $studentID . " " . $buttonID;
+        Return "route works " . $buttonID;
 
         $button = Button::find($buttonID);
         $student = $button->student();
