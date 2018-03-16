@@ -582,6 +582,8 @@ class ButtonController extends Controller
                 FROM contacts
                 JOIN relationships
                 ON contacts.user_id = relationships.contact_user_id
+                JOIN relationship_types
+                ON relationships.relationship_type_id = relationship_types.relationship_type_id
                 WHERE relationship.student_user_id
                 IN (SELECT DISTINCT contacts.user_id
                     FROM contacts
@@ -600,8 +602,7 @@ class ButtonController extends Controller
                     AND class_levels.class_level_label != "Not processed" 
                     AND class_levels.class_level_label != "Completed" )
                 AND relationships.is_main IN(1,2)
-                JOIN relationship_types
-                ON relationships.relationship_type_id = relationship_types.relationship_type_id');
+                ');
 
             DB::connection('mysql')->table('contact')->truncate();
 
