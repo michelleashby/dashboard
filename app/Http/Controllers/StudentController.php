@@ -63,7 +63,7 @@ class StudentController extends Controller
 
         $step = Step::find($button->step_id);
 
-        $email = $step->email;
+        $email = $step->email();
 
         //if enrolment email should = 0
         //have to figure out which email to send based on type
