@@ -38,7 +38,7 @@ class StudentController extends Controller
             $students = $student->where('student.name', 'LIKE', $searchInput)
                 ->orWhere('student.surname', 'LIKE', $searchInput)
                 ->distinct()
-                ->get();
+                ->paginate(20);
 
             $studentCount = $student->all()->count();
 
