@@ -380,9 +380,9 @@ class ButtonController extends Controller
 //        real time go.bluehealth.ca/api.questionnairesstatus
 
         try {
-            $client = new $client->request('POST', 'https://go.bluehealth.ca/api.questionnaires/status', [
+            $client = new $client->request('POST', 'https://go.bluehealth.ca/api/questionnaires/status', [
                 'query' => ['action' => 'AddQuestionnaireRecipient', 'patient_email' => $email, 'questionnaire_id' => $questionnaire_id],
-                'api_key' => ['cJaXrT2Ik8iG7Hps6IrGMXKILGgnzNPD']
+                'api_key' => env('BH_API_KEY')
             ]);
 
             //echo $apiRequest->getStatusCode());
