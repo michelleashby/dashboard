@@ -393,18 +393,20 @@ class ButtonController extends Controller
             //for handling exception
         }
 
-        if (true) {
+        if ($re == true) { //need logic here based on actual response
 //            $bhButton = Button::find();
             //apiRequest->"complete"=true
             $bhButton->class = "btn btn-success disabled";
-            $bhButton->words = "Health form complete <span class=\"glyphicon glyphicon-ok\"></span>";
+            $bhButton->words = "Health form complete";
+            $bhButton->status = 2;
 
-            $bhButton;
+            $bhButton->update();
         } else {
             $bhButton->class = "btn bnt-info enabled";
             $bhButton->words = "Not Complete: send email";
+            $bhButton->status = 0;
 
-            return $bhButton;
+            $bhButton->update();
         }
 
 
